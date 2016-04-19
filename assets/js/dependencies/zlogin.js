@@ -1,4 +1,4 @@
 
 function dropdown(){
-	$('#dropdown').dropdown('show');	
+	$('.ui.dropdown').dropdown('show');
 };

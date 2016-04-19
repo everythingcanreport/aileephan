@@ -22,6 +22,7 @@
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/dependencies/jquery.min.js"></script>
+    <script src="/js/dependencies/login.js"></script>
     <script src="/js/dependencies/semantic.min.js"></script>
     <script src="/js/dependencies/zlogin.js"></script>
     <!--SCRIPTS END-->
@@ -40,8 +41,31 @@ function onLoginFB(response) {
           oauth: true
         });
         FB.getLoginStatus(function(response){
-        console.log('response.status', response)
-        $('.userProfile').css({display: 'none'})
+        if(typeof response==='object' &&
+         response.status==='connected' &&
+         typeof response.authResponse==='object' &&
+         response.authResponse.userID) {
+          //get user profile
+         var urlPicture = '/'+response.authResponse.userID+'/picture'
+        FB.api('/me', function(responseMe){
+          if(typeof responseMe==='object') {
+            $('.connected-name').append(responseMe.name);
+            FB.api(urlPicture, function (response) {
+        if (typeof response ==='object'
+          && !response.error &&
+          typeof response.data==='object') {
+          /* handle the result */
+          $('.connected-avatar').attr('src',response.data.url);
+          $('.connected').removeClass('hide');
+        }
+      });
+          }
+        })
+        }
+        else {
+          //show button login
+          $('#unknown').removeClass('hide');
+        }
         });
         FB.Event.subscribe('auth.login', login_event);
         FB.Event.subscribe('auth.logout', logout_event);

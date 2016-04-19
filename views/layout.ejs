@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title><%=typeof title == 'undefined' ? 'Ailee Phan' : title%></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/a-semantic.min.css">
+    <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/z-custom.css">
+    <!--STYLES END-->
+  </head>
+  <body>
+    <%- partial ('header.ejs') %>
+    <%- partial ('menu.ejs') %>
+    <%- body %>
+    <%- partial ('footer.ejs') %>
+    <!--TEMPLATES-->
+    
+    <!--TEMPLATES END-->
+
+    <!--SCRIPTS-->
+    <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/dependencies/jquery.min.js"></script>
+    <script src="/js/dependencies/semantic.min.js"></script>
+    <script src="/js/dependencies/zlogin.js"></script>
+    <!--SCRIPTS END-->
+  </body>
+<script>
+function onLoginFB(response) {
+      console.log('on login', response)
+    }
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1032633966817570',
+          xfbml      : true,
+          version    : 'v2.6',
+          status: true,
+          cookie: true,
+          oauth: true
+        });
+        FB.getLoginStatus(function(response){
+        console.log('response.status', response)
+        $('.userProfile').css({display: 'none'})
+        });
+        FB.Event.subscribe('auth.login', login_event);
+        FB.Event.subscribe('auth.logout', logout_event);
+      };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+  var login_event = function(response) {
+    console.log('login_event...............', response);
+  if(response && !response.error) {
+    var urlPicture = '/'+response.authResponse.userID+'/picture'
+    FB.api(urlPicture,
+      function (response) {
+        if (response && !response.error) {
+          /* handle the result */
+          console.log('response facebook picture', response)
+        }
+      });
+  }
+}
+
+var logout_event = function(response) {
+  console.log('logout success!');
+}
+</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1032633966817570";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+  <script>
+        tinymce.init({ selector:'textarea#content', auto_focus: 'content',elementpath: false,  max_height: 500, 
+          menu: {
+          
+        },
+        toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright',
+      height: 300,
+      setup : function(ed) {
+          ed.on('init', function() {
+              this.getDoc().body.style.fontSize = '14px';
+          });
+}});
+  </script>
+</html>

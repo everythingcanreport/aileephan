@@ -3,24 +3,24 @@ module.exports.routes = {
         controller: 'HomeController',
         action: 'GetListStories'
     },
-    'GET /short-stories': {
-        controller: 'StoryController',
-        action: 'GetDataStory'
+    'GET /stories/view/:title': {
+        controller: 'StoriesController',
+        action: 'ViewStories'
     },
-    'GET /about': {
-        controller: 'AboutController',
-        action: 'GetDataAbout'
+    'GET /stories/write': {
+        controller: 'StoriesController',
+        action: 'WriteStories'
     },
-    'GET /contact': {
-        controller: 'ContactController',
-        action: 'GetDataContact'
+    'GET /stories/manage': {
+        controller: 'StoriesController',
+        action: 'ManageStories'
     },
-    'GET /short-story/detail': {
-        controller: 'StoryController',
-        action: 'GetDetailStory'
+    'GET /login': {
+        controller: 'OAuthController',
+        action: 'Login'
     },
-    'GET /write': {
-        controller: 'WriteController',
-        action: 'GetDataWrite'
+    'GET /help': {
+        controller: 'HelperController',
+        action: 'HelpMe'
     }
 };

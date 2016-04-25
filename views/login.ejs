@@ -1,19 +1,17 @@
 <div class="item right">
-	<div class="ui inline dropdown connected hide" onClick="dropdown();">
+	<div class="ui simple dropdown connected hide">
 		<div class="text connected-name">
 			<img class="ui avatar image connected-avatar" />
+			<span></span>
 		</div>
 		<i class="dropdown icon"></i>
-		<div class="menu">
-			<a href="/write" class="item"><i class="pencil icon"></i> Writting</a>
-		    <a class="item"><i class="setting icon"></i> Settings</a>
-		    <a class="divider"></a>
-		    <a class="item"><i class="key icon"></i> Logout</a>
+		<div class="menu connected-menu">
 		</div>
 	</div>
-	<a class="ui button unknown hide">
+	<a class="ui button unknown hide pink" onClick="FB.login();">
 		Login
 	</a>
+	<div class="ui active small inline loader"></div>
 </div>
 
 

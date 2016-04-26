@@ -9,7 +9,9 @@ define(function(require) {
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
                 response.status !== 'connected') {
-                $('.loader').removeClass('active');
+                $('.menu-loader').removeClass('active');
+                $('.write-loader').removeClass('active');
+                $('.write-stories').removeClass('hide');
                 $('.unknown').removeClass('hide');
             }
         });
@@ -28,6 +30,22 @@ define(function(require) {
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
     //end facebook plugin
+    //tinymce plugin
+    tinymce.init({
+        selector: 'textarea#content',
+        auto_focus: 'content',
+        elementpath: false,
+        max_height: 500,
+        menu: {},
+        toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright',
+        height: 300,
+        setup: function(ed) {
+            ed.on('init', function() {
+                this.getDoc().body.style.fontSize = '14px';
+            });
+        }
+    });
+    //end tinymce plugin
 
 });
 

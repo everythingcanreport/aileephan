@@ -5,7 +5,8 @@ define(function() {
             xfbml: true,
             version: 'v2.6',
             cookie: true,
-            status: true
+            status: true,
+            auth: true
         });
     };
 });

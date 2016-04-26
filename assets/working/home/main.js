@@ -9,7 +9,7 @@ define(function(require) {
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
                 response.status !== 'connected') {
-                $('.loader').removeClass('active');
+                $('.menu-loader').removeClass('active');
                 $('.unknown').removeClass('hide');
             }
         });

@@ -1,13 +1,39 @@
 <div class="ui container margin-top-40">
-  <form class="ui form">
-  <div class="field">
-    <textarea id='content'></textarea>
-  </div>
-      <a class="ui button pink right" onClick="clickSave()">
-      Save
-      </a>
+  <div class="ui active small inline loader write-loader"></div>
+  <form class="ui form write-stories">
       <div class="field">
-      &nbsp;
+        <label>Title:</label>
+        <input type="text" />
       </div>
-  </form>
-</div>
+      <div class="fields margin-top-20">
+        <div class="field">
+          <i class="attach icon" style="font-size: 22px;">
+          </i>
+          Attach Image      
+          </div>
+          <div class="field">
+          &nbsp;
+          </div>
+          <div class="field">
+            <div class="ui toggle checkbox pink">
+              <input type="checkbox" name="public">
+              <label>Show Stories</label>
+            </div>
+          </div>
+      </div>
+      <div class="field">
+        <label>Content:</label>
+        <textarea id='content'></textarea>
+      </div>
+      <a class="ui button tiny pink right" onClick="clickSave()">
+      Submit
+      </a>
+      <a class="ui button tiny pink right" onClick="clickSave()">
+      Review
+      </a>
+        <div class="field">
+        &nbsp;
+        </div>
+    </form>
+  </div>
+<script src="/libs/tinymce/tinymce.min.js"></script>

@@ -10,8 +10,6 @@ define(function(require) {
             if (typeof response === 'object' &&
                 response.status !== 'connected') {
                 $('.menu-loader').removeClass('active');
-                $('.write-loader').removeClass('active');
-                $('.write-stories').removeClass('hide');
                 $('.unknown').removeClass('hide');
             }
         });
@@ -26,14 +24,14 @@ define(function(require) {
         }
         js = d.createElement(s);
         js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
+        js.src = "//connect.facebook.net/vi_VN/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
     //end facebook plugin
     //tinymce plugin
     tinymce.init({
         selector: 'textarea#content',
-        auto_focus: 'content',
+        // auto_focus: 'content',
         elementpath: false,
         max_height: 500,
         menu: {},
@@ -42,6 +40,9 @@ define(function(require) {
         setup: function(ed) {
             ed.on('init', function() {
                 this.getDoc().body.style.fontSize = '14px';
+                $('.write-loader').removeClass('active');
+                $('.write-stories').removeClass('hide');
+                $('.write-title').focus();
             });
         }
     });

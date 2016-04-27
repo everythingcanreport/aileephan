@@ -3,23 +3,23 @@ module.exports.routes = {
         controller: 'HomeController',
         action: 'GetListStories'
     },
-    'GET /stories/view/:title': {
+    'GET /truyen/:tieu-de': {
         controller: 'StoriesController',
         action: 'ViewStories'
     },
-    'GET /stories/write': {
+    'GET /truyen/viet-truyen': {
         controller: 'StoriesController',
         action: 'WriteStories'
     },
-    'GET /stories/manage': {
+    'GET /truyen/quan-ly-truyen': {
         controller: 'StoriesController',
         action: 'ManageStories'
     },
-    'GET /login': {
+    'GET /dang-nhap': {
         controller: 'OAuthController',
         action: 'Login'
     },
-    'GET /help': {
+    'GET /tro-giup': {
         controller: 'HelperController',
         action: 'HelpMe'
     }

@@ -1,35 +1,35 @@
-<div class="ui container margin-top-40">
-  <div class="ui active small inline loader write-loader"></div>
-  <form class="ui form write-stories">
+<div class="ui container text margin-top-40">
+  <div class="ui active large centered inline loader write-loader"></div>
+  <form class="ui form write-stories hide">
       <div class="field">
-        <label>Title:</label>
-        <input type="text" />
+        <label>Tiêu đề:</label>
+        <input type="text"  class="write-title" />
       </div>
       <div class="fields margin-top-20">
         <div class="field">
           <i class="attach icon" style="font-size: 22px;">
           </i>
-          Attach Image      
+          Đính kèm ảnh      
           </div>
           <div class="field">
           &nbsp;
           </div>
           <div class="field">
             <div class="ui toggle checkbox pink">
-              <input type="checkbox" name="public">
-              <label>Show Stories</label>
+              <input type="checkbox" class="write-show pink" />
+              <label>Hiển thị truyện</label>
             </div>
           </div>
       </div>
       <div class="field">
-        <label>Content:</label>
+        <label>Nội dung:</label>
         <textarea id='content'></textarea>
       </div>
       <a class="ui button tiny pink right" onClick="clickSave()">
-      Submit
+      Gửi
       </a>
       <a class="ui button tiny pink right" onClick="clickSave()">
-      Review
+      Xem lại
       </a>
         <div class="field">
         &nbsp;

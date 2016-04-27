@@ -8,7 +8,7 @@
  * For more information on configuration, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.http.html
  */
-// var compress = require('compression');
+var compress = require('compression');
 module.exports.http = {
 
     /****************************************************************************
@@ -29,30 +29,30 @@ module.exports.http = {
          * router is invoked by the "router" middleware below.)                     *
          *                                                                          *
          ***************************************************************************/
-        // compress: compress({
-        //     threshold: 0, // or whatever you want the lower threshold to be
-        //     filter: function(req, res) {
-        //         var ct = res.get('content-type');
-        //         return true;
-        //     }
-        // }),
-        // order: [
-        //     'startRequestTimer',
-        //     'cookieParser',
-        //     'session',
-        //     'myRequestLogger',
-        //     'bodyParser',
-        //     'handleBodyParserError',
-        //     'compress',
-        //     'methodOverride',
-        //     'poweredBy',
-        //     '$custom',
-        //     'router',
-        //     'www',
-        //     'favicon',
-        //     '404',
-        //     '500'
-        // ],
+        compress: compress({
+            threshold: 0, // or whatever you want the lower threshold to be
+            filter: function(req, res) {
+                var ct = res.get('content-type');
+                return true;
+            }
+        }),
+        order: [
+            'startRequestTimer',
+            'cookieParser',
+            'session',
+            'myRequestLogger',
+            'bodyParser',
+            'handleBodyParserError',
+            'compress',
+            'methodOverride',
+            'poweredBy',
+            '$custom',
+            'router',
+            'www',
+            'favicon',
+            '404',
+            '500'
+        ],
 
         /****************************************************************************
          *                                                                           *

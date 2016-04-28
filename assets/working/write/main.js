@@ -30,8 +30,7 @@ define(function(require) {
     //end facebook plugin
     //tinymce plugin
     tinymce.init({
-        selector: 'textarea#content',
-        // auto_focus: 'content',
+        selector: 'textarea#write-content',
         elementpath: false,
         max_height: 500,
         menu: {},
@@ -66,4 +65,19 @@ function help() {
     require(['menu/menu'], function(menu) {
         menu.help();
     });
+};
+
+function onClickSave() {
+    var rawContent = tinymce.get('write-content').getContent({ format: 'raw' });
+    var htmlContent = tinymce.get('write-content').getContent();
+    console.log('rawContent', rawContent);
+    console.log('htmlContent', htmlContent);
+};
+
+function onClickView() {
+    console.log('view>>>');
+};
+
+function onClickAttachImage() {
+    console.log('click upload image>>>>>>>>');
 };

@@ -48,3 +48,13 @@ function help() {
         menu.help();
     });
 };
+
+//load data when scroll last page
+$(document).scroll(function() {
+    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+        $('.home-loader').addClass('active');
+        setTimeout(function() {
+            $('.home-loader').removeClass('active');
+        }, 5000);
+    }
+});

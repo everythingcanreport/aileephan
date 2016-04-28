@@ -1,39 +1,41 @@
 <div class="ui container text margin-top-40">
-  <div class="ui active large centered inline loader write-loader"></div>
   <form class="ui form write-stories hide">
       <div class="field">
         <label>Tiêu đề:</label>
         <input type="text"  class="write-title" />
       </div>
       <div class="fields margin-top-20">
-        <div class="field">
-          <i class="attach icon" style="font-size: 22px;">
+        <div class="field" onClick="onClickAttachImage();">
+          <i class="attach icon">
           </i>
           Đính kèm ảnh      
-          </div>
-          <div class="field">
+        </div>
+        <div class="field">
           &nbsp;
+        </div>
+        <div class="field">
+          <div class="ui toggle checkbox">
+            <input type="checkbox" class="write-show" />
+            <label>Hiển thị</label>
           </div>
-          <div class="field">
-            <div class="ui toggle checkbox pink">
-              <input type="checkbox" class="write-show pink" />
-              <label>Hiển thị truyện</label>
-            </div>
-          </div>
+        </div>
       </div>
       <div class="field">
         <label>Nội dung:</label>
-        <textarea id='content'></textarea>
+        <textarea id='write-content'></textarea>
       </div>
-      <a class="ui button tiny pink right" onClick="clickSave()">
-      Gửi
+      <a class="ui button tiny pink right" onClick="onClickSave();">
+      Lưu
       </a>
-      <a class="ui button tiny pink right" onClick="clickSave()">
-      Xem lại
+      <a class="ui button tiny pink right" onClick="onClickView();">
+      Xem
       </a>
         <div class="field">
         &nbsp;
         </div>
     </form>
+  </div>
+  <div class="ui container text margin-top-40 margin-bottom-40">
+    <div class="ui active centered inline loader write-loader"></div>
   </div>
 <script src="/libs/tinymce/tinymce.min.js"></script>

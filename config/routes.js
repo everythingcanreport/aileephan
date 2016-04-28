@@ -3,10 +3,10 @@ module.exports.routes = {
         controller: 'HomeController',
         action: 'GetListStories'
     },
-    'GET /truyen/:tieu-de': {
-        controller: 'StoriesController',
-        action: 'ViewStories'
-    },
+    // 'GET /truyen/:tieude': {
+    //     controller: 'StoriesController',
+    //     action: 'ViewStories'
+    // },
     'GET /truyen/viet-truyen': {
         controller: 'StoriesController',
         action: 'WriteStories'

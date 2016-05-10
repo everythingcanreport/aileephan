@@ -18,7 +18,7 @@
 
 
 module.exports.policies = {
-
+  '*': 'isAdmin'
   /***************************************************************************
   *                                                                          *
   * Default policy for all controllers and actions (`true` allows public     *

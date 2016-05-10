@@ -2,16 +2,16 @@ module.exports.connections = {
     disk: {
         module: 'sails-disk'
     },
-    postgresql: {
-        user: 'postgres',
-        password: '123456',
-        database: 'postgres',
-        dialect: 'postgres',
+    mysql: {
+        adapter: 'sails-mysql',
+        port: 3306,
+        user: 'meditek_db',
+        password: 'meditekdb123456',
+        database: 'Ailee',
+        charset: 'utf8',
+        collation: 'utf8-general_ci',
         options: {
-            dialect: 'postgres',
-            host: 'localhost',
-            port: 5432,
-            logging: true
+            host: 'localhost'
         }
-    },
+    }
 };

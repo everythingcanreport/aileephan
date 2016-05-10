@@ -67,11 +67,73 @@ function help() {
     });
 };
 
+$('#write-background').change(function(e) {
+    $('.background-loader').addClass('active');
+    var StoriesformData = new FormData();
+    StoriesformData.append('background', $('#write-background').prop('files')[0]);
+    require(['common/upload'], function(upload) {
+        upload(StoriesformData)
+            .then(function(response) {
+                var fileName = null;
+                var ext = response[0].FileName.split('.')[response[0].FileName.split('.').length - 1];
+                var fileName = response[0].FileName.length >= 10 ? response[0].FileName.substring(0, 10) + '...' + ext : response[0].FileName;
+                $('.title-background span').text(fileName);
+                $('.background-loader').removeClass('active');
+                var notyUploadBackground = noty({
+                    text: 'Tải ảnh nền thành công!',
+                    layout: 'topRight',
+                    type: 'success',
+                    timeout: 3000
+                });
+                $('.write-background-uid').val(response[0].UID);
+            }, function(err) {
+                var notyUploadBackground = noty({
+                    text: 'Tải ảnh nền thất bại!',
+                    layout: 'topRight',
+                    type: 'error',
+                    timeout: 3000
+                });
+            });
+    });
+});
+
 function onClickSave() {
-    var rawContent = tinymce.get('write-content').getContent({ format: 'raw' });
     var htmlContent = tinymce.get('write-content').getContent();
-    console.log('rawContent', rawContent);
-    console.log('htmlContent', htmlContent);
+    var title = $('.write-title').val();
+    var show = $('.write-show').val();
+    var backgroundUID = $('.write-background-uid').val();
+    var data = {
+        Stories: {
+            Title: title,
+            Show: show,
+            Status: 'Đang viết',
+            Content: htmlContent,
+        },
+        FileUploads: [{
+            UID: backgroundUID
+        }]
+    };
+    require(['common/create'], function(create) {
+        create({ data: data })
+            .then(function(response) {
+                require(['menu/menu'], function(menu) {
+                    var notyUploadBackground = noty({
+                        text: 'Thêm truyện thành công!',
+                        layout: 'topRight',
+                        type: 'success',
+                        timeout: 3000
+                    });
+                    menu.manageStories();
+                });
+            }, function(err) {
+                var notyUploadBackground = noty({
+                    text: 'Thêm truyện thất bại!',
+                    layout: 'topRight',
+                    type: 'error',
+                    timeout: 3000
+                });
+            });
+    });
 };
 
 function onClickView() {
@@ -79,5 +141,5 @@ function onClickView() {
 };
 
 function onClickAttachImage() {
-    console.log('click upload image>>>>>>>>');
+    document.getElementById('write-background').click();
 };

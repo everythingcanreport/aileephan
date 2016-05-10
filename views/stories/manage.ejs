@@ -3,36 +3,84 @@
   <thead>
     <tr><th>#</th>
     <th>Tiêu đề</th>
-    <th>Tráng thái</th>
+    <th>Trạng thái</th>
     <th>Hiển thị</th>
-    <th>Xem</th>
+    <th>Thao tác</th>
   </tr></thead><tbody>
-    <tr>
-      <td>1</td>
-      <td>Ngày mai sẽ ra sao</td>
-      <td>Đang viết</td>
-      <td>
-        <div class="ui toggle checkbox pink">
-          <input type="checkbox" class="write-show pink" />
-          <label>&nbsp;</label>
-        </div>
-      </td>
-      <td><a class="ui button mini pink">Chi tiết</a></td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Hôm nay sống cho ngày mai</td>
-      <td>Hoàn thành</td>
-      <td>
-        <div class="ui toggle checkbox pink">
-          <input type="checkbox" class="write-show pink" />
-          <label>&nbsp;</label>
-        </div>
-      </td>
-      <td><a class="ui button mini pink">Chi tiết</a></td>
-    </tr>
+  <tr>
+    <td>
+    </td>
+    <td>
+      <div class="ui small input">
+        <input type="text" placeholder="Search...">
+      </div>
+    </td>
+    <td>
+      <select class="ui dropdown">
+        <option value="">--Chọn--</option>
+        <option value="1">Đang viết</option>
+        <option value="0">Hoàn thành</option>
+      </select>
+    </td>
+    <td>
+      <select class="ui dropdown">
+        <option value="">--Chọn--</option>
+        <option value="1">Có</option>
+        <option value="0">Không</option>
+      </select>
+    </td>
+  </tr>
+    <%locals.data.rows.forEach(function(stories, index){%>
+      <tr>
+        <td>
+          <%=index+1%>
+        </td>
+        <td>
+          <%=stories.Title%>
+        </td>
+        <td>
+          <%=stories.Status%>
+        </td>
+        <td>
+          <div class="ui checkbox">
+            <%if(stories.Show==='Y'){%>
+              <input type="checkbox" name="<%=stories.UID%>" checked="true"/>
+              <%} else {%>
+                <input type="checkbox" name="<%=stories.UID%>"/>
+                <%}%>
+            <label></label>
+          </div>
+        </td>
+        <td>
+          <a class="ui button mini pink">Chi tiết</a>
+          <a class="ui button mini pink">Cập nhật</a>
+        </td>
+      </tr>
+    <%})%>
   </tbody>
 </table>
-    <div>&nbsp;
-    </div>
+<div class="ui pagination menu">
+  <a class="icon item">
+    <i class="left arrow icon"></i>
+  </a>
+  <a class="active item">
+    1
+  </a>
+  <div class="disabled item">
+    ...
+  </div>
+  <a class="item">
+    10
+  </a>
+  <a class="item">
+    11
+  </a>
+  <a class="item">
+    12
+  </a>
+  <a class="icon item">
+    <i class="right arrow icon"></i>
+  </a>
+</div>
+<div>&nbsp;</div>
 </div>

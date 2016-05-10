@@ -5,18 +5,21 @@
         <input type="text"  class="write-title" />
       </div>
       <div class="fields margin-top-20">
-        <div class="field" onClick="onClickAttachImage();">
+        <div class="field title-background" onClick="onClickAttachImage();">
           <i class="attach icon">
           </i>
-          Đính kèm ảnh      
+          <span>Đính kèm ảnh</span>    
+          <input type="file" name="background" class="hide" id="write-background" accept="image/*" />
+          <input type="hidden" class="write-background-uid"/>
+          <div class="ui centered small inline loader background-loader"></div>  
         </div>
         <div class="field">
           &nbsp;
         </div>
         <div class="field">
-          <div class="ui toggle checkbox">
-            <input type="checkbox" class="write-show" />
-            <label>Hiển thị</label>
+          <div class="ui checkbox">
+            <input type="checkbox" name="show" class="write-show" value="Y" />
+            <label for="write-show">Hiển thị</label>
           </div>
         </div>
       </div>
@@ -24,12 +27,12 @@
         <label>Nội dung:</label>
         <textarea id='write-content'></textarea>
       </div>
-      <a class="ui button tiny pink right" onClick="onClickSave();">
-      Lưu
-      </a>
-      <a class="ui button tiny pink right" onClick="onClickView();">
-      Xem
-      </a>
+        <a class="ui button tiny pink" onClick="onClickSave();">
+        Lưu
+        </a>
+        <a class="ui button tiny pink" onClick="onClickView();">
+        Xem
+        </a>
         <div class="field">
         &nbsp;
         </div>

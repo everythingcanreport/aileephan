@@ -22,5 +22,13 @@ module.exports.routes = {
     'GET /tro-giup': {
         controller: 'HelperController',
         action: 'HelpMe'
+    },
+    'POST /truyen/viet-truyen/upload-background': {
+        controller: 'StoriesController',
+        action: 'UploadBackground'
+    },
+    'POST /truyen/them-moi': {
+        controller: 'StoriesController',
+        action: 'CreateStories'
     }
 };

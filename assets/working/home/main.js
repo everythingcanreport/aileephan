@@ -43,12 +43,6 @@ function manageStories() {
     });
 };
 
-function help() {
-    require(['menu/menu'], function(menu) {
-        menu.help();
-    });
-};
-
 //load data when scroll last page
 $(document).scroll(function() {
     if ($(window).scrollTop() + $(window).height() == $(document).height()) {

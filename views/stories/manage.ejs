@@ -2,34 +2,35 @@
     <table class="ui grey table">
   <thead>
     <tr><th>#</th>
-    <th>Tiêu đề</th>
-    <th>Trạng thái</th>
-    <th>Hiển thị</th>
-    <th>Thao tác</th>
-  </tr></thead><tbody>
-  <tr>
-    <td>
-    </td>
-    <td>
-      <div class="ui small input">
-        <input type="text" placeholder="Search...">
-      </div>
-    </td>
-    <td>
-      <select class="ui dropdown">
-        <option value="">--Chọn--</option>
-        <option value="1">Đang viết</option>
-        <option value="0">Hoàn thành</option>
-      </select>
-    </td>
-    <td>
-      <select class="ui dropdown">
-        <option value="">--Chọn--</option>
-        <option value="1">Có</option>
-        <option value="0">Không</option>
-      </select>
-    </td>
-  </tr>
+    <th>Title</th>
+    <th>Status</th>
+    <th>Show</th>
+    <th>Action</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <div class="ui small input">
+          <input type="text" class="filter-title" placeholder="Tiêu đề..." onChange="loadList();"/>
+        </div>
+      </td>
+      <td>
+        <select class="ui dropdown filter-status" onChange="loadList();">
+          <option value="">---Select---</option>
+          <option value="Pending">Pending</option>
+          <option value="Finish">Finish</option>
+        </select>
+      </td>
+      <td>
+        <select class="ui dropdown filter-show" onChange="loadList();">
+          <option value="">---Select---</option>
+          <option value="Y">Yes</option>
+          <option value="N">No</option>
+        </select>
+      </td>
+    </tr>
     <%locals.data.rows.forEach(function(stories, index){%>
       <tr>
         <td>
@@ -52,35 +53,31 @@
           </div>
         </td>
         <td>
-          <a class="ui button mini pink">Chi tiết</a>
-          <a class="ui button mini pink">Cập nhật</a>
+          <a class="ui button mini pink">View</a>
+          <a class="ui button mini pink">Edit</a>
         </td>
       </tr>
     <%})%>
   </tbody>
 </table>
-<div class="ui pagination menu">
-  <a class="icon item">
+<div class="manage-total">
+<span>Total: <%=locals.data.count%></span>
+</div>
+<%if(locals.data.count!==0) {%>
+<div class="ui pagination menu manage-pagination" >
+  <a class="icon item" onClick="paginationManage(1);">
     <i class="left arrow icon"></i>
   </a>
-  <a class="active item">
-    1
-  </a>
-  <div class="disabled item">
-    ...
-  </div>
-  <a class="item">
-    10
-  </a>
-  <a class="item">
-    11
-  </a>
-  <a class="item">
-    12
-  </a>
-  <a class="icon item">
+  <%for(var i=1; i<=Math.round(locals.data.count/5); i++){%>
+    <a class="item" onClick="paginationManage(<%=i%>);">
+    <%=i%>
+    </a>
+  <%}%>
+  <a class="icon item" onClick="paginationManage(<%=Math.round(locals.data.count/5)%>);">
     <i class="right arrow icon"></i>
   </a>
 </div>
+<%}%>
 <div>&nbsp;</div>
 </div>
+<script src="/libs/speakingurl/speakingurl.min.js"></script>

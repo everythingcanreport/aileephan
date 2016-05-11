@@ -61,12 +61,6 @@ function manageStories() {
     });
 };
 
-function help() {
-    require(['menu/menu'], function(menu) {
-        menu.help();
-    });
-};
-
 $('#write-background').change(function(e) {
     $('.background-loader').addClass('active');
     var StoriesformData = new FormData();
@@ -80,7 +74,7 @@ $('#write-background').change(function(e) {
                 $('.title-background span').text(fileName);
                 $('.background-loader').removeClass('active');
                 var notyUploadBackground = noty({
-                    text: 'Tải ảnh nền thành công!',
+                    text: 'Upload background success!',
                     layout: 'topRight',
                     type: 'success',
                     timeout: 3000
@@ -88,7 +82,7 @@ $('#write-background').change(function(e) {
                 $('.write-background-uid').val(response[0].UID);
             }, function(err) {
                 var notyUploadBackground = noty({
-                    text: 'Tải ảnh nền thất bại!',
+                    text: 'Upload background failed!',
                     layout: 'topRight',
                     type: 'error',
                     timeout: 3000

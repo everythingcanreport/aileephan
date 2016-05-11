@@ -1,13 +1,10 @@
 define(function() {
     return {
         writeStories: function() {
-            window.location.href = window.location.origin + '/truyen/viet-truyen';
+            window.location.href = window.location.origin + '/admin/write';
         },
         manageStories: function() {
-            window.location.href = window.location.origin + '/truyen/quan-ly-truyen';
-        },
-        help: function() {
-            window.location.href = window.location.origin + '/tro-giup';
+            window.location.href = window.location.origin + '/admin/manage';
         }
     }
 });

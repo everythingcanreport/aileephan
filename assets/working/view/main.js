@@ -42,9 +42,3 @@ function manageStories() {
         menu.manageStories();
     });
 };
-
-function help() {
-    require(['menu/menu'], function(menu) {
-        menu.help();
-    });
-};

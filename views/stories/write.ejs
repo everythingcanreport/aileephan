@@ -1,14 +1,14 @@
 <div class="ui container text margin-top-40">
   <form class="ui form write-stories hide">
       <div class="field">
-        <label>Tiêu đề:</label>
+        <label>Title:</label>
         <input type="text"  class="write-title" />
       </div>
       <div class="fields margin-top-20">
         <div class="field title-background" onClick="onClickAttachImage();">
           <i class="attach icon">
           </i>
-          <span>Đính kèm ảnh</span>    
+          <span>Attach Background</span>    
           <input type="file" name="background" class="hide" id="write-background" accept="image/*" />
           <input type="hidden" class="write-background-uid"/>
           <div class="ui centered small inline loader background-loader"></div>  
@@ -19,19 +19,19 @@
         <div class="field">
           <div class="ui checkbox">
             <input type="checkbox" name="show" class="write-show" value="Y" />
-            <label for="write-show">Hiển thị</label>
+            <label for="write-show">Show</label>
           </div>
         </div>
       </div>
       <div class="field">
-        <label>Nội dung:</label>
+        <label>Content:</label>
         <textarea id='write-content'></textarea>
       </div>
         <a class="ui button tiny pink" onClick="onClickSave();">
-        Lưu
+        Save
         </a>
         <a class="ui button tiny pink" onClick="onClickView();">
-        Xem
+        Review
         </a>
         <div class="field">
         &nbsp;

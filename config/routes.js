@@ -3,32 +3,28 @@ module.exports.routes = {
         controller: 'HomeController',
         action: 'GetListStories'
     },
-    // 'GET /truyen/:tieude': {
-    //     controller: 'StoriesController',
-    //     action: 'ViewStories'
-    // },
-    'GET /truyen/viet-truyen': {
+    'GET /admin/write': {
         controller: 'StoriesController',
         action: 'WriteStories'
     },
-    'GET /truyen/quan-ly-truyen': {
+    'GET /admin/manage': {
         controller: 'StoriesController',
         action: 'ManageStories'
     },
-    'GET /dang-nhap': {
+    'GET /login': {
         controller: 'OAuthController',
         action: 'Login'
     },
-    'GET /tro-giup': {
-        controller: 'HelperController',
-        action: 'HelpMe'
-    },
-    'POST /truyen/viet-truyen/upload-background': {
+    'POST /admin/write/upload-background': {
         controller: 'StoriesController',
         action: 'UploadBackground'
     },
-    'POST /truyen/them-moi': {
+    'POST /admin/create': {
         controller: 'StoriesController',
         action: 'CreateStories'
+    },
+    'POST /admin/manage/list': {
+        controller: 'StoriesController',
+        action: 'GetListStoriesManage'
     }
 };

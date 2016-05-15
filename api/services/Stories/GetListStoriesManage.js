@@ -3,7 +3,7 @@ module.exports = function(data) {
     var defer = $q.defer();
     var pagination = Pagination(data, Stories);
     Stories.findAndCountAll({
-            attributes: ['UID', 'Status', 'Show', 'Title'],
+            attributes: ['UID', 'SpeakingUrl', 'Show', 'Title'],
             where: pagination.Stories,
             limit: pagination.limit,
             offset: pagination.offset

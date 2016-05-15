@@ -1,6 +1,7 @@
 /* override bootstrap styles */
 
 @import url('http://fonts.googleapis.com/css?family=Oswald:300,400:latin,latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400:latin,latin-ext');
 @font-face {
     font-family: VNCOMSI;
     src: url('../../fonts/VNCOMSI.ttf') format('truetype');
@@ -23,12 +24,17 @@
     font-family: VNARIS;
 }
 
+.font-roboto {
+    font-family: Roboto;
+}
+
 .font-menu {
     font-family: Oswald;
     font-size: 16px;
 }
 
 body {
+    /*font-family: VNARIS;*/
     background-color: #FFFFFF;
 }
 
@@ -142,8 +148,8 @@ body {
 }
 
 .logo {
-    width: 500px !important;
-    height: 150px !important;
+    width: 100% !important;
+    max-height: 150px !important;
 }
 
 .margin-top-10 {
@@ -226,10 +232,47 @@ body {
     margin-right: 50px
 }
 
+.margin-top-5 {
+    margin-top: 5px;
+}
+
 .hide {
     display: none !important;
 }
 
 .write-title {
     font-size: 16px !important;
+}
+
+.ui.form input[type="text"],
+.ui.form input[type=text]:focus {
+    border-radius: 0;
+}
+
+.ui.form input[type=text]:focus {
+    border-color: #e03997 !important;
+}
+
+.ui.input input:focus {
+    border-color: #e03997 !important;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.floated-right {
+    float: right;
+}
+
+.size-18 {
+    font-size: 18px;
+}
+
+.color-pink {
+    color: #e03997;
+}
+
+a.go-home:hover {
+    color: #e61a8d;
 }

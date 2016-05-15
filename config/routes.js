@@ -3,7 +3,11 @@ module.exports.routes = {
         controller: 'HomeController',
         action: 'GetListStories'
     },
-    'GET /admin/write': {
+    'GET /view/:title': {
+        controller: 'StoriesController',
+        action: 'ViewStories'
+    },
+    'GET /admin/write/(:UID)?': {
         controller: 'StoriesController',
         action: 'WriteStories'
     },
@@ -11,7 +15,7 @@ module.exports.routes = {
         controller: 'StoriesController',
         action: 'ManageStories'
     },
-    'GET /login': {
+    'GET /fb/login': {
         controller: 'OAuthController',
         action: 'Login'
     },
@@ -26,5 +30,21 @@ module.exports.routes = {
     'POST /admin/manage/list': {
         controller: 'StoriesController',
         action: 'GetListStoriesManage'
+    },
+    'POST /admin/update': {
+        controller: 'StoriesController',
+        action: 'UpdateStories'
+    },
+    'GET /user/download-backround/:UID': {
+        controller: 'StoriesController',
+        action: 'DownloadBackground'
+    },
+    'POST /admin/update-status': {
+        controller: 'StoriesController',
+        action: 'UpdateStoriesStatus'
+    },
+    'GET /admin/view/:UID': {
+        controller: 'StoriesController',
+        action: 'ManageViewStories'
     }
 };

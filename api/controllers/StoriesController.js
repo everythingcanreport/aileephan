@@ -8,16 +8,48 @@ module.exports = {
         });
     },
     WriteStories: function(req, res) {
-        res.view('stories/write', {
-            locals: {
-                url: req.url,
-                baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/appWriteStories'
-            }
-        });
+        var uid = req.param('UID');
+        if (HelperService.CheckExistData(uid)) {
+            Stories.findOne({
+                    attributes: ['UID', 'Show', 'Title', 'Content', 'CreatedDate'],
+                    include: [{
+                        model: FileUpload,
+                        attributes: ['UID', 'FileName', 'FileLocation'],
+                        where: {
+                            Enable: 'Y'
+                        },
+                        through: {
+                            attributes: null
+                        }
+                    }],
+                    where: {
+                        UID: uid
+                    },
+                    required: false
+                })
+                .then(function(stories) {
+                    res.view('stories/write', {
+                        locals: {
+                            url: req.url,
+                            baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/appWriteStories',
+                            data: stories
+                        }
+                    });
+                }, function(err) {
+                    res.serverError(err);
+                });
+        } else {
+            res.view('stories/write', {
+                locals: {
+                    url: req.url,
+                    baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/appWriteStories'
+                }
+            });
+        }
     },
     ManageStories: function(req, res) {
         Stories.findAndCountAll({
-                attributes: ['UID', 'Show', 'Status', 'Title'],
+                attributes: ['UID', 'SpeakingUrl', 'Show', 'Title'],
                 raw: true,
                 limit: 5
             })
@@ -71,6 +103,32 @@ module.exports = {
                 });
         });
     },
+    DownloadBackground: function(req, res) {
+        req.validate({
+            UID: 'string'
+        });
+        FileUpload.findOne({
+                attributes: ['FileLocation'],
+                where: {
+                    UID: req.param('UID')
+                }
+            })
+            .then(function(fileUpload) {
+                if (!fileUpload) return res.notFound();
+                if (!fileUpload.FileLocation) {
+                    return res.notFound();
+                }
+                var SkipperDisk = require('skipper-disk');
+                var fileAdapter = SkipperDisk();
+                fileAdapter.read(fileUpload.FileLocation)
+                    .on('error', function(err) {
+                        return res.serverError(err);
+                    })
+                    .pipe(res);
+            }, function(err) {
+                return res.negotiate(err);
+            });
+    },
     CreateStories: function(req, res) {
         var data = HelperService.CheckPostRequest(req);
         if (data === false) {
@@ -85,9 +143,9 @@ module.exports = {
                     HelperService.CheckExistData(err.transaction) &&
                     HelperService.CheckExistData(err.error)) {
                     err.transaction.rollback();
-                    return res.serverError(ErrorWrap(err.error));
+                    return res.serverError(err.error);
                 }
-                return res.serverError(ErrorWrap(err));
+                return res.serverError(err);
             });
     },
     GetListStoriesManage: function(req, res) {
@@ -103,11 +161,60 @@ module.exports = {
                         HelperService.CheckExistData(err.transaction) &&
                         HelperService.CheckExistData(err.error)) {
                         err.transaction.rollback();
-                        res.serverError(ErrorWrap(err.error));
+                        res.serverError(err.error);
                     } else {
-                        res.serverError(ErrorWrap(err));
+                        res.serverError(err);
                     }
                 });
         }
+    },
+    UpdateStories: function(req, res) {
+        var data = HelperService.CheckPostRequest(req);
+        if (data === false) {
+            return res.serverError('data failed');
+        }
+        Services.UpdateStories(data)
+            .then(function(success) {
+                success.transaction.commit();
+                res.ok('success');
+            }, function(err) {
+                if (HelperService.CheckExistData(err) &&
+                    HelperService.CheckExistData(err.transaction) &&
+                    HelperService.CheckExistData(err.error)) {
+                    err.transaction.rollback();
+                    return res.serverError(err.error);
+                }
+                return res.serverError(err);
+            });
+    },
+    UpdateStoriesStatus: function(req, res) {
+        var data = HelperService.CheckPostRequest(req);
+        if (data === false) {
+            return res.serverError('data failed');
+        }
+        Services.UpdateStoriesStatus(data)
+            .then(function(success) {
+                res.ok('success');
+            }, function(err) {
+                if (HelperService.CheckExistData(err) &&
+                    HelperService.CheckExistData(err.transaction) &&
+                    HelperService.CheckExistData(err.error)) {
+                    err.transaction.rollback();
+                    return res.serverError(err.error);
+                }
+                return res.serverError(err);
+            });
+    },
+    ManageViewStories: function(req, res) {
+        req.validate({
+            UID: 'string'
+        });
+        var uid = req.param('UID');
+        Services.ManageViewStories(uid)
+            .then(function(responseStories) {
+                res.ok(responseStories.data);
+            }, function(err) {
+                res.serverError(err);
+            });
     }
 };

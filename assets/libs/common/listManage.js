@@ -3,7 +3,7 @@ define(function() {
         var p = new Promise(function(resolve, reject) {
             $.ajax({
                 type: 'POST',
-                url: "http://localhost:1337/truyen/quan-li-truyen",
+                url: "http://localhost:1337/admin/manage",
                 data: dataFilter,
                 success: function(response) {
                     resolve(response);

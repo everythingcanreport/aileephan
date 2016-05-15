@@ -2,15 +2,42 @@
   <form class="ui form write-stories hide">
       <div class="field">
         <label>Title:</label>
-        <input type="text"  class="write-title" />
+        <%if(locals &&
+            locals.data) {%>
+        <input type="text"  class="write-title" value="<%=locals.data.Title%>"/>
+        <%} else {%>
+          <input type="text"  class="write-title"/>
+          <%}%>
       </div>
       <div class="fields margin-top-20">
         <div class="field title-background" onClick="onClickAttachImage();">
           <i class="attach icon">
           </i>
-          <span>Attach Background</span>    
+          <span>Attach Background</span>
+          <!--file upload hidden-->    
           <input type="file" name="background" class="hide" id="write-background" accept="image/*" />
-          <input type="hidden" class="write-background-uid"/>
+          <!--end-->
+          <!-- UID file upload update stories-->
+          <%if(locals && 
+            locals.data &&
+             locals.data.FileUploads &&
+             locals.data.FileUploads[0]) {%>
+          <input type="hidden" class="write-background-uid" value="<%=locals.data.FileUploads[0].UID%>"/>
+          <!--filename stories update stories-->
+          <input type="hidden" class="write-background-filename-hidden" value="<%=locals.data.FileUploads[0].FileName%>"/>
+          <!--end-->
+          <%}%>
+          <!--end-->
+          <!-- UID stories update stories-->
+          <%if(locals &&
+            locals.data) {%>
+          <input type="hidden" class="write-uid" value="<%=locals.data.UID%>"/>
+          <input type="hidden" class="write-date" value="<%=locals.data.CreatedDate%>"/>
+          <!--content stories update stories-->
+          <input type="hidden" class="write-content-hidden" value="<%=locals.data.Content%>"/>
+          <!--end-->
+          <%}%>
+          <!--end-->
           <div class="ui centered small inline loader background-loader"></div>  
         </div>
         <div class="field">
@@ -18,7 +45,13 @@
         </div>
         <div class="field">
           <div class="ui checkbox">
-            <input type="checkbox" name="show" class="write-show" value="Y" />
+          <%if(locals &&
+            locals.data &&
+            locals.data.Show==='Y') {%>
+            <input type="checkbox" name="show" class="write-show" value="Y" checked="true"/>
+            <%} else {%>
+              <input type="checkbox" name="show" class="write-show" value="Y"/>
+              <%}%>
             <label for="write-show">Show</label>
           </div>
         </div>
@@ -27,18 +60,49 @@
         <label>Content:</label>
         <textarea id='write-content'></textarea>
       </div>
-        <a class="ui button tiny pink" onClick="onClickSave();">
-        Save
-        </a>
-        <a class="ui button tiny pink" onClick="onClickView();">
+      <div class="actions align-right">
+        <a class="ui button tiny grey write-review-button" onClick="onClickView();">
         Review
         </a>
+        <a class="ui button tiny pink write-save-button" onClick="onClickSave();">
+        Save
+        </a>
+      </div>
         <div class="field">
         &nbsp;
         </div>
     </form>
   </div>
+  <!--loading-->
   <div class="ui container text margin-top-40 margin-bottom-40">
     <div class="ui active centered inline loader write-loader"></div>
   </div>
+  <!--end-->
+  <!--modal review-->
+    <div class="ui long modal">
+    <div class="ui segment">
+      <h1 class="ui header pink">
+        <span class="font-header review-title">
+        </span>
+      </h1>
+      <div class="ui images" style="text-align: center;">
+        <img class="review-background ui big centered image" src="/user/download-backround/5e9e2d6b-a029-4b91-a121-3569a3706063" width="100%" height="15%" />
+      </div>
+      <h4 class="ui horizontal divider header review-date pink">
+          <!--date write stories-->
+      </h4>
+      <div class="description review-description">
+      <!--content stories-->
+      </div>
+      <div class="ui divider">
+      </div>
+      <div class="actions align-right">
+        <div class="ui pink tiny approve button">
+          Ok
+          <i class="right chevron icon"></i>
+        </div>
+    </div>
+    </div>
+  </div>
+  <!--end-->
 <script src="/libs/tinymce/tinymce.min.js"></script>

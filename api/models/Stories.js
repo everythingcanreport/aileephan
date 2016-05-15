@@ -21,9 +21,9 @@ module.exports = {
                 }
             }
         },
-        Title: {
+        SpeakingUrl: {
             type: Sequelize.STRING(255),
-            allowNull: false,
+            allowNull: true,
             validate: {
                 len: {
                     args: [0, 255],
@@ -31,12 +31,12 @@ module.exports = {
                 }
             }
         },
-        Status: {
-            type: Sequelize.STRING(100),
+        Title: {
+            type: Sequelize.STRING(255),
             allowNull: false,
             validate: {
                 len: {
-                    args: [0, 100],
+                    args: [0, 255],
                     msg: 'Too long!'
                 }
             }
@@ -104,6 +104,28 @@ module.exports = {
         freezeTableName: true,
         createdAt: 'CreatedDate',
         updatedAt: 'ModifiedDate',
-        hooks: {}
+        hooks: {
+            afterCreate: function(stories, options, callback) {
+                if (!_.isEmpty(stories) &&
+                    !_.isEmpty(stories.dataValues) &&
+                    HelperService.CheckExistData(stories.dataValues.ID)) {
+                    var speakingUrl = SpeakingUrlService(stories.dataValues.Title) +
+                        '-' + HashIDService.Create(stories.dataValues.ID) + '.html';
+                    Stories.update({
+                            SpeakingUrl: speakingUrl
+                        }, {
+                            where: {
+                                ID: stories.dataValues.ID
+                            },
+                            transaction: options.transaction
+                        })
+                        .then(function(speakingUrlUpdated) {
+                            callback();
+                        }, function(err) {
+                            callback(err);
+                        });
+                }
+            }
+        }
     }
 };

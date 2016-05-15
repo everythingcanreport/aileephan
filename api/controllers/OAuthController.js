@@ -2,7 +2,7 @@ var requestify = require('requestify');
 module.exports = {
     Login: function(req, res) {
         var isAdmin = false;
-        var urlGetUserAccount = sails.config.aileeConfig.urlGetUserAccount + req.param('access_token')
+        var urlGetUserAccount = sails.config.aileeConfig.urlGetUserAccount + req.param('access_token');
         requestify.get(urlGetUserAccount).then(function(response) {
             // Get the response body
             var userInfo = response.getBody();
@@ -17,7 +17,11 @@ module.exports = {
                     }
                 });
                 res.ok({ data: UserMenuService(isAdmin) });
+            }, function(err){
+                res.forbidden(err);
             });
+        }, function(err){
+            res.forbidden(err);
         });
     }
 }

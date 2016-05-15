@@ -18,4 +18,7 @@ module.exports = {
             return false;
         }
     },
+    CheckExistData: function(data) {
+        return (!_.isUndefined(data) && !_.isNull(data));
+    },
 };

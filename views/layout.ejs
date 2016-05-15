@@ -5,8 +5,8 @@
     <title><%=typeof title == 'undefined' ? 'Ailee Phan' : title%></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!--STYLES-->
-    <link rel="stylesheet" href="/styles/a-semantic.min.css">
     <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/semantic.css">
     <link rel="stylesheet" href="/styles/z-custom.css">
     <!--STYLES END-->
   </head>
@@ -19,8 +19,8 @@
     <!--TEMPLATES END-->
 
     <!--SCRIPTS-->
-    <script src="/js/dependencies/sails.io.js"></script>
+    
     <!--SCRIPTS END-->
-    <script src="/libs/require.js" data-main="<%=locals.baseUrlServer%>"></script>
   </body>
+<script type="text/javascript" src="/libs/require.js" data-main="<%=locals.baseUrlServer%>"></script>
 </html>

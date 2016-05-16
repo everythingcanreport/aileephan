@@ -3,7 +3,7 @@ module.exports.routes = {
         controller: 'HomeController',
         action: 'GetListStories'
     },
-    'GET /view/:title': {
+    'GET /truyen/:title': {
         controller: 'StoriesController',
         action: 'ViewStories'
     },
@@ -35,7 +35,7 @@ module.exports.routes = {
         controller: 'StoriesController',
         action: 'UpdateStories'
     },
-    'GET /user/download-backround/:UID': {
+    'GET /user/download-background/:UID': {
         controller: 'StoriesController',
         action: 'DownloadBackground'
     },
@@ -46,5 +46,9 @@ module.exports.routes = {
     'GET /admin/view/:UID': {
         controller: 'StoriesController',
         action: 'ManageViewStories'
+    },
+    'POST /stories/list': {
+        controller: 'StoriesController',
+        action: 'GetListStories'
     }
 };

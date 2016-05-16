@@ -48,9 +48,12 @@ define(function(require) {
                     !_.isUndefined($('.write-content-hidden').val())) {
                     tinymce.get('write-content').setContent($('.write-content-hidden').val());
                 }
-                if (!_.isNull($('.write-background-filename-hidden').val()) &&
-                    !_.isUndefined($('.write-background-filename-hidden').val())) {
-                    $('.title-background span').text($('.write-background-filename-hidden').val());
+                var fileName = $('.write-background-filename-hidden').val();
+                if (!_.isNull(fileName) &&
+                    !_.isUndefined(fileName)) {
+                    var ext = fileName.split('.')[fileName.split('.').length - 1];
+                    fileName = fileName.length >= 10 ? fileName.substring(0, 10) + '...' + ext : fileName;
+                    $('.title-background span').text(fileName);
                 }
                 //check status create or edit
                 if (!_.isNull($('.write-title').val()) &&
@@ -110,6 +113,17 @@ $('#write-background').change(function(e) {
 
 function onClickSave() {
     var htmlContent = tinymce.get('write-content').getContent();
+    var textContent = tinymce.get('write-content').getContent({ format: 'text' });
+    if (!_.isNull(textContent) &&
+        !_.isUndefined(textContent) &&
+        textContent.length > 300) {
+        var maxLengthCut = 300 // maximum number of characters to extract
+            //trim the string to the maximum length
+        var trimmedString = textContent.substr(0, maxLengthCut);
+        //re-trim if we are in the middle of a word
+        trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+        textContent = trimmedString + ' ...';
+    }
     var title = $('.write-title').val();
     var show = $('.write-show').val();
     var backgroundUID = $('.write-background-uid').val();
@@ -119,6 +133,7 @@ function onClickSave() {
                 Title: title,
                 Show: show,
                 Content: htmlContent,
+                ShortContent: textContent
             },
             FileUploads: [{
                 UID: backgroundUID
@@ -134,7 +149,9 @@ function onClickSave() {
                             type: 'success',
                             timeout: 3000
                         });
-                        menu.manageStories();
+                        setTimeout(function() {
+                            menu.manageStories();
+                        }, 1000);
                     });
                 }, function(err) {
                     var notyUploadBackground = noty({
@@ -152,6 +169,7 @@ function onClickSave() {
                 Title: title,
                 Show: show,
                 Content: htmlContent,
+                ShortContent: textContent,
                 UID: uidStories
             },
             FileUploads: [{
@@ -168,7 +186,9 @@ function onClickSave() {
                             type: 'success',
                             timeout: 3000
                         });
-                        menu.manageStories();
+                        setTimeout(function() {
+                            menu.manageStories();
+                        }, 1000);
                     });
                 }, function(err) {
                     var notyUploadBackground = noty({
@@ -190,7 +210,7 @@ function onClickView() {
         $('.review-description').append(htmlContent);
         $('.review-title').text(title);
         var backgroundUID = $('.write-background-uid').val();
-        $('.review-background').attr('src', '/user/download-backround/' + backgroundUID);
+        $('.review-background').attr('src', '/user/download-background/' + backgroundUID);
         var dateWriteReview = moment().format('DD/MM/YYYY');
         if (!_.isNull($('.write-date').val()) &&
             !_.isUndefined($('.write-date').val())) {

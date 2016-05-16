@@ -10,8 +10,20 @@
 }
 
 @font-face {
-    font-family: VNARIS;
-    src: url('../../fonts/VNARIS.ttf') format('truetype');
+    font-family: burnstown_dam;
+    src: url('../../fonts/burnstown_dam.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: texgyrecursorbolditalic;
+    src: url('../../fonts/texgyrecursorbolditalic.otf') format('truetype');
+}
+
+@font-face {
+    font-family: DejaVuSans;
+    src: url('../../fonts/DejaVuSans.ttf') format('truetype');
 }
 
 .logo {
@@ -21,20 +33,24 @@
 }
 
 .font-header {
-    font-family: VNARIS;
+    font-family: texgyrecursorbolditalic;
 }
 
-.font-roboto {
-    font-family: Roboto;
+.font-brand {
+    font-family: DejaVuSans !important;
+}
+
+.capitalize {
+    text-transform: capitalize;
 }
 
 .font-menu {
-    font-family: Oswald;
+    font-family: burnstown_dam;
     font-size: 16px;
 }
 
 body {
-    /*font-family: VNARIS;*/
+    font-family: DejaVuSans !important;
     background-color: #FFFFFF;
 }
 
@@ -261,6 +277,10 @@ body {
     text-align: right;
 }
 
+.align-center {
+    text-align: center;
+}
+
 .floated-right {
     float: right;
 }
@@ -275,4 +295,16 @@ body {
 
 a.go-home:hover {
     color: #e61a8d;
+}
+
+.height-image-home {
+    height: 187px !important;
+}
+
+.max-height-image-view {
+    max-height: 550px !important;
+}
+
+.margin-top-negative-20 {
+    margin-top: -20px;
 }

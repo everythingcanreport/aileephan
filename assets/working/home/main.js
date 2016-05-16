@@ -28,7 +28,16 @@ define(function(require) {
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
     //end facebook plugin
-
+    require(['/libs/moment-timezone/moment-timezone.js'], function(moment) {
+        var dateWriteReview = moment().format('DD/MM/YYYY');
+        var dateWriteResponse = $('.home-date-hidden').val();
+        if (!_.isNull(dateWriteResponse) &&
+            !_.isUndefined(dateWriteResponse)) {
+            dateWriteReview = moment(dateWriteResponse, 'ddd MMM DD YYYY HH:mm:ss ZZ').format('DD/MM/YYYY');
+        }
+        $('.home-date').text('');
+        $('.home-date').append(dateWriteReview);
+    });
 });
 
 function writeStories() {
@@ -43,12 +52,64 @@ function manageStories() {
     });
 };
 
+var rows = 5;
+var count = $('.home-count').val();
+var appending = false;
 //load data when scroll last page
 $(document).scroll(function() {
     if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-        $('.home-loader').addClass('active');
-        setTimeout(function() {
-            $('.home-loader').removeClass('active');
-        }, 5000);
+        if (rows < count && !appending) {
+            appending = true;
+            require(['common/listStories'], function(listStories) {
+                var dataFilter = {
+                    Limit: 5,
+                    Offset: rows
+                };
+                $('.home-loader').addClass('active');
+                listStories(dataFilter)
+                    .then(function(response) {
+                        $('.home-loader').removeClass('active');
+                        renderData(response);
+                    }, function(err) {
+                        $('.home-loader').removeClass('active');
+                    });
+            });
+        }
     }
 });
+
+//render data
+function renderData(response) {
+    if (!_.isEmpty(response) &&
+        !_.isEmpty(response.rows)) {
+        require(['/libs/moment-timezone/moment-timezone.js'], function(moment) {
+            _.forEach(response.rows, function(stories, index) {
+                var ribbon = '<a class="ui pink font-brand ribbon large label">Ngôn tình</a>';
+                var homeDate = '<span class="float-right media-time font-brand home-date">' +
+                    moment(stories.CreatedDate).format('DD/MM/YYYY') + '</span>';
+                var uidBackground = (stories &&
+                    stories.FileUploads &&
+                    stories.FileUploads[0]) ? stories.FileUploads[0].UID : null;
+                var imageBackground = '<div class="ui small image">' +
+                    '<img class="height-image-home" src="/user/download-background/' +
+                    uidBackground + '"/></div>';
+                var title = '<h1 class="ui pink header"><div class="content">' +
+                    '<span class="font-header capitalize">' +
+                    stories.Title +
+                    '</span></div></h1>';
+                var content = ''
+                var detail = '<div class="description"><p>' +
+                    stories.ShortContent +
+                    '</p><a href="/truyen/' +
+                    stories.SpeakingUrl +
+                    '"class = "ui mini pink button font-brand">Chi tiết</a></div>';
+                $('.home-main').append('<div class="ui segment">' +
+                    ribbon + homeDate + '<div class="ui very relaxed items"><div class="item">' +
+                    imageBackground + '<div class="content">' + title + detail +
+                    '</div></div></div></div>');
+            });
+        });
+        appending = false;
+        rows += response.rows.length;
+    }
+};

@@ -28,7 +28,17 @@ define(function(require) {
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
     //end facebook plugin
-
+    require(['/libs/moment-timezone/moment-timezone.js'], function(moment) {
+        var dateWriteReview = moment().format('DD/MM/YYYY');
+        var dateWriteResponse = $('.view-date-create').val();
+        if (!_.isNull(dateWriteResponse) &&
+            !_.isUndefined(dateWriteResponse)) {
+            dateWriteReview = moment(dateWriteResponse, 'ddd MMM DD YYYY HH:mm:ss ZZ').format('DD/MM/YYYY');
+        }
+        $('.review-date').text('');
+        $('.review-date').append('<i class="time pink icon"></i>');
+        $('.review-date').append(dateWriteReview);
+    });
 });
 
 function writeStories() {

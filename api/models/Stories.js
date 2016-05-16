@@ -52,6 +52,16 @@ module.exports = {
                 }
             }
         },
+        ShortContent: {
+            type: Sequelize.TEXT,
+            allowNull: true,
+            validate: {
+                len: {
+                    args: [0, 500],
+                    msg: 'Too long!'
+                }
+            }
+        },
         Content: {
             type: Sequelize.TEXT,
             allowNull: true,

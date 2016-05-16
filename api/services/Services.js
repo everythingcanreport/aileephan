@@ -4,5 +4,6 @@ module.exports = {
     GetListStoriesManage: require('./Stories/GetListStoriesManage'),
     UpdateStories: require('./Stories/UpdateStories'),
     UpdateStoriesStatus: require('./Stories/UpdateStoriesStatus'),
-    ManageViewStories: require('./Stories/ManageViewStories')
+    ManageViewStories: require('./Stories/ManageViewStories'),
+    GetListStories: require('./Stories/GetListStories')
 };

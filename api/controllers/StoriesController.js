@@ -1,11 +1,41 @@
 module.exports = {
     ViewStories: function(req, res) {
-        res.view('stories/view', {
-            locals: {
-                url: req.url,
-                baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/appViewStories'
-            }
+        req.validate({
+            title: 'string'
         });
+        var title = req.param('title');
+        Stories.findOne({
+                attributes: ['UID', 'SpeakingUrl', 'Show', 'Title', 'Content', 'CreatedDate'],
+                include: [{
+                    model: FileUpload,
+                    attributes: ['UID', 'FileName', 'FileLocation'],
+                    where: {
+                        Enable: 'Y'
+                    },
+                    through: {
+                        attributes: null
+                    },
+                    required: false
+                }],
+                where: {
+                    SpeakingUrl: title
+                },
+            })
+            .then(function(stories) {
+                if (!_.isEmpty(stories)) {
+                    res.view('stories/view', {
+                        locals: {
+                            url: req.url,
+                            baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/appViewStories',
+                            data: stories
+                        }
+                    });
+                } else {
+                    res.notFound('stories.not.found');
+                }
+            }, function(err) {
+                res.serverError(err);
+            });
     },
     WriteStories: function(req, res) {
         var uid = req.param('UID');
@@ -20,12 +50,12 @@ module.exports = {
                         },
                         through: {
                             attributes: null
-                        }
+                        },
+                        required: false
                     }],
                     where: {
                         UID: uid
-                    },
-                    required: false
+                    }
                 })
                 .then(function(stories) {
                     res.view('stories/write', {
@@ -216,5 +246,25 @@ module.exports = {
             }, function(err) {
                 res.serverError(err);
             });
+    },
+    GetListStories: function(req, res) {
+        var data = HelperService.CheckPostRequest(req);
+        if (data === false) {
+            res.serverError('data failed');
+        } else {
+            Services.GetListStories(data)
+                .then(function(success) {
+                    res.ok(success.data);
+                }, function(err) {
+                    if (HelperService.CheckExistData(err) &&
+                        HelperService.CheckExistData(err.transaction) &&
+                        HelperService.CheckExistData(err.error)) {
+                        err.transaction.rollback();
+                        res.serverError(err.error);
+                    } else {
+                        res.serverError(err);
+                    }
+                });
+        }
     }
 };

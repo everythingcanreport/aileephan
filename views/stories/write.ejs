@@ -1,7 +1,8 @@
 <div class="ui container text margin-top-40">
+  <a href="/" class="go-home floated-right size-18 color-pink margin-top-negative-20"><i class="icon home"></i></a>
   <form class="ui form write-stories hide">
       <div class="field">
-        <label>Title:</label>
+        <label class="font-brand">Tiêu đề:</label>
         <%if(locals &&
             locals.data) {%>
         <input type="text"  class="write-title" value="<%=locals.data.Title%>"/>
@@ -13,7 +14,7 @@
         <div class="field title-background" onClick="onClickAttachImage();">
           <i class="attach icon">
           </i>
-          <span>Attach Background</span>
+          <span class="font-brand">Đính kèm ảnh</span>
           <!--file upload hidden-->    
           <input type="file" name="background" class="hide" id="write-background" accept="image/*" />
           <!--end-->
@@ -44,28 +45,28 @@
           &nbsp;
         </div>
         <div class="field">
-          <div class="ui checkbox">
+          <div class="ui slider checkbox">
           <%if(locals &&
             locals.data &&
             locals.data.Show==='Y') {%>
-            <input type="checkbox" name="show" class="write-show" value="Y" checked="true"/>
+            <input type="checkbox" id="show_id" name="show" class="write-show" value="Y" checked="true"/>
             <%} else {%>
-              <input type="checkbox" name="show" class="write-show" value="Y"/>
+              <input type="checkbox" id="show_id" name="show" class="write-show" value="Y"/>
               <%}%>
-            <label for="write-show">Show</label>
+            <label for="show_id" class="font-brand">Hiển thị</label>
           </div>
         </div>
       </div>
       <div class="field">
-        <label>Content:</label>
+        <label class="font-brand">Nội dung:</label>
         <textarea id='write-content'></textarea>
       </div>
       <div class="actions align-right">
-        <a class="ui button tiny grey write-review-button" onClick="onClickView();">
-        Review
+        <a class="ui button tiny grey write-review-button font-brand" onClick="onClickView();">
+        Xem lại
         </a>
-        <a class="ui button tiny pink write-save-button" onClick="onClickSave();">
-        Save
+        <a class="ui button tiny pink write-save-button font-brand" onClick="onClickSave();">
+        Lưu
         </a>
       </div>
         <div class="field">
@@ -85,8 +86,8 @@
         <span class="font-header review-title">
         </span>
       </h1>
-      <div class="ui images" style="text-align: center;">
-        <img class="review-background ui big centered image" src="/user/download-backround/5e9e2d6b-a029-4b91-a121-3569a3706063" width="100%" height="15%" />
+      <div class="ui images align-center">
+        <img class="review-background ui big centered image max-height-image-view" src="" />
       </div>
       <h4 class="ui horizontal divider header review-date pink">
           <!--date write stories-->

@@ -7,12 +7,30 @@ module.exports = function(data) {
         dataStories.ModifiedBy = 2121212121;
         sequelize.transaction()
             .then(function(t) {
-                return Stories.update(dataStories, {
+                return Stories.findOne({
+                        attributes: ['ID'],
                         where: {
                             UID: dataStories.UID
                         },
-                        transaction: t,
-                        individualHooks: true
+                        raw: true
+                    }).then(function(stories) {
+                        if (!_.isEmpty(stories)) {
+                            var speakingUrl = SpeakingUrlService(dataStories.Title) +
+                                '-' + HashIDService.Create(stories.ID) + '.html';
+                            dataStories.SpeakingUrl = speakingUrl;
+                        }
+                        return Stories.update(dataStories, {
+                            where: {
+                                UID: dataStories.UID
+                            },
+                            transaction: t,
+                            individualHooks: true
+                        });
+                    }, function(err) {
+                        defer.reject({
+                            error: err,
+                            transaction: t
+                        });
                     })
                     .then(function(storiesUpdated) {
                         if (!_.isEmpty(storiesUpdated) &&

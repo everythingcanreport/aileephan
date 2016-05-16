@@ -135,11 +135,11 @@ function renderData(limit, offset, response) {
                 '" onChange="onChangeShow(\'' + stories.UID + '\');"/>' +
                 '<label></label></div></td>';
             var action = '<td><div class="ui buttons tiny icon">' +
-                '<a class="ui grey button" onClick="onClickView(\'' + stories.UID + '\');">' +
-                '<i class="icon search"></i>View</a>' +
+                '<a class="ui grey button font-brand" onClick="onClickView(\'' + stories.UID + '\');">' +
+                '<i class="icon search"></i>Xem</a>' +
                 '<div class="or"></div>' +
-                '<a class="ui pink button" onClick="onClickEdit(\'' + stories.UID + '\');">' +
-                '<i class="icon write"></i>Edit</a></div></td>';
+                '<a class="ui pink button font-brand" onClick="onClickEdit(\'' + stories.UID + '\');">' +
+                '<i class="icon write"></i>Sửa</a></div></td>';
             $('tbody').append('<tr>' + no + title + show + action + '</tr>');
             $('.manage-pagination').removeClass('hide');
         });
@@ -156,7 +156,7 @@ function renderData(limit, offset, response) {
         $('.manage-pagination-main').addClass('hide');
     }
     //set total for pagination
-    $('.manage-total').text('Total: ' + response.count + ' records');
+    $('.manage-total').text('Tổng cộng: ' + response.count + ' dòng');
 };
 //end
 //pagination
@@ -187,7 +187,7 @@ function onClickView(uid) {
                         $('.review-description').append(htmlContent);
                         $('.review-title').text(title);
                         var backgroundUID = (stories && stories.FileUploads && stories.FileUploads[0] ? stories.FileUploads[0].UID : null);
-                        $('.review-background').attr('src', '/user/download-backround/' + backgroundUID);
+                        $('.review-background').attr('src', '/user/download-background/' + backgroundUID);
                         var dateWriteReview = moment().format('DD/MM/YYYY');
                         if (!_.isNull(stories.CreatedDate) &&
                             !_.isUndefined(stories.CreatedDate)) {

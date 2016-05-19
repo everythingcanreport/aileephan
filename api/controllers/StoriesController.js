@@ -81,7 +81,10 @@ module.exports = {
         Stories.findAndCountAll({
                 attributes: ['UID', 'SpeakingUrl', 'Show', 'Title'],
                 raw: true,
-                limit: 5
+                limit: 5,
+                order: [
+                    ['CreatedDate', 'DESC']
+                ]
             })
             .then(function(stories) {
                 res.view('stories/manage', {
@@ -115,12 +118,12 @@ module.exports = {
                 _.forEach(fileUploads, function(fu, index) {
                     var objFU = {
                         UID: UUIDService.Create(),
-                        UserAccountID: 21212121212,
+                        UserAccountID: req.user.id,
                         FileName: fu.filename,
                         FileLocation: fu.fd,
                         FileExtension: fu.type,
                         Enable: 'Y',
-                        CreatedBy: 21212121212
+                        CreatedBy: req.user.id
                     };
                     arrayFileUpload.push(objFU);
                 });
@@ -164,7 +167,7 @@ module.exports = {
         if (data === false) {
             return res.serverError('data failed');
         }
-        Services.CreateStories(data)
+        Services.CreateStories(data, req.user)
             .then(function(success) {
                 success.transaction.commit();
                 res.ok('success');
@@ -203,7 +206,7 @@ module.exports = {
         if (data === false) {
             return res.serverError('data failed');
         }
-        Services.UpdateStories(data)
+        Services.UpdateStories(data, req.user)
             .then(function(success) {
                 success.transaction.commit();
                 res.ok('success');

@@ -1,3 +1,4 @@
+var accessToken = null;
 define(function(require) {
     //facebook plugin
     var fbInit = require('fbPlugin/init');
@@ -8,9 +9,8 @@ define(function(require) {
         fbInit();
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
-                response.status !== 'connected') {
-                $('.menu-loader').removeClass('active');
-                $('.unknown').removeClass('hide');
+                response.status === 'connected') {
+                accessToken = response.authResponse.accessToken;
             }
         });
         FB.Event.subscribe('auth.login', login_event);
@@ -84,21 +84,27 @@ function renderData(response) {
         !_.isEmpty(response.rows)) {
         require(['/libs/moment-timezone/moment-timezone.js'], function(moment) {
             _.forEach(response.rows, function(stories, index) {
-                var ribbon = '<a class="ui pink font-brand ribbon large label">Ngôn tình</a>';
-                var homeDate = '<span class="float-right media-time font-brand home-date">' +
+                var ribbon = '<a class="ui pink font-ribbon ribbon large label">Ngôn tình</a>';
+                var homeDate = '<span class="float-right media-time font-ribbon home-date">' +
                     moment(stories.CreatedDate).format('DD/MM/YYYY') + '</span>';
                 var uidBackground = (stories &&
                     stories.FileUploads &&
                     stories.FileUploads[0]) ? stories.FileUploads[0].UID : null;
-                var imageBackground = '<div class="ui small image">' +
+                var imageBackground = uidBackground ? '<div class="ui small image">' +
+                    '<a href="/truyen/' + stories.SpeakingUrl + '" class="ui image">' +
                     '<img class="height-image-home" src="/user/download-background/' +
-                    uidBackground + '"/></div>';
-                var title = '<h1 class="ui pink header"><div class="content">' +
-                    '<span class="font-header capitalize">' +
+                    uidBackground + '"/></a></div>' : '';
+                var title = (!_.isEmpty(stories) &&
+                        !_.isNull(stories.Title) &&
+                        !_.isUndefined(stories.Title) &&
+                        stories.Title.length !== 0) ? '<h1 class="ui pink header">' +
+                    '<div class="content">' +
+                    '<span class="font-header capitalize"><a href="/truyen/' + stories.SpeakingUrl +
+                    '">' +
                     stories.Title +
-                    '</span></div></h1>';
+                    '</a></span></div></h1>' : '';
                 var content = ''
-                var detail = '<div class="description"><p>' +
+                var detail = '<div class="description"><p class="font-content">' +
                     stories.ShortContent +
                     '</p><a href="/truyen/' +
                     stories.SpeakingUrl +

@@ -1,10 +1,10 @@
-module.exports = function(data) {
+module.exports = function(data, userInfo) {
     var $q = require('q');
     var defer = $q.defer();
     if (!_.isEmpty(data) &&
         !_.isEmpty(data.Stories)) {
         var dataStories = data.Stories;
-        dataStories.ModifiedBy = 2121212121;
+        dataStories.ModifiedBy = userInfo.id;
         sequelize.transaction()
             .then(function(t) {
                 return Stories.findOne({

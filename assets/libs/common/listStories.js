@@ -3,7 +3,7 @@ define(function() {
         var p = new Promise(function(resolve, reject) {
             $.ajax({
                 type: 'POST',
-                url: "http://localhost:1337/stories/list",
+                url: "http://aileephan.com/stories/list",
                 data: {
                     data: JSON.stringify(dataFilter)
                 },

@@ -14,7 +14,8 @@ module.exports = {
                     }
                 }],
                 limit: 5,
-                offset: 0
+                offset: 0,
+                order: [['CreatedDate', 'DESC']]
             })
             .then(function(listStories) {
                 res.view('home/home', {

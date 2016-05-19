@@ -8,10 +8,7 @@ define(function(require) {
         fbInit();
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
-                response.status !== 'connected') {
-                $('.menu-loader').removeClass('active');
-                $('.unknown').removeClass('hide');
-            }
+                response.status === 'connected') {}
         });
         FB.Event.subscribe('auth.login', login_event);
         FB.Event.subscribe('auth.logout', logout_event);
@@ -24,7 +21,7 @@ define(function(require) {
         }
         js = d.createElement(s);
         js.id = id;
-        js.src = "//connect.facebook.net/vi_VN/sdk.js";
+        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1032633966817570";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
     //end facebook plugin
@@ -36,7 +33,6 @@ define(function(require) {
             dateWriteReview = moment(dateWriteResponse, 'ddd MMM DD YYYY HH:mm:ss ZZ').format('DD/MM/YYYY');
         }
         $('.review-date').text('');
-        $('.review-date').append('<i class="time pink icon"></i>');
         $('.review-date').append(dateWriteReview);
     });
 });

@@ -6,7 +6,10 @@ module.exports = function(data) {
             attributes: ['UID', 'SpeakingUrl', 'Show', 'Title'],
             where: pagination.Stories,
             limit: pagination.limit,
-            offset: pagination.offset
+            offset: pagination.offset,
+            order: [
+                ['CreatedDate', 'DESC']
+            ]
         })
         .then(function(listStories) {
             defer.resolve({ data: listStories });

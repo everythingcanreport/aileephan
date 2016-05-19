@@ -16,7 +16,12 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
                     $('.connected').removeClass('hide');
                     $('.unknown').addClass('hide');
                 }, function(err) {
-                    console.log('OAuth failed', err);
+                    noty({
+                        text: 'Authentication failed!',
+                        layout: 'topRight',
+                        type: 'error',
+                        timeout: 3000
+                    });
                 });
         } else {
             //show button login

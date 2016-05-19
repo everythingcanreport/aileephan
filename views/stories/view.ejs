@@ -17,7 +17,7 @@
 			<img class="review-background ui big centered image max-height-image-view" src="/user/download-background/<%=locals.data.FileUploads[0].UID%>" width="100%" height="15%" />
 			<%}%>
 			</div>
-			<h4 class="ui horizontal divider pink header review-date">
+			<h4 class="ui horizontal divider pink header review-date font-ribbon">
 			  	<!--date write stoties-->
 			  	<!--end-->
 			</h4>
@@ -25,7 +25,7 @@
 			  		locals.data){%>
 			  		<input type="hidden" class="view-date-create" value="<%=locals.data.CreatedDate%>" />
 			  		<%}%>
-			<div class="description review-description">
+			<div class="description review-description font-content">
 				<!--description stories-->
 				<%-locals.data.Content%>
 				<!--end-->
@@ -35,7 +35,7 @@
 	<div class="ui two segments">
 		<div class="ui segment">
 		    <div class="ui threaded comments">
-		  		<h3 class="ui dividing header pink font-brand">Bình luận</h3>
+		  		<h3 class="ui dividing header pink font-ribbon">Bình luận</h3>
 		  		<div class="fb-like" data-href="http://localhost:1337/view/<%=locals.data.SpeakingUrl%>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 				<div class="fb-comments"
 			     data-href="http://localhost:1337/view/<%=locals.data.SpeakingUrl%>"

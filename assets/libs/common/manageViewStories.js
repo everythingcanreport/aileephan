@@ -1,9 +1,12 @@
 define(function() {
-    return function(uid) {
+    return function(uid, accessToken) {
         var p = new Promise(function(resolve, reject) {
             $.ajax({
                 type: 'GET',
-                url: "http://localhost:1337/admin/view/" + uid,
+                url: "http://aileephan.com/admin/view/" + uid,
+                beforeSend: function(request) {
+                    request.setRequestHeader("accessTokenFB", accessToken);
+                },
                 success: function(response) {
                     resolve(response);
                 },

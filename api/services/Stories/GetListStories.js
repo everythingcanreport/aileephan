@@ -12,7 +12,8 @@ module.exports = function(data) {
             }],
             where: pagination.Stories,
             limit: pagination.limit,
-            offset: pagination.offset
+            offset: pagination.offset,
+            order: [['CreatedDate', 'DESC']]
         })
         .then(function(listStories) {
             defer.resolve({ data: listStories });

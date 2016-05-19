@@ -1,4 +1,5 @@
 var isCreate = true;
+var accessToken = null;
 define(function(require) {
     //facebook plugin
     var fbInit = require('fbPlugin/init');
@@ -9,9 +10,8 @@ define(function(require) {
         fbInit();
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
-                response.status !== 'connected') {
-                $('.menu-loader').removeClass('active');
-                $('.unknown').removeClass('hide');
+                response.status === 'connected') {
+                accessToken = response.authResponse.accessToken;
             }
         });
         FB.Event.subscribe('auth.login', login_event);
@@ -39,7 +39,8 @@ define(function(require) {
         height: 300,
         setup: function(ed) {
             ed.on('init', function() {
-                this.getDoc().body.style.fontSize = '14px';
+                this.getDoc().body.style.fontSize = '20px';
+                // this.getDoc().body.style.fontFamily = 'serif';
                 $('.write-loader').removeClass('active');
                 $('.write-stories').removeClass('hide');
                 $('.write-title').focus();
@@ -66,7 +67,6 @@ define(function(require) {
         }
     });
     //end tinymce plugin
-
 });
 
 function writeStories() {
@@ -86,23 +86,28 @@ $('#write-background').change(function(e) {
     var StoriesformData = new FormData();
     StoriesformData.append('background', $('#write-background').prop('files')[0]);
     require(['common/upload'], function(upload) {
-        upload(StoriesformData)
+        upload(StoriesformData, accessToken)
             .then(function(response) {
                 var fileName = null;
                 var ext = response[0].FileName.split('.')[response[0].FileName.split('.').length - 1];
-                var fileName = response[0].FileName.length >= 10 ? response[0].FileName.substring(0, 10) + '...' + ext : response[0].FileName;
+                var fileName = null;
+                if (response[0].FileName.length - ext.length >= 10) {
+                    fileName = response[0].FileName.substring(0, 10) + '...' + ext;
+                } else {
+                    fileName = response[0].FileName;
+                }
                 $('.title-background span').text(fileName);
                 $('.background-loader').removeClass('active');
+                $('.write-background-uid').val(response[0].UID);
                 var notyUploadBackground = noty({
-                    text: 'Upload background success!',
+                    text: 'Tải ảnh nền lên thành công!',
                     layout: 'topRight',
                     type: 'success',
                     timeout: 3000
                 });
-                $('.write-background-uid').val(response[0].UID);
             }, function(err) {
                 var notyUploadBackground = noty({
-                    text: 'Upload background failed!',
+                    text: 'Tải ảnh nền lên thất bại!',
                     layout: 'topRight',
                     type: 'error',
                     timeout: 3000
@@ -111,94 +116,121 @@ $('#write-background').change(function(e) {
     });
 });
 
-function onClickSave() {
-    var htmlContent = tinymce.get('write-content').getContent();
-    var textContent = tinymce.get('write-content').getContent({ format: 'text' });
-    if (!_.isNull(textContent) &&
-        !_.isUndefined(textContent) &&
-        textContent.length > 300) {
-        var maxLengthCut = 300 // maximum number of characters to extract
-            //trim the string to the maximum length
-        var trimmedString = textContent.substr(0, maxLengthCut);
-        //re-trim if we are in the middle of a word
-        trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
-        textContent = trimmedString + ' ...';
-    }
-    var title = $('.write-title').val();
-    var show = $('.write-show').val();
-    var backgroundUID = $('.write-background-uid').val();
-    if (isCreate) {
-        var data = {
-            Stories: {
-                Title: title,
-                Show: show,
-                Content: htmlContent,
-                ShortContent: textContent
-            },
-            FileUploads: [{
-                UID: backgroundUID
-            }]
-        };
-        require(['common/create'], function(create) {
-            create({ data: data })
-                .then(function(response) {
-                    require(['menu/menu'], function(menu) {
-                        var notyUploadBackground = noty({
-                            text: 'Add stories success!',
-                            layout: 'topRight',
-                            type: 'success',
-                            timeout: 3000
-                        });
-                        setTimeout(function() {
-                            menu.manageStories();
-                        }, 1000);
-                    });
-                }, function(err) {
-                    var notyUploadBackground = noty({
-                        text: 'Add stories failed!',
-                        layout: 'topRight',
-                        type: 'error',
-                        timeout: 3000
-                    });
-                });
-        });
+//function validate write stories
+function validateWrite() {
+    var titleValidate = $('.write-title').val();
+    if (_.isNull(titleValidate) ||
+        _.isUndefined(titleValidate) ||
+        titleValidate.length === 0) {
+        $('.validate-title').addClass('error');
+        $('.error-message-write').text('');
+        $('.error-message-write').append('<ul class="list"><li>Vui lòng nhập tiêu đề!</li></ul>');
+        $('.error-message-write').removeClass('hide');
+        return false;
+    } else if (titleValidate.length > 255) {
+        $('.validate-title').addClass('error');
+        $('.error-message-write').text('');
+        $('.error-message-write').append('<ul class="list"><li>Tiêu đề không được quá 255 ký tự!</li></ul>');
+        $('.error-message-write').removeClass('hide');
+        return false;
     } else {
-        var uidStories = $('.write-uid').val();
-        var data = {
-            Stories: {
-                Title: title,
-                Show: show,
-                Content: htmlContent,
-                ShortContent: textContent,
-                UID: uidStories
-            },
-            FileUploads: [{
-                UID: backgroundUID
-            }]
-        };
-        require(['common/update'], function(update) {
-            update({ data: data })
-                .then(function(response) {
-                    require(['menu/menu'], function(menu) {
+        $('.validate-title').removeClass('error');
+        $('.error-message-write').addClass('hide');
+        return true;
+    }
+};
+//end
+
+function onClickSave() {
+    if (validateWrite()) {
+        var htmlContent = tinymce.get('write-content').getContent();
+        var textContent = tinymce.get('write-content').getContent({ format: 'text' });
+        if (!_.isNull(textContent) &&
+            !_.isUndefined(textContent) &&
+            textContent.length > 300) {
+            var maxLengthCut = 300 // maximum number of characters to extract
+                //trim the string to the maximum length
+            var trimmedString = textContent.substr(0, maxLengthCut);
+            //re-trim if we are in the middle of a word
+            trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+            textContent = trimmedString + ' ...';
+        }
+        var title = $('.write-title').val();
+        var show = $('.write-show').val();
+        var backgroundUID = $('.write-background-uid').val();
+        if (isCreate) {
+            var data = {
+                Stories: {
+                    Title: title,
+                    Show: show,
+                    Content: htmlContent,
+                    ShortContent: textContent
+                },
+                FileUploads: [{
+                    UID: backgroundUID
+                }]
+            };
+            require(['common/create'], function(create) {
+                create(data, accessToken)
+                    .then(function(response) {
+                        require(['menu/menu'], function(menu) {
+                            var notyUploadBackground = noty({
+                                text: 'Thêm truyện thành công!',
+                                layout: 'topRight',
+                                type: 'success',
+                                timeout: 3000
+                            });
+                            setTimeout(function() {
+                                menu.manageStories();
+                            }, 1000);
+                        });
+                    }, function(err) {
                         var notyUploadBackground = noty({
-                            text: 'Update stories success!',
+                            text: 'Thêm truyện thất bại!',
                             layout: 'topRight',
-                            type: 'success',
+                            type: 'error',
                             timeout: 3000
                         });
-                        setTimeout(function() {
-                            menu.manageStories();
-                        }, 1000);
                     });
-                }, function(err) {
-                    var notyUploadBackground = noty({
-                        text: 'Update stories failed!',
-                        layout: 'topRight',
-                        type: 'error',
-                        timeout: 3000
+            });
+        } else {
+            var uidStories = $('.write-uid').val();
+            var data = {
+                Stories: {
+                    Title: title,
+                    Show: show,
+                    Content: htmlContent,
+                    ShortContent: textContent,
+                    UID: uidStories
+                },
+                FileUploads: [{
+                    UID: backgroundUID
+                }]
+            };
+            require(['common/update'], function(update) {
+                update(data, accessToken)
+                    .then(function(response) {
+                        require(['menu/menu'], function(menu) {
+                            var notyUploadBackground = noty({
+                                text: 'Cập nhật truyện thành công!',
+                                layout: 'topRight',
+                                type: 'success',
+                                timeout: 3000
+                            });
+                            setTimeout(function() {
+                                menu.manageStories();
+                            }, 1000);
+                        });
+                    }, function(err) {
+                        var notyUploadBackground = noty({
+                            text: 'Cập nhật truyện thất bại!',
+                            layout: 'topRight',
+                            type: 'error',
+                            timeout: 3000
+                        });
                     });
-                });
-        });
+            });
+        }
     }
 };
 
@@ -207,9 +239,16 @@ function onClickView() {
         //set data before show modal review
         var htmlContent = tinymce.get('write-content').getContent();
         var title = $('.write-title').val();
+        $('.review-description').text('');
         $('.review-description').append(htmlContent);
         $('.review-title').text(title);
         var backgroundUID = $('.write-background-uid').val();
+        if (!_.isNull(backgroundUID) &&
+            !_.isUndefined(backgroundUID)) {
+            $('.review-background').removeClass('hide');
+        } else {
+            $('.review-background').addClass('hide');
+        }
         $('.review-background').attr('src', '/user/download-background/' + backgroundUID);
         var dateWriteReview = moment().format('DD/MM/YYYY');
         if (!_.isNull($('.write-date').val()) &&
@@ -217,7 +256,6 @@ function onClickView() {
             dateWriteReview = moment($('.write-date').val(), 'ddd MMM DD YYYY HH:mm:ss ZZ').format('DD/MM/YYYY');
         }
         $('.review-date').text('');
-        $('.review-date').append('<i class="time pink icon"></i>');
         $('.review-date').append(dateWriteReview);
         $('.long.modal').modal('show');
     });

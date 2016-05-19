@@ -43,8 +43,8 @@
           <%=index+1%>
         </td>
         <td colspan="2">
-          <h4 class="ui header font-brand">
-            <div class="content">
+          <h4 class="ui header">
+            <div class="content font-header">
               <%=stories.Title%>
             </div>
           </h4>
@@ -76,7 +76,7 @@
               <%}%>
               <a class="icon item" onClick="paginationManage(<%=Math.ceil(locals.data.count/5)%>);"><i class="right chevron icon"></i></a>
             </div>
-            <div class="manage-total font-brand">Tổng cộng: <%=locals.data.count%> dòng</div>
+            <div class="manage-total font-brand">Tổng cộng: <%=locals.data.count%> truyện</div>
           </th>
         </tr>
       </tfoot>
@@ -93,10 +93,10 @@
       <div class="ui images align-center">
         <img class="review-background ui big centered image max-height-image-view" src="" />
       </div>
-      <h4 class="ui horizontal divider header review-date pink">
+      <h4 class="ui horizontal divider header review-date pink font-ribbon">
           <!--date write stories-->
       </h4>
-      <div class="description review-description">
+      <div class="description review-description font-content">
       <!--content stories-->
       </div>
       <div class="ui divider">
@@ -113,10 +113,10 @@
 <!--confirm change status modal-->
 <div class="ui small modal change-status">
     <div class="header">
-      Change Status Stories
+      Cập Nhật Trạng Thái
     </div>
     <div class="content">
-      <p>Are you update status this stories?</p>
+      <p>Bạn có chắc muốn cập nhật trạng thái truyện?</p>
       <input type="hidden" class="confirm-change-status" />
     </div>
     <div class="actions">

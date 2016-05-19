@@ -1,3 +1,4 @@
+var accessTokenFB = null;
 define(function(require) {
     //facebook plugin
     var fbInit = require('fbPlugin/init');
@@ -8,9 +9,8 @@ define(function(require) {
         fbInit();
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
-                response.status !== 'connected') {
-                $('.loader').removeClass('active');
-                $('.unknown').removeClass('hide');
+                response.status === 'connected') {
+                accessTokenFB = response.authResponse.accessToken;
             }
         });
         FB.Event.subscribe('auth.login', login_event);
@@ -95,6 +95,9 @@ function loadList(limit, offset) {
     $.ajax({
         type: 'POST',
         url: 'http://localhost:1337/admin/manage/list',
+        beforeSend: function(request) {
+            request.setRequestHeader("accessTokenFB", accessTokenFB);
+        },
         data: {
             data: JSON.stringify(data)
         },
@@ -122,9 +125,9 @@ function renderData(limit, offset, response) {
         !_.isEmpty(response.rows)) {
         //rerender data manage
         _.forEach(response.rows, function(stories, index) {
-            var no = '<td>' + (index + 1 + (offset ? offset : 0)) + '</td>';
+            var no = '<td class="font-brand">' + (index + 1 + (offset ? offset : 0)) + '</td>';
             var title = '<td colspan="2"><h4 class="ui header">' +
-                '<div class="content">' + stories.Title + '</div></h4></td>';
+                '<div class="content font-header">' + stories.Title + '</div></h4></td>';
             var show = stories.Show === 'Y' ? '<td class="center aligned">' +
                 '<div class="ui fitted slider checkbox">' +
                 '<input type="checkbox" name="change-status-' + stories.UID +
@@ -156,7 +159,7 @@ function renderData(limit, offset, response) {
         $('.manage-pagination-main').addClass('hide');
     }
     //set total for pagination
-    $('.manage-total').text('Tổng cộng: ' + response.count + ' dòng');
+    $('.manage-total').text('Tổng cộng: ' + response.count + ' truyện');
 };
 //end
 //pagination
@@ -177,16 +180,22 @@ function onClickEdit(uid) {
 //view stories
 function onClickView(uid) {
     require(['common/manageViewStories'], function(manageViewStories) {
-        manageViewStories(uid)
+        manageViewStories(uid, accessTokenFB)
             .then(function(stories) {
                 if (!_.isEmpty(stories)) {
                     require(['/libs/moment-timezone/moment-timezone.js'], function(moment) {
                         //set data before show modal review
                         var htmlContent = stories.Content;
                         var title = stories.Title;
+                        $('.review-description').text('');
                         $('.review-description').append(htmlContent);
                         $('.review-title').text(title);
                         var backgroundUID = (stories && stories.FileUploads && stories.FileUploads[0] ? stories.FileUploads[0].UID : null);
+                        if (backgroundUID !== null) {
+                            $('.review-background').removeClass('hide');
+                        } else {
+                            $('.review-background').addClass('hide');
+                        }
                         $('.review-background').attr('src', '/user/download-background/' + backgroundUID);
                         var dateWriteReview = moment().format('DD/MM/YYYY');
                         if (!_.isNull(stories.CreatedDate) &&
@@ -194,13 +203,12 @@ function onClickView(uid) {
                             dateWriteReview = moment(stories.CreatedDate).format('DD/MM/YYYY');
                         }
                         $('.review-date').text('');
-                        $('.review-date').append('<i class="time pink icon"></i>');
                         $('.review-date').append(dateWriteReview);
                         $('.long.modal').modal('show');
                     });
                 } else {
                     noty({
-                        text: 'View stories failed!',
+                        text: 'Tải truyện thất bại!',
                         layout: 'topRight',
                         type: 'error',
                         timeout: 3000
@@ -208,7 +216,7 @@ function onClickView(uid) {
                 }
             }, function(err) {
                 noty({
-                    text: 'View stories failed!',
+                    text: 'Tải truyện thất bại!',
                     layout: 'topRight',
                     type: 'error',
                     timeout: 3000
@@ -273,11 +281,11 @@ function onClickChangeStatusYes() {
                     UID: uid
                 }
             };
-            updateStatus(dataUpdateStatus)
+            updateStatus(dataUpdateStatus, accessTokenFB)
                 .then(function(response) {
                     $('.small.modal.change-status').modal('hide');
                     noty({
-                        text: 'Update status stories success!',
+                        text: 'Cập nhật trạng thái truyện thành công!',
                         layout: 'topRight',
                         type: 'success',
                         timeout: 3000
@@ -291,7 +299,7 @@ function onClickChangeStatusYes() {
                     }
                     $('.small.modal.change-status').modal('hide');
                     noty({
-                        text: 'Update status stories failed!',
+                        text: 'Cập nhật trạng thái truyện thất bại!',
                         layout: 'topRight',
                         type: 'error',
                         timeout: 3000
@@ -300,7 +308,7 @@ function onClickChangeStatusYes() {
         });
     } else {
         noty({
-            text: 'Update status stories failed!',
+            text: 'Cập nhật trạng thái truyện thất bại!',
             layout: 'topRight',
             type: 'error',
             timeout: 3000

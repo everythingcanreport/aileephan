@@ -1,13 +1,13 @@
 <div class="ui container text margin-top-40">
   <a href="/" class="go-home floated-right size-18 color-pink margin-top-negative-20"><i class="icon home"></i></a>
   <form class="ui form write-stories hide">
-      <div class="field">
+      <div class="field validate-title">
         <label class="font-brand">Tiêu đề:</label>
         <%if(locals &&
             locals.data) {%>
         <input type="text"  class="write-title" value="<%=locals.data.Title%>"/>
         <%} else {%>
-          <input type="text"  class="write-title"/>
+          <input type="text" name="write_title"  class="write-title"/>
           <%}%>
       </div>
       <div class="fields margin-top-20">
@@ -27,7 +27,9 @@
           <!--filename stories update stories-->
           <input type="hidden" class="write-background-filename-hidden" value="<%=locals.data.FileUploads[0].FileName%>"/>
           <!--end-->
-          <%}%>
+          <%} else {%>
+            <input type="hidden" class="write-background-uid" />
+            <%}%>
           <!--end-->
           <!-- UID stories update stories-->
           <%if(locals &&
@@ -69,9 +71,12 @@
         Lưu
         </a>
       </div>
-        <div class="field">
+      <!--notification error-->
+      <div class="font-brand hide error-message-write"></div>
+      <!--end-->
+      <div class="field">
         &nbsp;
-        </div>
+      </div>
     </form>
   </div>
   <!--loading-->
@@ -89,17 +94,17 @@
       <div class="ui images align-center">
         <img class="review-background ui big centered image max-height-image-view" src="" />
       </div>
-      <h4 class="ui horizontal divider header review-date pink">
+      <h4 class="ui horizontal divider header review-date pink font-ribbon">
           <!--date write stories-->
       </h4>
-      <div class="description review-description">
+      <div class="description review-description font-content">
       <!--content stories-->
       </div>
       <div class="ui divider">
       </div>
       <div class="actions align-right">
-        <div class="ui pink tiny approve button">
-          Ok
+        <div class="ui pink tiny approve button font-brand">
+          Trở lại
           <i class="right chevron icon"></i>
         </div>
     </div>

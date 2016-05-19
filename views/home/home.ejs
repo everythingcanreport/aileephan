@@ -1,11 +1,4 @@
 <div class="ui container text margin-top-40 margin-bottom-40">
-	<div class="float-right">
-		<div class="ui small left icon input">
-			<i class="search icon"></i>
-		  	<input class="font-brand" type="text" placeholder="Tìm..." />
-		</div>
-	</div>
-	<h1 class="ui header pink">&nbsp;</h1>
 	<div class="ui tall stacked segments home-main">
 		<!--count input-->
 		<input type="hidden" class="home-count" value="<%=locals.data.count%>" />
@@ -15,8 +8,8 @@
 			locals.data.rows){
 			locals.data.rows.forEach(function(stories, index){%>
 			<div class="ui segment">
-				<a class="ui pink font-brand ribbon large label">Ngôn tình</a>
-				<span class="float-right media-time font-brand home-date">
+				<a class="ui pink font-ribbon ribbon large label">Ngôn tình</a>
+				<span class="float-right media-time font-ribbon home-date">
 				</span>
 				<input type="hidden" class="home-date-hidden" value="<%=stories.CreatedDate%>" />
 				<div class="ui very relaxed items">
@@ -25,19 +18,27 @@
 						stories.FileUploads &&
 						stories.FileUploads[0]){%>
 						<div class="ui small image">
-							<img class="height-image-home" src="/user/download-background/<%=stories.FileUploads[0].UID%>" />
+							<a href="/truyen/<%=stories.SpeakingUrl%>" class="ui image">
+								<img class="height-image-home" src="/user/download-background/<%=stories.FileUploads[0].UID%>" />
+							</a>
 						</div>
 						<%}%>
 						<div class="content">
-							<h1 class="ui pink header">
-							  	<div class="content">
-							    	<span class="font-header capitalize"><%=stories.Title%>
-							    	</span>
-							  	</div>
-							</h1>
+						<%if(stories &&
+						stories.Title){%>
+								<h1 class="ui pink header">
+								  	<div class="content">
+								    	<span class="font-header capitalize">
+								    	<a href="/truyen/<%=stories.SpeakingUrl%>">
+								    	<%=stories.Title%>
+								    	</a>
+								    	</span>
+								  	</div>
+								</h1>
+							<%}%>
 							<div class="description">
-								<p>
-								<%=stories.ShortContent%>
+								<p class="font-content">
+									<%=stories.ShortContent%>
 								</p>
 								<a href="/truyen/<%=stories.SpeakingUrl%>" 
 								class="ui mini pink button font-brand">Chi tiết</a>

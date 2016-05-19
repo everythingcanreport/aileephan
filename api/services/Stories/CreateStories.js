@@ -1,11 +1,11 @@
-module.exports = function(data) {
+module.exports = function(data, userInfo) {
     var $q = require('q');
     var defer = $q.defer();
     if (!_.isEmpty(data) &&
         !_.isEmpty(data.Stories)) {
         var dataStories = data.Stories;
         dataStories.UID = UUIDService.Create();
-        dataStories.CreatedBy = 2121212121;
+        dataStories.CreatedBy = userInfo.id;
         sequelize.transaction()
             .then(function(t) {
                 return Stories.create(dataStories, {

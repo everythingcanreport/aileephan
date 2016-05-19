@@ -1,10 +1,15 @@
 define(function() {
-    return function(dataCreate) {
+    return function(dataCreate, accessToken) {
         var p = new Promise(function(resolve, reject) {
             $.ajax({
                 type: 'POST',
-                url: "http://localhost:1337/admin/create",
-                data: dataCreate,
+                url: "http://aileephan.com/admin/create",
+                beforeSend: function(request) {
+                    request.setRequestHeader("accessTokenFB", accessToken);
+                },
+                data: {
+                    data: dataCreate
+                },
                 success: function(response) {
                     resolve(response);
                 },

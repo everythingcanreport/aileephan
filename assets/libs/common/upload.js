@@ -3,7 +3,7 @@ define(function() {
         var p = new Promise(function(resolve, reject) {
             $.ajax({
                 type: 'POST',
-                url: 'http://aileephan.com/admin/write/upload-background',
+                url: 'http://aileephan.com:1337/admin/write/upload-background',
                 data: dataUpload,
                 beforeSend: function(request) {
                     request.setRequestHeader("accessTokenFB", accessToken);

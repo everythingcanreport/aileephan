@@ -94,7 +94,7 @@ function loadList(limit, offset) {
     };
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:1337/admin/manage/list',
+        url: 'http://aileephan.com:1337/admin/manage/list',
         beforeSend: function(request) {
             request.setRequestHeader("accessTokenFB", accessTokenFB);
         },

@@ -3,7 +3,7 @@ define(function() {
         var p = new Promise(function(resole, reject) {
             $.ajax({
                 type: 'GET',
-                url: 'http://aileephan.com/fb/login?access_token=' + responseStatusLogin.authResponse.accessToken,
+                url: 'http://aileephan.com:1337/fb/login?access_token=' + responseStatusLogin.authResponse.accessToken,
                 success: resole,
                 error: reject
             });

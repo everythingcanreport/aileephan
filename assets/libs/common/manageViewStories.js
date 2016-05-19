@@ -3,7 +3,7 @@ define(function() {
         var p = new Promise(function(resolve, reject) {
             $.ajax({
                 type: 'GET',
-                url: "http://aileephan.com/admin/view/" + uid,
+                url: "http://aileephan.com:1337/admin/view/" + uid,
                 beforeSend: function(request) {
                     request.setRequestHeader("accessTokenFB", accessToken);
                 },

@@ -8,7 +8,10 @@ define(function(require) {
         fbInit();
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
-                response.status === 'connected') {}
+                response.status === 'connected') {} else {
+                $('.menu-loader').removeClass('active');
+                $('.unknown').removeClass('active');
+            }
         });
         FB.Event.subscribe('auth.login', login_event);
         FB.Event.subscribe('auth.logout', logout_event);

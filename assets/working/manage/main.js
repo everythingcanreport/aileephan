@@ -141,10 +141,10 @@ function renderData(limit, offset, response) {
                 '" onChange="onChangeShow(\'' + stories.UID + '\');"/>' +
                 '<label></label></div></td>';
             var action = '<td><div class="ui buttons tiny icon">' +
-                '<a class="ui grey button font-brand" onClick="onClickView(\'' + stories.UID + '\');">' +
+                '<a class="ui grey button font-button" onClick="onClickView(\'' + stories.UID + '\');">' +
                 '<i class="icon search"></i>Xem</a>' +
                 '<div class="or"></div>' +
-                '<a class="ui pink button font-brand" onClick="onClickEdit(\'' + stories.UID + '\');">' +
+                '<a class="ui pink button font-button" onClick="onClickEdit(\'' + stories.UID + '\');">' +
                 '<i class="icon write"></i>Sửa</a></div></td>';
             $('tbody').append('<tr>' + no + title + show + action + '</tr>');
             $('.manage-pagination').removeClass('hide');

@@ -13,7 +13,7 @@ define(function(require) {
                 accessTokenFB = response.authResponse.accessToken;
             } else {
                 $('.menu-loader').removeClass('active');
-                $('.unknown').removeClass('active');
+                $('.unknown').removeClass('hide');
             }
         });
         FB.Event.subscribe('auth.login', login_event);

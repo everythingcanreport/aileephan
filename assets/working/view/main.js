@@ -28,16 +28,17 @@ define(function(require) {
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
     //end facebook plugin
-    require(['/libs/moment-timezone/moment-timezone.js'], function(moment) {
-        var dateWriteReview = moment().format('DD/MM/YYYY');
-        var dateWriteResponse = $('.view-date-create').val();
-        if (!_.isNull(dateWriteResponse) &&
-            !_.isUndefined(dateWriteResponse)) {
-            dateWriteReview = moment(dateWriteResponse, 'ddd MMM DD YYYY HH:mm:ss ZZ').format('DD/MM/YYYY');
-        }
-        $('.review-date').text('');
-        $('.review-date').append(dateWriteReview);
-    });
+    var dateWriteReview = new Date();
+    var dateWriteResponse = $('.view-date-create').val();
+    if (dateWriteResponse) {
+        dateWriteReview = new Date(dateWriteResponse);
+    }
+    var d = dateWriteReview.getDate() <= 9 ? '0' + dateWriteReview.getDate() : dateWriteReview.getDate();
+    var m = (dateWriteReview.getMonth() + 1) <= 9 ? ('0' + (dateWriteReview.getMonth() + 1)) : dateWriteReview.getMonth() + 1;
+    var y = dateWriteReview.getFullYear();
+    var dateWriteReviewShow = d + '/' + m + '/' + y;
+    $('.review-date').text('');
+    $('.review-date').append(dateWriteReviewShow);
 });
 
 function writeStories() {

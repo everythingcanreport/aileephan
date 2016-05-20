@@ -1,10 +1,9 @@
 requirejs.config({
     baseUrl: window.location.origin + '/libs',
     paths: {
-        app: '../working/view',
-        moment: './moment/moment'
+        app: '../working/view'
     }
 });
-requirejs(['lodash.min', 'jquery.min'], function(_, $) {
+requirejs(['jquery.min'], function($) {
     requirejs(['app/main']);
 });

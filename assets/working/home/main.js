@@ -33,8 +33,7 @@ define(function(require) {
     //end facebook plugin
     var dateWriteReview = new Date();
     var dateWriteResponse = $('.home-date-hidden').val();
-    if (!_.isNull(dateWriteResponse) &&
-        !_.isUndefined(dateWriteResponse)) {
+    if (dateWriteResponse) {
         dateWriteReview = new Date(dateWriteResponse);
     }
     var d = dateWriteReview.getDate() <= 9 ? '0' + dateWriteReview.getDate() : dateWriteReview.getDate();
@@ -85,9 +84,8 @@ $(document).scroll(function() {
 
 //render data
 function renderData(response) {
-    if (!_.isEmpty(response) &&
-        !_.isEmpty(response.rows)) {
-        _.forEach(response.rows, function(stories, index) {
+    if (response && response.rows) {
+        response.rows.forEach(function(stories, index) {
             var dateCreate = new Date(stories.CreatedDate);
             var d = dateCreate.getDate() <= 9 ? '0' + dateCreate.getDate() : dateCreate.getDate();
             var m = (dateCreate.getMonth() + 1) <= 9 ? ('0' + (dateCreate.getMonth() + 1)) : dateCreate.getMonth() + 1;
@@ -103,9 +101,9 @@ function renderData(response) {
                 '<a href="/truyen/' + stories.SpeakingUrl + '" class="ui image">' +
                 '<img class="height-image-home" src="/user/download-background/' +
                 uidBackground + '"/></a></div>' : '';
-            var title = (!_.isEmpty(stories) &&
-                    !_.isNull(stories.Title) &&
-                    !_.isUndefined(stories.Title) &&
+            var title = (stories &&
+                    stories.Title &&
+                    stories.Title &&
                     stories.Title.length !== 0) ? '<h1 class="ui pink header">' +
                 '<div class="content">' +
                 '<span class="font-header capitalize"><a href="/truyen/' + stories.SpeakingUrl +

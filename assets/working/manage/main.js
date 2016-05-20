@@ -53,8 +53,7 @@ function manageStories() {
 //load list stories
 function loadList(limit, offset) {
     var filterTitle = $('.filter-title').val();
-    if (_.isNull(filterTitle) ||
-        _.isUndefined(filterTitle) ||
+    if (filterTitle ||
         filterTitle.length === 0) {
         filterTitle = null;
     }
@@ -62,23 +61,19 @@ function loadList(limit, offset) {
     var filterHide = $('input[name=manage_hide]:checked').val();
     var filterShowHide = null;
     if ((filterShow === '' ||
-            _.isNull(filterShow) ||
-            _.isUndefined(filterShow)) &&
+            filterShow) &&
         filterHide === 'Y') {
         filterShowHide = {
             $ne: 'Y'
         };
     } else if (filterShow === 'Y' &&
         (filterHide === '' ||
-            _.isNull(filterHide) ||
-            _.isUndefined(filterHide))) {
+            filterHide)) {
         filterShowHide = 'Y'
     } else if ((filterHide === '' ||
-            _.isNull(filterHide) ||
-            _.isUndefined(filterHide)) &&
+            filterHide) &&
         (filterShow === '' ||
-            _.isNull(filterShow) ||
-            _.isUndefined(filterShow))) {
+            filterShow)) {
         filterShowHide = 'N/A';
     }
     var data = {
@@ -123,11 +118,11 @@ function loadList(limit, offset) {
 function renderData(limit, offset, response) {
     //append and set value filter
     $('tbody').text('');
-    if (!_.isEmpty(response) &&
+    if (response &&
         response.count !== 0 &&
-        !_.isEmpty(response.rows)) {
+        response.rows) {
         //rerender data manage
-        _.forEach(response.rows, function(stories, index) {
+        response.rows.forEach(function(stories, index) {
             var no = '<td class="font-brand">' + (index + 1 + (offset ? offset : 0)) + '</td>';
             var title = '<td colspan="2"><h4 class="ui header">' +
                 '<div class="content font-header">' + stories.Title + '</div></h4></td>';
@@ -185,30 +180,31 @@ function onClickView(uid) {
     require(['common/manageViewStories'], function(manageViewStories) {
         manageViewStories(uid, accessTokenFB)
             .then(function(stories) {
-                if (!_.isEmpty(stories)) {
-                    require(['/libs/moment-timezone/moment-timezone.js'], function(moment) {
-                        //set data before show modal review
-                        var htmlContent = stories.Content;
-                        var title = stories.Title;
-                        $('.review-description').text('');
-                        $('.review-description').append(htmlContent);
-                        $('.review-title').text(title);
-                        var backgroundUID = (stories && stories.FileUploads && stories.FileUploads[0] ? stories.FileUploads[0].UID : null);
-                        if (backgroundUID !== null) {
-                            $('.review-background').removeClass('hide');
-                        } else {
-                            $('.review-background').addClass('hide');
-                        }
-                        $('.review-background').attr('src', '/user/download-background/' + backgroundUID);
-                        var dateWriteReview = moment().format('DD/MM/YYYY');
-                        if (!_.isNull(stories.CreatedDate) &&
-                            !_.isUndefined(stories.CreatedDate)) {
-                            dateWriteReview = moment(stories.CreatedDate).format('DD/MM/YYYY');
-                        }
-                        $('.review-date').text('');
-                        $('.review-date').append(dateWriteReview);
-                        $('.long.modal').modal('show');
-                    });
+                if (stories) {
+                    //set data before show modal review
+                    var htmlContent = stories.Content;
+                    var title = stories.Title;
+                    $('.review-description').text('');
+                    $('.review-description').append(htmlContent);
+                    $('.review-title').text(title);
+                    var backgroundUID = (stories && stories.FileUploads && stories.FileUploads[0] ? stories.FileUploads[0].UID : null);
+                    if (backgroundUID !== null) {
+                        $('.review-background').removeClass('hide');
+                    } else {
+                        $('.review-background').addClass('hide');
+                    }
+                    $('.review-background').attr('src', '/user/download-background/' + backgroundUID);
+                    var dateWriteReview = new Date();
+                    if (stories.CreatedDate) {
+                        dateWriteReview = new Date(stories.CreatedDate);
+                    }
+                    var d = dateWriteReview.getDate() <= 9 ? '0' + dateWriteReview.getDate() : dateWriteReview.getDate();
+                    var m = (dateWriteReview.getMonth() + 1) <= 9 ? ('0' + (dateWriteReview.getMonth() + 1)) : dateWriteReview.getMonth() + 1;
+                    var y = dateWriteReview.getFullYear();
+                    var dateWriteReviewShow = d + '/' + m + '/' + y;
+                    $('.review-date').text('');
+                    $('.review-date').append(dateWriteReviewShow);
+                    $('.long.modal').modal('show');
                 } else {
                     noty({
                         text: 'Tải truyện thất bại!',
@@ -231,7 +227,7 @@ function onClickView(uid) {
 
 //keypress search
 function onKeypressSearch(e) {
-    if (!_.isEmpty(e) &&
+    if (e &&
         e.keyCode === 13) {
         loadList();
     }
@@ -248,8 +244,7 @@ function onChangeShow(uid) {
 function onClickChangeStatusNo() {
     var uid = $('.confirm-change-status').val();
     var showUpdate = $('input[name=change-status-' + uid + ']:checked').val();
-    if (_.isNull(showUpdate) ||
-        _.isUndefined(showUpdate) ||
+    if (showUpdate ||
         showUpdate.length === 0) {
         showUpdate = "N";
     }
@@ -266,12 +261,10 @@ function onClickChangeStatusNo() {
 //confirm change status yes
 function onClickChangeStatusYes() {
     var uid = $('.confirm-change-status').val();
-    if (!_.isNull(uid) &&
-        !_.isUndefined(uid) &&
+    if (uid &&
         uid.length !== 0) {
         var showUpdate = $('input[name=change-status-' + uid + ']:checked').val();
-        if (_.isNull(showUpdate) ||
-            _.isUndefined(showUpdate) ||
+        if (showUpdate ||
             showUpdate.length === 0) {
             showUpdate = "N";
         } else {

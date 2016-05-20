@@ -48,20 +48,17 @@ define(function(require) {
                 $('.write-stories').removeClass('hide');
                 $('.write-title').focus();
                 //set value default edit
-                if (!_.isNull($('.write-content-hidden').val()) &&
-                    !_.isUndefined($('.write-content-hidden').val())) {
+                if ($('.write-content-hidden').val()) {
                     tinymce.get('write-content').setContent($('.write-content-hidden').val());
                 }
                 var fileName = $('.write-background-filename-hidden').val();
-                if (!_.isNull(fileName) &&
-                    !_.isUndefined(fileName)) {
+                if (fileName) {
                     var ext = fileName.split('.')[fileName.split('.').length - 1];
                     fileName = fileName.length >= 10 ? fileName.substring(0, 10) + '...' + ext : fileName;
                     $('.title-background span').text(fileName);
                 }
                 //check status create or edit
-                if (!_.isNull($('.write-title').val()) &&
-                    !_.isUndefined($('.write-title').val()) &&
+                if ($('.write-title').val() &&
                     $('.write-title').val().length !== 0) {
                     isCreate = false;
                     $('.write-save-button').text('Update');
@@ -122,8 +119,7 @@ $('#write-background').change(function(e) {
 //function validate write stories
 function validateWrite() {
     var titleValidate = $('.write-title').val();
-    if (_.isNull(titleValidate) ||
-        _.isUndefined(titleValidate) ||
+    if (titleValidate ||
         titleValidate.length === 0) {
         $('.validate-title').addClass('error');
         $('.error-message-write').text('');
@@ -148,8 +144,7 @@ function onClickSave() {
     if (validateWrite()) {
         var htmlContent = tinymce.get('write-content').getContent();
         var textContent = tinymce.get('write-content').getContent({ format: 'text' });
-        if (!_.isNull(textContent) &&
-            !_.isUndefined(textContent) &&
+        if (textContent &&
             textContent.length > 300) {
             var maxLengthCut = 300 // maximum number of characters to extract
                 //trim the string to the maximum length
@@ -238,30 +233,30 @@ function onClickSave() {
 };
 
 function onClickView() {
-    require(['/libs/moment-timezone/moment-timezone.js'], function(moment) {
-        //set data before show modal review
-        var htmlContent = tinymce.get('write-content').getContent();
-        var title = $('.write-title').val();
-        $('.review-description').text('');
-        $('.review-description').append(htmlContent);
-        $('.review-title').text(title);
-        var backgroundUID = $('.write-background-uid').val();
-        if (!_.isNull(backgroundUID) &&
-            !_.isUndefined(backgroundUID)) {
-            $('.review-background').removeClass('hide');
-        } else {
-            $('.review-background').addClass('hide');
-        }
-        $('.review-background').attr('src', '/user/download-background/' + backgroundUID);
-        var dateWriteReview = moment().format('DD/MM/YYYY');
-        if (!_.isNull($('.write-date').val()) &&
-            !_.isUndefined($('.write-date').val())) {
-            dateWriteReview = moment($('.write-date').val(), 'ddd MMM DD YYYY HH:mm:ss ZZ').format('DD/MM/YYYY');
-        }
-        $('.review-date').text('');
-        $('.review-date').append(dateWriteReview);
-        $('.long.modal').modal('show');
-    });
+    //set data before show modal review
+    var htmlContent = tinymce.get('write-content').getContent();
+    var title = $('.write-title').val();
+    $('.review-description').text('');
+    $('.review-description').append(htmlContent);
+    $('.review-title').text(title);
+    var backgroundUID = $('.write-background-uid').val();
+    if (backgroundUID) {
+        $('.review-background').removeClass('hide');
+    } else {
+        $('.review-background').addClass('hide');
+    }
+    $('.review-background').attr('src', '/user/download-background/' + backgroundUID);
+    var dateWriteReview = new Date();
+    if ($('.write-date').val()) {
+        dateWriteReview = new Date($('.write-date').val());
+    }
+    var d = dateWriteReview.getDate() <= 9 ? '0' + dateWriteReview.getDate() : dateWriteReview.getDate();
+    var m = (dateWriteReview.getMonth() + 1) <= 9 ? ('0' + (dateWriteReview.getMonth() + 1)) : dateWriteReview.getMonth() + 1;
+    var y = dateWriteReview.getFullYear();
+    var dateWriteReviewShow = d + '/' + m + '/' + y;
+    $('.review-date').text('');
+    $('.review-date').append(dateWriteReviewShow);
+    $('.long.modal').modal('show');
 };
 
 function onClickAttachImage() {

@@ -8,5 +8,4 @@ requirejs(['jquery.min',
     '/libs/noty/js/noty/packaged/jquery.noty.packaged.min.js'
 ], function($, noty) {
     requirejs(['app/main']);
-    var localStorageFB = localStorage.setItem('test', 'thanh');
 });

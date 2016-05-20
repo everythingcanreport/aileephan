@@ -1,5 +1,37 @@
 var accessToken = null;
-console.log('dasdadsd', localStorage.getItem('test'));
+//check localStorageAccessToken
+var localStorageAccessToken = localStorage.getItem('localStorageAccessToken');
+if (typeof localStorageAccessToken === 'object') {
+    //render profile
+}
+//check locaStorageAvatar - localStorageProfile
+var localStorageAvatar = localStorage.getItem('localStorageAvartar');
+var localStorageProfile = localStorage.getItem('localStorageProfile');
+if (localStorageAvartar &&
+    typeof localStorageAvartar === 'object' &&
+    localStorageProfile &&
+    typeof localStorageProfile === 'object') {
+    $('.connected-name span').text(localStorageProfile.name);
+    $('.connected-avatar').attr('src', localStorageAvartar.url);
+    $('.loader').removeClass('active');
+    $('.connected').removeClass('hide');
+    $('.unknown').addClass('hide');
+}
+//end
+
+//check localStorageMenu
+var localStorageMenu = localStorage.getItem('localStorageMenu');
+if (typeof localStorageMenu === 'object') {
+    //render menu
+    $('.connected-menu').empty();
+    localStorageMenu.forEach(function(menu, index) {
+        $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');
+    });
+    $('.loader').removeClass('active');
+    $('.connected').removeClass('hide');
+    $('.unknown').addClass('hide');
+}
+//end
 define(function(require) {
     //facebook plugin
     var fbInit = require('fbPlugin/init');
@@ -12,6 +44,8 @@ define(function(require) {
             if (typeof response === 'object' &&
                 response.status === 'connected') {
                 accessToken = response.authResponse.accessToken;
+                //set localStorageAccessToken
+                localStorage.setItem('localStorageAccessToken', JSON.stringify(response.authResponse));
             } else {
                 $('.menu-loader').removeClass('active');
                 $('.unknown').removeClass('hide');

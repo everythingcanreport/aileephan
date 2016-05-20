@@ -4,6 +4,7 @@ define(function() {
             FB.api('/me', function(userProfile) {
                 if (typeof userProfile === 'object' &&
                     !userProfile.error) {
+                    localStorage.setItem('localStorageMenuProfile', userProfile);
                     $('.connected-name span').text(userProfile.name);
                     resolve({ status: 'success' });
                 } else {

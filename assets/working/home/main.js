@@ -37,7 +37,10 @@ define(function(require) {
         !_.isUndefined(dateWriteResponse)) {
         dateWriteReview = new Date(dateWriteResponse);
     }
-    var dateWriteReviewShow = dateWriteReview.getDate() + (dateWriteReview.getMonth() + 1) + '/' + dateWriteReview.getFullYear();
+    var d = dateWriteReview.getDate() <= 9 ? '0' + dateWriteReview.getDate() : dateWriteReview.getDate();
+    var m = (dateWriteReview.getMonth() + 1) <= 9 ? ('0' + (dateWriteReview.getMonth() + 1)) : dateWriteReview.getMonth() + 1;
+    var y = dateWriteReview.getFullYear();
+    var dateWriteReviewShow = d + '/' + m + '/' + y;
     $('.home-date').text('');
     $('.home-date').append(dateWriteReviewShow);
 });
@@ -86,7 +89,10 @@ function renderData(response) {
         !_.isEmpty(response.rows)) {
         _.forEach(response.rows, function(stories, index) {
             var dateCreate = new Date(stories.CreatedDate);
-            var dateCreateShow = dateCreate.getDate() + (dateCreate.getMonth() + 1) + '/' + dateCreate.getFullYear();
+            var d = dateCreate.getDate() <= 9 ? '0' + dateCreate.getDate() : dateCreate.getDate();
+            var m = (dateCreate.getMonth() + 1) <= 9 ? ('0' + (dateCreate.getMonth() + 1)) : dateCreate.getMonth() + 1;
+            var y = dateCreate.getFullYear();
+            var dateCreateShow = d + '/' + m + '/' + y;
             var ribbon = '<a class="ui pink font-ribbon ribbon large label">Ngôn tình</a>';
             var homeDate = '<span class="float-right media-time font-ribbon home-date">' +
                 dateCreateShow + '</span>';

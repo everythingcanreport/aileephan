@@ -4,14 +4,16 @@ var localStorageAccessToken = localStorage.getItem('localStorageAccessToken');
 if (typeof localStorageAccessToken === 'object') {
     //render profile
 }
-//check locaStorageAvatar - localStorageProfile
+//check localStorageAvatar - localStorageProfile
 var localStorageAvatar = localStorage.getItem('localStorageAvatar');
 var localStorageProfile = localStorage.getItem('localStorageProfile');
+console.log('localStorageAvatar', localStorageAvatar);
+console.log('localStorageProfile', localStorageProfile);
 if (localStorageAvatar &&
     localStorageProfile) {
     localStorageAvatar = JSON.parse(localStorageAvatar);
     localStorageProfile = JSON.parse(localStorageProfile);
-    console.log('locaStorageAvatar', locaStorageAvatar);
+    console.log('localStorageAvatar', localStorageAvatar);
     console.log('localStorageProfile', localStorageProfile);
     $('.connected-name span').text(localStorageProfile.name);
     $('.connected-avatar').attr('src', localStorageAvatar.url);

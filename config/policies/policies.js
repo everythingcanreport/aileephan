@@ -4,7 +4,7 @@ module.exports = {
         // 'WriteStories': true,
         // 'GetListStories': true,
         'DownloadBackground': true,
-        // 'ViewStories': true
+        'ViewStories': true
     },
     'OAuthController': {
         'Login': true

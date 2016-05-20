@@ -7,8 +7,6 @@ if (typeof localStorageAccessToken === 'object') {
 //check localStorageAvatar - localStorageProfile
 var localStorageAvatar = localStorage.getItem('localStorageAvatar');
 var localStorageProfile = localStorage.getItem('localStorageProfile');
-console.log('localStorageAvatar', localStorageAvatar);
-console.log('localStorageProfile', localStorageProfile);
 if (localStorageAvatar &&
     localStorageProfile) {
     localStorageAvatar = JSON.parse(localStorageAvatar);

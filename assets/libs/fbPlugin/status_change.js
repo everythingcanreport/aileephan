@@ -7,7 +7,7 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
             response.authResponse.userID) {
             console.log('vao set cookies');
             //set cookiesAccessToken
-            document.cookie = 'accessToken=' + response.authResponse.accessToken;
+            document.cookie = ("accessToken=" + response.authResponse.accessToken).toString();
             console.log('cookies after set', document.cookie)
             //get user profile
             var urlPicture = '/' + response.authResponse.userID + '/picture';

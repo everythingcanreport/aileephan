@@ -1,3 +1,32 @@
+//check localStorageAvatar - localStorageProfile
+var localStorageAvatar = localStorage.getItem('localStorageAvatar');
+var localStorageProfile = localStorage.getItem('localStorageProfile');
+if (localStorageAvatar &&
+    localStorageProfile) {
+    localStorageAvatar = JSON.parse(localStorageAvatar);
+    localStorageProfile = JSON.parse(localStorageProfile);
+    $('.connected-name span').text(localStorageProfile.name);
+    $('.connected-avatar').attr('src', localStorageAvatar.url);
+    $('.loader').removeClass('active');
+    $('.connected').removeClass('hide');
+    $('.unknown').addClass('hide');
+}
+//end
+
+//check localStorageMenu
+var localStorageMenu = localStorage.getItem('localStorageMenu');
+if (localStorageMenu) {
+    localStorageMenu = JSON.parse(localStorageMenu);
+    //render menu
+    $('.connected-menu').empty();
+    localStorageMenu.forEach(function(menu, index) {
+        $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');
+    });
+    $('.loader').removeClass('active');
+    $('.connected').removeClass('hide');
+    $('.unknown').addClass('hide');
+}
+//end
 define(function(require) {
     //facebook plugin
     var fbInit = require('fbPlugin/init');
@@ -8,7 +37,10 @@ define(function(require) {
         fbInit();
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
-                response.status === 'connected') {} else {
+                response.status === 'connected') {
+                //set cookiesAccessToken
+                document.cookie = 'accessToken=' + response.authResponse.accessToken;
+            } else {
                 $('.menu-loader').removeClass('active');
                 $('.unknown').removeClass('hide');
             }

@@ -1,13 +1,10 @@
 define(function() {
-    return function(dataUpdate, accessToken) {
+    return function(dataUpdate) {
         var p = new Promise(function(resolve, reject) {
             $.ajax({
                 type: 'POST',
                 url: "http://aileephan.com/admin/update-status",
                 data: dataUpdate,
-                beforeSend: function(request) {
-                    request.setRequestHeader("accessTokenFB", accessToken);
-                },
                 success: function(response) {
                     resolve(response);
                 },

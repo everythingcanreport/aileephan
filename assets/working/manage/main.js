@@ -1,4 +1,32 @@
-var accessTokenFB = null;
+//check localStorageAvatar - localStorageProfile
+var localStorageAvatar = localStorage.getItem('localStorageAvatar');
+var localStorageProfile = localStorage.getItem('localStorageProfile');
+if (localStorageAvatar &&
+    localStorageProfile) {
+    localStorageAvatar = JSON.parse(localStorageAvatar);
+    localStorageProfile = JSON.parse(localStorageProfile);
+    $('.connected-name span').text(localStorageProfile.name);
+    $('.connected-avatar').attr('src', localStorageAvatar.url);
+    $('.loader').removeClass('active');
+    $('.connected').removeClass('hide');
+    $('.unknown').addClass('hide');
+}
+//end
+
+//check localStorageMenu
+var localStorageMenu = localStorage.getItem('localStorageMenu');
+if (localStorageMenu) {
+    localStorageMenu = JSON.parse(localStorageMenu);
+    //render menu
+    $('.connected-menu').empty();
+    localStorageMenu.forEach(function(menu, index) {
+        $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');
+    });
+    $('.loader').removeClass('active');
+    $('.connected').removeClass('hide');
+    $('.unknown').addClass('hide');
+}
+//end
 define(function(require) {
     //facebook plugin
     var fbInit = require('fbPlugin/init');
@@ -10,7 +38,8 @@ define(function(require) {
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
                 response.status === 'connected') {
-                accessTokenFB = response.authResponse.accessToken;
+                //set cookiesAccessToken
+                document.cookie = 'accessToken=' + response.authResponse.accessToken;
             } else {
                 $('.menu-loader').removeClass('active');
                 $('.unknown').removeClass('hide');
@@ -93,9 +122,6 @@ function loadList(limit, offset) {
     $.ajax({
         type: 'POST',
         url: 'http://aileephan.com/admin/manage/list',
-        beforeSend: function(request) {
-            request.setRequestHeader("accessTokenFB", accessTokenFB);
-        },
         data: {
             data: JSON.stringify(data)
         },
@@ -177,9 +203,8 @@ function onClickEdit(uid) {
 
 //view stories
 function onClickView(uid) {
-    document.cookie = "username=John Doe";
     require(['common/manageViewStories'], function(manageViewStories) {
-        manageViewStories(uid, accessTokenFB)
+        manageViewStories(uid)
             .then(function(stories) {
                 if (stories) {
                     //set data before show modal review
@@ -278,7 +303,7 @@ function onClickChangeStatusYes() {
                     UID: uid
                 }
             };
-            updateStatus(dataUpdateStatus, accessTokenFB)
+            updateStatus(dataUpdateStatus)
                 .then(function(response) {
                     $('.small.modal.change-status').modal('hide');
                     noty({

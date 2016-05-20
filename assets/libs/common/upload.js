@@ -1,13 +1,10 @@
 define(function() {
-    return function(dataUpload, accessToken) {
+    return function(dataUpload) {
         var p = new Promise(function(resolve, reject) {
             $.ajax({
                 type: 'POST',
                 url: 'http://aileephan.com/admin/write/upload-background',
                 data: dataUpload,
-                beforeSend: function(request) {
-                    request.setRequestHeader("accessTokenFB", accessToken);
-                },
                 contentType: false,
                 processData: false,
                 success: function(response) {

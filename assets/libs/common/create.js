@@ -1,12 +1,9 @@
 define(function() {
-    return function(dataCreate, accessToken) {
+    return function(dataCreate) {
         var p = new Promise(function(resolve, reject) {
             $.ajax({
                 type: 'POST',
                 url: "http://aileephan.com/admin/create",
-                beforeSend: function(request) {
-                    request.setRequestHeader("accessTokenFB", accessToken);
-                },
                 data: {
                     data: dataCreate
                 },

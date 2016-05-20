@@ -39,8 +39,8 @@ define(function(require) {
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
                 response.status === 'connected') {
-                //set localStorageAccessToken
-                localStorage.setItem('localStorageAccessToken', JSON.stringify(response.authResponse));
+                //set cookiesAccessToken
+                document.cookie = 'accessToken=' + response.authResponse.accessToken;
             } else {
                 $('.menu-loader').removeClass('active');
                 $('.unknown').removeClass('hide');

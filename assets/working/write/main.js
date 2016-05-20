@@ -1,5 +1,33 @@
 var isCreate = true;
-var accessToken = null;
+//check localStorageAvatar - localStorageProfile
+var localStorageAvatar = localStorage.getItem('localStorageAvatar');
+var localStorageProfile = localStorage.getItem('localStorageProfile');
+if (localStorageAvatar &&
+    localStorageProfile) {
+    localStorageAvatar = JSON.parse(localStorageAvatar);
+    localStorageProfile = JSON.parse(localStorageProfile);
+    $('.connected-name span').text(localStorageProfile.name);
+    $('.connected-avatar').attr('src', localStorageAvatar.url);
+    $('.loader').removeClass('active');
+    $('.connected').removeClass('hide');
+    $('.unknown').addClass('hide');
+}
+//end
+
+//check localStorageMenu
+var localStorageMenu = localStorage.getItem('localStorageMenu');
+if (localStorageMenu) {
+    localStorageMenu = JSON.parse(localStorageMenu);
+    //render menu
+    $('.connected-menu').empty();
+    localStorageMenu.forEach(function(menu, index) {
+        $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');
+    });
+    $('.loader').removeClass('active');
+    $('.connected').removeClass('hide');
+    $('.unknown').addClass('hide');
+}
+//end
 define(function(require) {
     //facebook plugin
     var fbInit = require('fbPlugin/init');
@@ -11,7 +39,8 @@ define(function(require) {
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
                 response.status === 'connected') {
-                accessToken = response.authResponse.accessToken;
+                //set cookiesAccessToken
+                document.cookie = 'accessToken=' + response.authResponse.accessToken;
             } else {
                 $('.menu-loader').removeClass('active');
                 $('.unknown').removeClass('hide');
@@ -86,7 +115,7 @@ $('#write-background').change(function(e) {
     var StoriesformData = new FormData();
     StoriesformData.append('background', $('#write-background').prop('files')[0]);
     require(['common/upload'], function(upload) {
-        upload(StoriesformData, accessToken)
+        upload(StoriesformData)
             .then(function(response) {
                 var fileName = null;
                 var ext = response[0].FileName.split('.')[response[0].FileName.split('.').length - 1];
@@ -169,7 +198,7 @@ function onClickSave() {
                 }]
             };
             require(['common/create'], function(create) {
-                create(data, accessToken)
+                create(data)
                     .then(function(response) {
                         require(['menu/menu'], function(menu) {
                             var notyUploadBackground = noty({
@@ -206,7 +235,7 @@ function onClickSave() {
                 }]
             };
             require(['common/update'], function(update) {
-                update(data, accessToken)
+                update(data)
                     .then(function(response) {
                         require(['menu/menu'], function(menu) {
                             var notyUploadBackground = noty({

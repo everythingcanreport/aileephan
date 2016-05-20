@@ -239,7 +239,6 @@ module.exports = {
             });
     },
     ManageViewStories: function(req, res) {
-        console.log('req', req.cookies);
         req.validate({
             UID: 'string'
         });

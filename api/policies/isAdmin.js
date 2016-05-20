@@ -1,11 +1,12 @@
 module.exports = function(req, res, next) {
     var requestify = require('requestify');
+    console.log('req', req.cookies);
     if (!_.isEmpty(req) &&
-        !_.isEmpty(req.headers) &&
-        HelperService.CheckExistData(req.headers.accesstokenfb)) {
-        var accesstokenfb = req.headers.accesstokenfb;
+        !_.isEmpty(req.cookies) &&
+        HelperService.CheckExistData(req.cookies.accessToken)) {
+        var accessToken = req.cookies.accessToken;
         var isAdmin = false;
-        var urlGetUserAccount = sails.config.aileeConfig.urlGetUserAccount + accesstokenfb;
+        var urlGetUserAccount = sails.config.aileeConfig.urlGetUserAccount + accessToken;
         requestify.get(urlGetUserAccount).then(function(response) {
             // Get the response body
             var userInfo = response.getBody();

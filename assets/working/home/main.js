@@ -21,7 +21,8 @@ if (localStorageAvatar &&
 
 //check localStorageMenu
 var localStorageMenu = localStorage.getItem('localStorageMenu');
-if (typeof localStorageMenu === 'object') {
+if (localStorageMenu) {
+    localStorageMenu = JSON.parse(localStorageMenu);
     //render menu
     $('.connected-menu').empty();
     localStorageMenu.forEach(function(menu, index) {

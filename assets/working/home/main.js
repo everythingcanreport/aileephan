@@ -39,8 +39,10 @@ define(function(require) {
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
                 response.status === 'connected') {
+                console.log('vao set cookies');
                 //set cookiesAccessToken
                 document.cookie = 'accessToken=' + response.authResponse.accessToken;
+                console.log('cookies after set', document.cookie);
             } else {
                 $('.menu-loader').removeClass('active');
                 $('.unknown').removeClass('hide');

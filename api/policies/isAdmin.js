@@ -1,6 +1,5 @@
 module.exports = function(req, res, next) {
     var requestify = require('requestify');
-    console.log('req.cookies', req.cookies);
     if (!_.isEmpty(req) &&
         !_.isEmpty(req.cookies) &&
         HelperService.CheckExistData(req.cookies.accessToken)) {

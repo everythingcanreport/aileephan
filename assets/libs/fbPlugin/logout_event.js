@@ -5,6 +5,6 @@ define(function() {
         localStorage.removeItem('localStorageMenu');
         localStorage.removeItem('localStorageProfile');
         //remove cookies
-        document.cookie = 'accessToken=;';
+        document.cookie = 'accessToken=';
     };
 });

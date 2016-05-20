@@ -11,6 +11,8 @@ if (localStorageAvatar &&
     typeof localStorageAvatar === 'object' &&
     localStorageProfile &&
     typeof localStorageProfile === 'object') {
+    console.log('locaStorageAvatar', locaStorageAvatar);
+    console.log('localStorageProfile', localStorageProfile);
     $('.connected-name span').text(localStorageProfile.name);
     $('.connected-avatar').attr('src', localStorageAvatar.url);
     $('.loader').removeClass('active');
@@ -21,6 +23,7 @@ if (localStorageAvatar &&
 
 //check localStorageMenu
 var localStorageMenu = localStorage.getItem('localStorageMenu');
+console.log('localStorageMenu', localStorageMenu);
 if (localStorageMenu) {
     localStorageMenu = JSON.parse(localStorageMenu);
     //render menu

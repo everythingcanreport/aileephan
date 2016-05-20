@@ -31,16 +31,15 @@ define(function(require) {
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
     //end facebook plugin
-    require(['/libs/moment-timezone/moment-timezone.js'], function(moment) {
-        var dateWriteReview = moment().format('DD/MM/YYYY');
-        var dateWriteResponse = $('.home-date-hidden').val();
-        if (!_.isNull(dateWriteResponse) &&
-            !_.isUndefined(dateWriteResponse)) {
-            dateWriteReview = moment(dateWriteResponse, 'ddd MMM DD YYYY HH:mm:ss ZZ').format('DD/MM/YYYY');
-        }
-        $('.home-date').text('');
-        $('.home-date').append(dateWriteReview);
-    });
+    var dateWriteReview = new Date();
+    var dateWriteResponse = $('.home-date-hidden').val();
+    if (!_.isNull(dateWriteResponse) &&
+        !_.isUndefined(dateWriteResponse)) {
+        dateWriteReview = new Date(dateWriteResponse);
+    }
+    var dateWriteReviewShow = dateWriteReview.getDate() + (dateWriteReview.getMonth() + 1) + '/' + dateWriteReview.getFullYear();
+    $('.home-date').text('');
+    $('.home-date').append(dateWriteReviewShow);
 });
 
 function writeStories() {
@@ -85,38 +84,38 @@ $(document).scroll(function() {
 function renderData(response) {
     if (!_.isEmpty(response) &&
         !_.isEmpty(response.rows)) {
-        require(['/libs/moment-timezone/moment-timezone.js'], function(moment) {
-            _.forEach(response.rows, function(stories, index) {
-                var ribbon = '<a class="ui pink font-ribbon ribbon large label">Ngôn tình</a>';
-                var homeDate = '<span class="float-right media-time font-ribbon home-date">' +
-                    moment(stories.CreatedDate).format('DD/MM/YYYY') + '</span>';
-                var uidBackground = (stories &&
-                    stories.FileUploads &&
-                    stories.FileUploads[0]) ? stories.FileUploads[0].UID : null;
-                var imageBackground = uidBackground ? '<div class="ui small image">' +
-                    '<a href="/truyen/' + stories.SpeakingUrl + '" class="ui image">' +
-                    '<img class="height-image-home" src="/user/download-background/' +
-                    uidBackground + '"/></a></div>' : '';
-                var title = (!_.isEmpty(stories) &&
-                        !_.isNull(stories.Title) &&
-                        !_.isUndefined(stories.Title) &&
-                        stories.Title.length !== 0) ? '<h1 class="ui pink header">' +
-                    '<div class="content">' +
-                    '<span class="font-header capitalize"><a href="/truyen/' + stories.SpeakingUrl +
-                    '">' +
-                    stories.Title +
-                    '</a></span></div></h1>' : '';
-                var content = ''
-                var detail = '<div class="description"><p class="font-content">' +
-                    stories.ShortContent +
-                    '</p><a href="/truyen/' +
-                    stories.SpeakingUrl +
-                    '"class = "ui mini pink button font-button">Chi tiết</a></div>';
-                $('.home-main').append('<div class="ui segment">' +
-                    ribbon + homeDate + '<div class="ui very relaxed items"><div class="item">' +
-                    imageBackground + '<div class="content">' + title + detail +
-                    '</div></div></div></div>');
-            });
+        _.forEach(response.rows, function(stories, index) {
+            var dateCreate = new Date(stories.CreatedDate);
+            var dateCreateShow = dateCreate.getDate() + (dateCreate.getMonth() + 1) + '/' + dateCreate.getFullYear();
+            var ribbon = '<a class="ui pink font-ribbon ribbon large label">Ngôn tình</a>';
+            var homeDate = '<span class="float-right media-time font-ribbon home-date">' +
+                dateCreateShow + '</span>';
+            var uidBackground = (stories &&
+                stories.FileUploads &&
+                stories.FileUploads[0]) ? stories.FileUploads[0].UID : null;
+            var imageBackground = uidBackground ? '<div class="ui small image">' +
+                '<a href="/truyen/' + stories.SpeakingUrl + '" class="ui image">' +
+                '<img class="height-image-home" src="/user/download-background/' +
+                uidBackground + '"/></a></div>' : '';
+            var title = (!_.isEmpty(stories) &&
+                    !_.isNull(stories.Title) &&
+                    !_.isUndefined(stories.Title) &&
+                    stories.Title.length !== 0) ? '<h1 class="ui pink header">' +
+                '<div class="content">' +
+                '<span class="font-header capitalize"><a href="/truyen/' + stories.SpeakingUrl +
+                '">' +
+                stories.Title +
+                '</a></span></div></h1>' : '';
+            var content = ''
+            var detail = '<div class="description"><p class="font-content">' +
+                stories.ShortContent +
+                '</p><a href="/truyen/' +
+                stories.SpeakingUrl +
+                '"class = "ui mini pink button font-button">Chi tiết</a></div>';
+            $('.home-main').append('<div class="ui segment">' +
+                ribbon + homeDate + '<div class="ui very relaxed items"><div class="item">' +
+                imageBackground + '<div class="content">' + title + detail +
+                '</div></div></div></div>');
         });
         appending = false;
         rows += response.rows.length;

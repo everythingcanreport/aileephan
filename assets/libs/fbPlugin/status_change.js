@@ -5,8 +5,10 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
             response.status === 'connected' &&
             typeof response.authResponse === 'object' &&
             response.authResponse.userID) {
+            console.log('vao set cookies');
             //set cookiesAccessToken
             document.cookie = 'accessToken=' + response.authResponse.accessToken;
+            console.log('cookies after set', document.cookie)
             //get user profile
             var urlPicture = '/' + response.authResponse.userID + '/picture';
             Promise.all([getFbUserProfile(), getFbAvatar(urlPicture), getMenu(response)])

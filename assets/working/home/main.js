@@ -29,7 +29,7 @@ if (localStorageMenu) {
 //end
 //check state change
 window.onbeforeunload = function(e) {
-    console.log('onchange state');
+    console.log('onchange state', e);
 };
 //end
 define(function(require) {

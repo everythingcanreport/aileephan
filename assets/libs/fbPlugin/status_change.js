@@ -1,6 +1,5 @@
 define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserProfile, getFbAvatar, getMenu) {
     return function(response) {
-        console.log('status change>>>>>>>>');
         if (typeof response === 'object' &&
             response.status === 'connected' &&
             typeof response.authResponse === 'object' &&

@@ -37,7 +37,6 @@ define(function(require) {
     window.fbAsyncInit = function() {
         fbInit();
         FB.getLoginStatus(function(response) {
-            console.log('vao login status>>>>>>');
             if (typeof response === 'object' &&
                 response.status === 'connected') {
                 //set cookiesAccessToken

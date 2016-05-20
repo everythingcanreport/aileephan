@@ -8,9 +8,9 @@ if (typeof localStorageAccessToken === 'object') {
 var localStorageAvatar = localStorage.getItem('localStorageAvatar');
 var localStorageProfile = localStorage.getItem('localStorageProfile');
 if (localStorageAvatar &&
-    typeof localStorageAvatar === 'object' &&
-    localStorageProfile &&
-    typeof localStorageProfile === 'object') {
+    localStorageProfile) {
+    localStorageAvatar = JSON.parse(localStorageAvatar);
+    localStorageProfile = JSON.parse(localStorageProfile);
     console.log('locaStorageAvatar', locaStorageAvatar);
     console.log('localStorageProfile', localStorageProfile);
     $('.connected-name span').text(localStorageProfile.name);

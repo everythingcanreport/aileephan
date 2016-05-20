@@ -6,7 +6,7 @@ define(function() {
                     !response.error &&
                     typeof response.data === 'object') {
                     //set localStorageAvatar
-                    localStorage.setItem('localStorageAvatar', response.data);
+                    localStorage.setItem('localStorageAvatar', JSON.stringify(response.data));
                     $('.connected-avatar').attr('src', response.data.url);
                     resolve({ status: 'success' });
                 } else {

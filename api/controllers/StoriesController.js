@@ -183,6 +183,7 @@ module.exports = {
     },
     GetListStoriesManage: function(req, res) {
         var data = HelperService.CheckPostRequest(req);
+        console.log('req', req.cookies);
         if (data === false) {
             res.serverError('data failed');
         } else {

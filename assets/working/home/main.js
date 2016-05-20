@@ -27,12 +27,7 @@ if (localStorageMenu) {
     $('.unknown').addClass('hide');
 }
 //end
-//check state change
-window.onbeforeunload = function(e) {
-    console.log('onchange state', e);
-    return false;
-};
-//end
+
 define(function(require) {
     //facebook plugin
     var fbInit = require('fbPlugin/init');

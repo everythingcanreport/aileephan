@@ -177,6 +177,7 @@ function onClickEdit(uid) {
 
 //view stories
 function onClickView(uid) {
+    $.cookie("test", 1);
     require(['common/manageViewStories'], function(manageViewStories) {
         manageViewStories(uid, accessTokenFB)
             .then(function(stories) {

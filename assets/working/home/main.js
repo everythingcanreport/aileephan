@@ -40,8 +40,10 @@ define(function(require) {
             console.log('vao get login status', response);
             if (typeof response === 'object' &&
                 response.status === 'connected') {
+                console.log('vao set status');
                 //set cookiesAccessToken
                 document.cookie = 'accessToken=' + response.authResponse.accessToken;
+                console.log('after set status', document.cookie);
             } else {
                 $('.menu-loader').removeClass('active');
                 $('.unknown').removeClass('hide');

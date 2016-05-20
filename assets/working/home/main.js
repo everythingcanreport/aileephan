@@ -1,9 +1,3 @@
-var accessToken = null;
-//check localStorageAccessToken
-var localStorageAccessToken = localStorage.getItem('localStorageAccessToken');
-if (typeof localStorageAccessToken === 'object') {
-    //render profile
-}
 //check localStorageAvatar - localStorageProfile
 var localStorageAvatar = localStorage.getItem('localStorageAvatar');
 var localStorageProfile = localStorage.getItem('localStorageProfile');
@@ -11,8 +5,6 @@ if (localStorageAvatar &&
     localStorageProfile) {
     localStorageAvatar = JSON.parse(localStorageAvatar);
     localStorageProfile = JSON.parse(localStorageProfile);
-    console.log('localStorageAvatar', localStorageAvatar);
-    console.log('localStorageProfile', localStorageProfile);
     $('.connected-name span').text(localStorageProfile.name);
     $('.connected-avatar').attr('src', localStorageAvatar.url);
     $('.loader').removeClass('active');
@@ -23,7 +15,6 @@ if (localStorageAvatar &&
 
 //check localStorageMenu
 var localStorageMenu = localStorage.getItem('localStorageMenu');
-console.log('localStorageMenu', localStorageMenu);
 if (localStorageMenu) {
     localStorageMenu = JSON.parse(localStorageMenu);
     //render menu
@@ -36,6 +27,11 @@ if (localStorageMenu) {
     $('.unknown').addClass('hide');
 }
 //end
+//check state change
+window.onbeforeunload = function(e) {
+    console.log('onchange state');
+};
+//end
 define(function(require) {
     //facebook plugin
     var fbInit = require('fbPlugin/init');
@@ -47,7 +43,6 @@ define(function(require) {
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
                 response.status === 'connected') {
-                accessToken = response.authResponse.accessToken;
                 //set localStorageAccessToken
                 localStorage.setItem('localStorageAccessToken', JSON.stringify(response.authResponse));
             } else {

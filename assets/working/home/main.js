@@ -1,4 +1,5 @@
 var accessToken = null;
+console.log('dasdadsd', localStorage.getItem('test'));
 define(function(require) {
     //facebook plugin
     var fbInit = require('fbPlugin/init');

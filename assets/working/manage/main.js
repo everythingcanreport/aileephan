@@ -37,10 +37,7 @@ define(function(require) {
         fbInit();
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
-                response.status === 'connected') {
-                //set cookiesAccessToken
-                document.cookie = 'accessToken=' + response.authResponse.accessToken;
-            } else {
+                response.status === 'connected') {} else {
                 $('.menu-loader').removeClass('active');
                 $('.unknown').removeClass('hide');
             }

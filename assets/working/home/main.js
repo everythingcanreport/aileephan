@@ -5,14 +5,14 @@ if (typeof localStorageAccessToken === 'object') {
     //render profile
 }
 //check locaStorageAvatar - localStorageProfile
-var localStorageAvatar = localStorage.getItem('localStorageAvartar');
+var localStorageAvatar = localStorage.getItem('localStorageAvatar');
 var localStorageProfile = localStorage.getItem('localStorageProfile');
-if (localStorageAvartar &&
-    typeof localStorageAvartar === 'object' &&
+if (localStorageAvatar &&
+    typeof localStorageAvatar === 'object' &&
     localStorageProfile &&
     typeof localStorageProfile === 'object') {
     $('.connected-name span').text(localStorageProfile.name);
-    $('.connected-avatar').attr('src', localStorageAvartar.url);
+    $('.connected-avatar').attr('src', localStorageAvatar.url);
     $('.loader').removeClass('active');
     $('.connected').removeClass('hide');
     $('.unknown').addClass('hide');

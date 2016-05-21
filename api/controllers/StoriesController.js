@@ -116,14 +116,12 @@ module.exports = {
             if (!_.isEmpty(fileUploads) &&
                 _.isArray(fileUploads)) {
                 _.forEach(fileUploads, function(fu, index) {
-                    console.log('fu', fu.fd);
-                    var indexSearch = fu.fd.search('images')-1;
-                    console.log('ne',fu.fd.substring(indexSearch, fu.fd.length));
+                    var indexCut = fu.fd.search('images') - 1;
                     var objFU = {
                         UID: UUIDService.Create(),
                         UserAccountID: req.user.id,
                         FileName: fu.filename,
-                        FileLocation: fu.fd,
+                        FileLocation: fu.fd.substring(indexCut, fu.fd.length),
                         FileExtension: fu.type,
                         Enable: 'Y',
                         CreatedBy: req.user.id

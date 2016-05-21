@@ -15,7 +15,7 @@ module.exports = function(objRel) {
             })
             .then(function(fileUpload) {
                 fileUpload = _.map(fileUpload, 'ID');
-                return objRel.storiesObject.addFileUploads(fileUpload, { transaction: objRel.transaction });
+                return objRel.storiesObject.setFileUploads(fileUpload, { transaction: objRel.transaction });
             }, function(err) {
                 defer.reject({ error: err });
             })

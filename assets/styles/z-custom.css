@@ -12,6 +12,19 @@
     src: url('../../fonts/UTMIsadoraBold.ttf') format('truetype');
 }
 
+body {
+    background: url('../../images/bg.gif') no-repeat 0 0 fixed;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: auto 100%;
+    -o-background-size: auto 100%;
+    background-size: 100% 100%;
+    background-position: left top;
+}
+
+.ui.menu {
+    background: transparent;
+}
+
 .logo {
     text-shadow: 5px 2px 10px #ccc;
 }
@@ -150,7 +163,7 @@
 #border-top {
     width: 100%;
     border-width: 50px 0px 0px 0px;
-    border-image: url("../../images/bg-notebook-1-compressed.jpg") 100% 0 round;
+    border-image: url("../../images/border-top-notebook.gif") 100% 0 round;
     box-shadow: 0 27px 27px 0 rgba(34, 36, 38, .15);
 }
 
@@ -326,4 +339,9 @@ a {
 a:hover {
     text-decoration: none;
     color: #e03997;
+}
+
+.ui.pink.segment:not(.inverted) {
+    border-top: 2px solid #e03997;
+    background: rgba(255, 176, 220, 0.34);
 }

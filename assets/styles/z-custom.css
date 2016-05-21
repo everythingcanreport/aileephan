@@ -163,7 +163,7 @@ body {
 #border-top {
     width: 100%;
     border-width: 50px 0px 0px 0px;
-    border-image: url("../../images/border-top-notebook.gif") 100% 0 round;
+    border-image: url("../../images/border-top-notebook.png") 100% 0 round;
     box-shadow: 0 27px 27px 0 rgba(34, 36, 38, .15);
 }
 

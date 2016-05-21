@@ -100,7 +100,7 @@ module.exports = {
     },
     UploadBackground: function(req, res) {
         req.file('background').upload({
-            dirname: '../../uploads/',
+            dirname: '../../assets/stories',
             maxBytes: 25000000
         }, function whenDone(err, fileUploads) {
             if (err) {
@@ -116,6 +116,7 @@ module.exports = {
             if (!_.isEmpty(fileUploads) &&
                 _.isArray(fileUploads)) {
                 _.forEach(fileUploads, function(fu, index) {
+                    console.log('fu', fu);
                     var objFU = {
                         UID: UUIDService.Create(),
                         UserAccountID: req.user.id,

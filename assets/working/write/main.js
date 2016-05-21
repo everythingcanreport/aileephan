@@ -145,7 +145,7 @@ $('#write-background').change(function(e) {
 //function validate write stories
 function validateWrite() {
     var titleValidate = $('.write-title').val();
-    if (titleValidate ||
+    if (!titleValidate ||
         titleValidate.length === 0) {
         $('.validate-title').addClass('error');
         $('.error-message-write').text('');

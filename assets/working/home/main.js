@@ -123,10 +123,10 @@ function renderData(response) {
                 dateCreateShow + '</span>';
             var uidBackground = (stories &&
                 stories.FileUploads &&
-                stories.FileUploads[0]) ? stories.FileUploads[0].UID : null;
+                stories.FileUploads[0]) ? stories.FileUploads[0].FileLocation : null;
             var imageBackground = uidBackground ? '<div class="ui small image">' +
                 '<a href="/truyen/' + stories.SpeakingUrl + '" class="ui image">' +
-                '<img class="height-image-home" src="/user/download-background/' +
+                '<img class="height-image-home" src="' +
                 uidBackground + '"/></a></div>' : '';
             var title = (stories &&
                     stories.Title &&

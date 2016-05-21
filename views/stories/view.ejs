@@ -14,7 +14,7 @@
 				locals.data &&
 				locals.data.FileUploads &&
 				locals.data.FileUploads[0]) {%>
-			<img class="review-background ui big centered image max-height-image-view" src="/user/download-background/<%=locals.data.FileUploads[0].UID%>" width="100%" height="15%" />
+			<img class="review-background ui big centered image max-height-image-view" src="<%=locals.data.FileUploads[0].FileLocation%>" width="100%" height="15%" />
 			<%}%>
 			</div>
 			<h4 class="ui horizontal divider pink header review-date font-ribbon">

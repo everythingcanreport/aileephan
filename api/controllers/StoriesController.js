@@ -100,7 +100,7 @@ module.exports = {
     },
     UploadBackground: function(req, res) {
         req.file('background').upload({
-            dirname: '../../assets/stories',
+            dirname: '../../assets/images/stories',
             maxBytes: 25000000
         }, function whenDone(err, fileUploads) {
             if (err) {
@@ -116,7 +116,9 @@ module.exports = {
             if (!_.isEmpty(fileUploads) &&
                 _.isArray(fileUploads)) {
                 _.forEach(fileUploads, function(fu, index) {
-                    console.log('fu', fu);
+                    console.log('fu', fu.fd);
+                    var indexSearch = fu.fd.search('images')-1;
+                    console.log('ne',fu.fd.substring(indexSearch, fu.fd.length));
                     var objFU = {
                         UID: UUIDService.Create(),
                         UserAccountID: req.user.id,

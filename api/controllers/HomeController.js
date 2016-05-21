@@ -3,7 +3,7 @@ module.exports = {
         Stories.findAndCountAll({
                 attributes: ['SpeakingUrl', 'Title', 'ShortContent', 'CreatedDate'],
                 include: [{
-                    // attributes: ['UID', 'FileLocation'],
+                    attributes: ['FileLocation'],
                     model: FileUpload,
                     through: {
                         attributes: null

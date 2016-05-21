@@ -23,7 +23,7 @@
             locals.data &&
              locals.data.FileUploads &&
              locals.data.FileUploads[0]) {%>
-          <input type="hidden" class="write-background-uid" value="<%=locals.data.FileUploads[0].UID%>"/>
+          <input type="hidden" class="write-background-uid" value="<%=locals.data.FileUploads[0].FileLocation%>"/>
           <!--filename stories update stories-->
           <input type="hidden" class="write-background-filename-hidden" value="<%=locals.data.FileUploads[0].FileName%>"/>
           <!--end-->

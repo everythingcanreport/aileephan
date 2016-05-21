@@ -216,7 +216,7 @@ function onClickView(uid) {
                     } else {
                         $('.review-background').addClass('hide');
                     }
-                    $('.review-background').attr('src', '/user/download-background/' + backgroundUID);
+                    $('.review-background').attr('src', backgroundUID);
                     var dateWriteReview = new Date();
                     if (stories.CreatedDate) {
                         dateWriteReview = new Date(stories.CreatedDate);

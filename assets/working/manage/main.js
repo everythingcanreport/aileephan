@@ -87,19 +87,19 @@ function loadList(limit, offset) {
     var filterHide = $('input[name=manage_hide]:checked').val();
     var filterShowHide = null;
     if ((filterShow === '' ||
-            filterShow) &&
+            !filterShow) &&
         filterHide === 'Y') {
         filterShowHide = {
             $ne: 'Y'
         };
     } else if (filterShow === 'Y' &&
         (filterHide === '' ||
-            filterHide)) {
+            !filterHide)) {
         filterShowHide = 'Y'
     } else if ((filterHide === '' ||
-            filterHide) &&
+            !filterHide) &&
         (filterShow === '' ||
-            filterShow)) {
+            !filterShow)) {
         filterShowHide = 'N/A';
     }
     var data = {
@@ -110,7 +110,7 @@ function loadList(limit, offset) {
         }],
         Search: [{
             Stories: {
-                Title: filterTitle
+                SpeakingUrl: filterTitle
             }
         }],
         Limit: limit || 5,

@@ -112,6 +112,18 @@ module.exports = function(data, primaryKeyModel) {
                                         }
                                     };
 
+                                } else if (keySearch === 'SpeakingUrl') {
+                                    var arraySearch = search[keyModel][keySearch].split(' ');
+                                    var arraySearchObject = [];
+                                    arraySearch.forEach(function(value, index) {
+                                        var valueSpeakingUrl = SpeakingUrlService(value)
+                                        arraySearchObject.push({
+                                            '$like': '%' + valueSpeakingUrl + '%'
+                                        });
+                                    });
+                                    tempSearch[keySearch] = {
+                                        '$or': arraySearchObject
+                                    };
                                 } else {
                                     //case normal
                                     tempSearch[keySearch] = {

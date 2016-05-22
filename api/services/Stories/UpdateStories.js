@@ -16,7 +16,7 @@ module.exports = function(data, userInfo) {
                     }).then(function(stories) {
                         if (!_.isEmpty(stories)) {
                             var speakingUrl = SpeakingUrlService(dataStories.Title) +
-                                '-' + HashIDService.Create(stories.ID) + '.html';
+                                '-' + HashIDService.Create(stories.ID);
                             dataStories.SpeakingUrl = speakingUrl;
                         }
                         return Stories.update(dataStories, {

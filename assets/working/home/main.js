@@ -126,7 +126,7 @@ function renderData(response) {
                 stories.FileUploads[0]) ? stories.FileUploads[0].FileLocation : null;
             var imageBackground = uidBackground ? '<div class="ui small image">' +
                 '<a href="/truyen/' + stories.SpeakingUrl + '" class="ui image">' +
-                '<img class="height-image-home" src="' +
+                '<img alt="truyện ngắn ailee phan" class="height-image-home" src="' +
                 uidBackground + '"/></a></div>' : '';
             var title = (stories &&
                     stories.Title &&

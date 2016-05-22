@@ -22,7 +22,7 @@ module.exports = {
                     locals: {
                         baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/appHome',
                         data: listStories,
-                        title: 'Ailee Phan'
+                        title: 'Ailee Phan - Truyện ngôn tình trong đời sống'
                     }
                 });
             }, function(err) {

@@ -27,7 +27,8 @@ module.exports = {
                         locals: {
                             url: req.url,
                             baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/appViewStories',
-                            data: stories
+                            data: stories,
+                            title: 'Ailee Phan - Truyện ngôn tình trong đời sống'
                         }
                     });
                 } else {
@@ -62,7 +63,8 @@ module.exports = {
                         locals: {
                             url: req.url,
                             baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/appWriteStories',
-                            data: stories
+                            data: stories,
+                            title: 'Ailee Phan - Truyện ngôn tình trong đời sống'
                         }
                     });
                 }, function(err) {
@@ -91,7 +93,8 @@ module.exports = {
                     locals: {
                         data: stories,
                         url: req.url,
-                        baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/appManageStories'
+                        baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/appManageStories',
+                        title: 'Ailee Phan - Truyện ngôn tình trong đời sống'
                     }
                 });
             }, function(err) {

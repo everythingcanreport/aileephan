@@ -120,7 +120,7 @@ module.exports = {
                     !_.isEmpty(stories.dataValues) &&
                     HelperService.CheckExistData(stories.dataValues.ID)) {
                     var speakingUrl = SpeakingUrlService(stories.dataValues.Title) +
-                        '-' + HashIDService.Create(stories.dataValues.ID) + '.html';
+                        '-' + HashIDService.Create(stories.dataValues.ID);
                     Stories.update({
                             SpeakingUrl: speakingUrl
                         }, {

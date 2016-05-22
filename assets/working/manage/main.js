@@ -79,7 +79,7 @@ function manageStories() {
 //load list stories
 function loadList(limit, offset) {
     var filterTitle = $('.filter-title').val();
-    if (filterTitle ||
+    if (!filterTitle ||
         filterTitle.length === 0) {
         filterTitle = null;
     }

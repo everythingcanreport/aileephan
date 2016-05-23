@@ -1,113 +1,112 @@
 <div class="ui container text margin-top-40">
-  <a href="/" title="Trang chủ" class="go-home floated-right size-18 color-pink margin-top-negative-20"><i class="icon home"></i></a>
-  <form class="ui form write-stories hide">
-      <div class="field validate-title">
-        <label class="font-brand">Tiêu đề:</label>
-        <%if(locals &&
-            locals.data) {%>
-        <input type="text"  class="write-title" value="<%=locals.data.Title%>"/>
-        <%} else {%>
-          <input type="text" name="write_title"  class="write-title"/>
-          <%}%>
-      </div>
-      <div class="fields margin-top-20">
-        <div class="field title-background" onClick="onClickAttachImage();">
-          <i class="attach icon">
-          </i>
-          <span class="font-brand">Đính kèm ảnh</span>
-          <!--file upload hidden-->    
-          <input type="file" name="background" class="hide" id="write-background" accept="image/*" />
-          <!--end-->
-          <!-- UID file upload update stories-->
-          <%if(locals && 
-            locals.data &&
-             locals.data.FileUploads &&
-             locals.data.FileUploads[0]) {%>
-          <input type="hidden" class="write-background-uid" value="<%=locals.data.FileUploads[0].FileLocation%>"/>
-          <!--filename stories update stories-->
-          <input type="hidden" class="write-background-filename-hidden" value="<%=locals.data.FileUploads[0].FileName%>"/>
-          <!--end-->
+  <div class="ui segment">
+    <form class="ui form write-stories hide">
+     <a href="/" title="Trang chủ" class="go-home floated-right size-18 color-pink"><i class="icon home"></i></a>
+        <div class="field validate-title">
+          <label class="font-brand">Tiêu đề:</label>
+          <%if(locals &&
+              locals.data) {%>
+          <input type="text"  class="write-title" value="<%=locals.data.Title%>"/>
           <%} else {%>
-            <input type="hidden" class="write-background-uid" />
+            <input type="text" name="write_title"  class="write-title"/>
             <%}%>
-          <!--end-->
-          <!-- UID stories update stories-->
-          <%if(locals &&
-            locals.data) {%>
-          <input type="hidden" class="write-uid" value="<%=locals.data.UID%>"/>
-          <input type="hidden" class="write-date" value="<%=locals.data.CreatedDate%>"/>
-          <!--content stories update stories-->
-          <input type="hidden" class="write-content-hidden" value="<%=locals.data.Content%>"/>
-          <!--end-->
-          <%}%>
-          <!--end-->
-          <div class="ui centered small inline loader background-loader"></div>  
         </div>
-        <div class="field">
-          &nbsp;
-        </div>
-        <div class="field">
-          <div class="ui slider checkbox">
-          <%if(locals &&
-            locals.data &&
-            locals.data.Show==='Y') {%>
-            <input type="checkbox" id="show_id" name="show" class="write-show" value="Y" checked="true"/>
+        <div class="fields margin-top-20">
+          <div class="field title-background" onClick="onClickAttachImage();">
+            <i class="attach icon">
+            </i>
+            <span class="font-brand">Đính kèm ảnh</span>
+            <!--file upload hidden-->    
+            <input type="file" name="background" class="hide" id="write-background" accept="image/*" />
+            <!--end-->
+            <!-- UID file upload update stories-->
+            <%if(locals && 
+              locals.data &&
+               locals.data.FileUploads &&
+               locals.data.FileUploads[0]) {%>
+            <input type="hidden" class="write-background-uid" value="<%=locals.data.FileUploads[0].FileLocation%>"/>
+            <!--filename stories update stories-->
+            <input type="hidden" class="write-background-filename-hidden" value="<%=locals.data.FileUploads[0].FileName%>"/>
+            <!--end-->
             <%} else {%>
-              <input type="checkbox" id="show_id" name="show" class="write-show" value="Y"/>
+              <input type="hidden" class="write-background-uid" />
               <%}%>
-            <label for="show_id" class="font-brand">Hiển thị</label>
+            <!--end-->
+            <!-- UID stories update stories-->
+            <%if(locals &&
+              locals.data) {%>
+            <input type="hidden" class="write-uid" value="<%=locals.data.UID%>"/>
+            <input type="hidden" class="write-date" value="<%=locals.data.CreatedDate%>"/>
+            <!--content stories update stories-->
+            <input type="hidden" class="write-content-hidden" value="<%=locals.data.Content%>"/>
+            <!--end-->
+            <%}%>
+            <!--end-->
+            <div class="ui centered small inline loader background-loader"></div>  
+          </div>
+          <div class="field">
+            &nbsp;
+          </div>
+          <div class="field">
+            <div class="ui slider checkbox">
+            <%if(locals &&
+              locals.data &&
+              locals.data.Show==='Y') {%>
+              <input type="checkbox" id="show_id" name="show" class="write-show" value="Y" checked="true"/>
+              <%} else {%>
+                <input type="checkbox" id="show_id" name="show" class="write-show" value="Y"/>
+                <%}%>
+              <label for="show_id" class="font-brand">Hiển thị</label>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="field">
-        <label class="font-brand">Nội dung:</label>
-        <textarea id='write-content'></textarea>
-      </div>
-      <div class="actions align-right">
-        <a class="ui button tiny grey write-review-button font-button" onClick="onClickView();">
-        Xem lại
-        </a>
-        <a class="ui button tiny pink write-save-button font-button" onClick="onClickSave();">
-        Lưu
-        </a>
-      </div>
-      <!--notification error-->
-      <div class="font-brand hide error-message-write"></div>
-      <!--end-->
-      <div class="field">
-        &nbsp;
-      </div>
-    </form>
-  </div>
-  <!--loading-->
-  <div class="ui container text margin-top-40 margin-bottom-40">
-    <div class="ui active centered inline loader write-loader"></div>
-  </div>
-  <!--end-->
-  <!--modal review-->
-    <div class="ui long modal">
-    <div class="ui segment">
-      <h1 class="ui header pink">
-        <span class="font-header review-title">
-        </span>
-      </h1>
-      <div class="ui images align-center">
-        <img class="review-background ui big centered image max-height-image-view" src="" />
-      </div>
-      <h4 class="ui horizontal divider header review-date pink font-ribbon">
-          <!--date write stories-->
-      </h4>
-      <div class="description review-description font-content">
-      <!--content stories-->
-      </div>
-      <div class="ui divider">
-      </div>
-      <div class="actions align-right">
-        <div class="ui pink tiny approve button font-button">
-          Trở lại
-          <i class="right chevron icon"></i>
+        <div class="field">
+          <label class="font-brand">Nội dung:</label>
+          <textarea id='write-content'></textarea>
         </div>
+        <div class="actions align-right">
+          <a class="ui button tiny grey write-review-button font-button" onClick="onClickView();">
+          Xem lại
+          </a>
+          <a class="ui button tiny pink write-save-button font-button" onClick="onClickSave();">
+          Lưu
+          </a>
+        </div>
+        <!--notification error-->
+        <div class="font-brand hide error-message-write"></div>
+        <!--end-->
+      </form>
     </div>
+    <!--loading-->
+    <div class="ui container text margin-top-40 margin-bottom-40">
+      <div class="ui active centered inline loader write-loader"></div>
+    </div>
+    <!--end-->
+    <!--modal review-->
+      <div class="ui long modal">
+      <div class="ui segment">
+        <h1 class="ui header pink">
+          <span class="font-header review-title">
+          </span>
+        </h1>
+        <div class="ui images align-center">
+          <img class="review-background ui big centered image max-height-image-view" src="" />
+        </div>
+        <h4 class="ui horizontal divider header review-date pink font-ribbon">
+            <!--date write stories-->
+        </h4>
+        <div class="description review-description font-content">
+        <!--content stories-->
+        </div>
+        <div class="ui divider">
+        </div>
+        <div class="actions align-right">
+          <div class="ui pink tiny approve button font-button">
+            Trở lại
+            <i class="right chevron icon"></i>
+          </div>
+      </div>
+      </div>
     </div>
   </div>
   <!--end-->

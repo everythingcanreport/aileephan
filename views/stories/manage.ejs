@@ -69,7 +69,7 @@
       <tfoot class="full-width">
         <tr>
           <th colspan="6">
-            <div class="ui right floated pagination menu small manage-pagination-main">
+            <div class="ui right floated pagination menu small manage-pagination-main <%=locals.data.count==0? 'hide': ''%>">
               <a class="icon item" onClick="paginationManage(1);"><i class="left chevron icon"></i></a>
               <%for(var i=1; i<=Math.ceil(locals.data.count/5);i++){%>
                 <a class="item manage-pagination-<%=i+(i==1?' active': '')%>" onClick="paginationManage(<%=i%>);"><%=i%></a>

@@ -6,7 +6,8 @@
 		<!--end-->
 		<%if(locals &&
 			locals.data &&
-			locals.data.rows){
+			locals.data.rows &&
+			locals.data.count!==0){
 			locals.data.rows.forEach(function(stories, index){%>
 			<div class="ui segment">
 				<a class="ui pink font-ribbon ribbon large label">Ngôn tình</a>
@@ -49,7 +50,24 @@
 				</div>
 			</div> 
 			<%})
-		}%>
+		} else {%>
+			<div class="ui segment">
+				<h1 class="ui pink header">
+					<div class="content">
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+					</div>
+				</h1>
+			</div>
+			<%}%>
 		</div>
 		<div class="ui centered inline loader home-loader"></div>	
 	</div>

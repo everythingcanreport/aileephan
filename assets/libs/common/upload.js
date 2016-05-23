@@ -4,6 +4,7 @@ define(function() {
             $.ajax({
                 type: 'POST',
                 url: 'http://aileephan.com/admin/write/upload-background',
+                // url: 'http://localhost:1337/admin/write/upload-background',
                 data: dataUpload,
                 contentType: false,
                 processData: false,

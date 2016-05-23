@@ -1,6 +1,5 @@
 module.exports = function(req, res, next) {
     var requestify = require('requestify');
-    console.log('vaovaovoao', req.cookies);
     if (!_.isEmpty(req) &&
         !_.isEmpty(req.cookies) &&
         HelperService.CheckExistData(req.cookies.accessToken)) {
@@ -24,7 +23,8 @@ module.exports = function(req, res, next) {
                     req.user = userInfo;
                     next();
                 } else {
-                    res.forbidden(err);
+                    var error = new Error('not.permission');
+                    res.forbidden(error);
                 }
             }, function(err) {
                 res.forbidden(err);

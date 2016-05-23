@@ -5,7 +5,11 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
             typeof response.authResponse === 'object' &&
             response.authResponse.userID) {
             //set cookiesAccessToken
-            document.cookie = 'accessToken=' + response.authResponse.accessToken;
+            var nowC = new Date();
+            var timeC = nowC.getTime();
+            timeC += response.authResponse.expiresIn * 1000;
+            nowC.setTime(timeC);
+            document.cookie = 'accessToken=' + response.authResponse.accessToken + '; expires=' + nowC.toUTCString() + '; path=/';
             //get user profile
             var urlPicture = '/' + response.authResponse.userID + '/picture';
             Promise.all([getFbUserProfile(), getFbAvatar(urlPicture), getMenu(response)])
@@ -15,7 +19,7 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
                     successAll[2].data.forEach(function(menu, index) {
                         $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');
                     });
-                    $('.loader').removeClass('active');
+                    $('.menu-loader').removeClass('active');
                     $('.connected').removeClass('hide');
                     $('.unknown').addClass('hide');
                 }, function(err) {
@@ -28,7 +32,7 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
                 });
         } else {
             //show button login
-            $('.loader').removeClass('active');
+            $('.menu-loader').removeClass('active');
             $('.connected').addClass('hide');
             $('.unknown').removeClass('hide');
         }

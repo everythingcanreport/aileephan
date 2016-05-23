@@ -7,6 +7,7 @@ module.exports.connections = {
         port: 3306,
         user: 'root',
         password: 'tamran1101681',
+        // password: 'meditekdb123456',
         database: 'Ailee',
         charset: 'utf8',
         collation: 'utf8-general_ci',

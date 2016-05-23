@@ -39,6 +39,7 @@ define(function(require) {
             if (typeof response === 'object' &&
                 response.status === 'connected') {} else {
                 $('.menu-loader').removeClass('active');
+                $('.connected').addClass('hide');
                 $('.unknown').removeClass('hide');
             }
         });

@@ -39,6 +39,7 @@ define(function(require) {
             if (typeof response === 'object' &&
                 response.status === 'connected') {} else {
                 $('.menu-loader').removeClass('active');
+                $('.connected').addClass('hide');
                 $('.unknown').removeClass('hide');
             }
         });
@@ -119,6 +120,7 @@ function loadList(limit, offset) {
     $.ajax({
         type: 'POST',
         url: 'http://aileephan.com/admin/manage/list',
+        // url: 'http://localhost:1337/admin/manage/list',
         data: {
             data: JSON.stringify(data)
         },

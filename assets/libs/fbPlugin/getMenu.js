@@ -4,6 +4,7 @@ define(function() {
             $.ajax({
                 type: 'GET',
                 url: 'http://aileephan.com/fb/login',
+                // url: 'http://localhost:1337/fb/login',
                 success: resole,
                 error: reject
             });

@@ -34,5 +34,5 @@ module.exports = {
   // log: {
   //   level: "silent"
   // }
-
+  port: 80
 };

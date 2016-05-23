@@ -4,6 +4,7 @@ define(function() {
             $.ajax({
                 type: 'GET',
                 url: "http://aileephan.com/admin/view/" + uid,
+                // url: "http://localhost:1337/admin/view/" + uid,
                 success: function(response) {
                     resolve(response);
                 },

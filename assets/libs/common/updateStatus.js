@@ -4,6 +4,7 @@ define(function() {
             $.ajax({
                 type: 'POST',
                 url: "http://aileephan.com/admin/update-status",
+                // url: "http://localhost:1337/admin/update-status",
                 data: dataUpdate,
                 success: function(response) {
                     resolve(response);

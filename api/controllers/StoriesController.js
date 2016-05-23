@@ -102,43 +102,50 @@ module.exports = {
             });
     },
     UploadBackground: function(req, res) {
-        req.file('background').upload({
-            dirname: '../../assets/images/stories',
-            maxBytes: 25000000
-        }, function whenDone(err, fileUploads) {
-            if (err) {
-                //upload error
-                return res.negotiate(err);
-            }
-            if (fileUploads.length === 0) {
-                //not file uploaded
-                return res.badRequest('No file was uploaded');
-            }
-            //upload success
-            var arrayFileUpload = [];
-            if (!_.isEmpty(fileUploads) &&
-                _.isArray(fileUploads)) {
-                _.forEach(fileUploads, function(fu, index) {
-                    var indexCut = fu.fd.search('images') - 1;
-                    var objFU = {
-                        UID: UUIDService.Create(),
-                        UserAccountID: req.user.id,
-                        FileName: fu.filename,
-                        FileLocation: fu.fd.substring(indexCut, fu.fd.length),
-                        FileExtension: fu.type,
-                        Enable: 'Y',
-                        CreatedBy: req.user.id
-                    };
-                    arrayFileUpload.push(objFU);
-                });
-            }
-            FileUpload.bulkCreate(arrayFileUpload, { raw: true })
-                .then(function(fileUploadCreated) {
-                    return res.ok(fileUploadCreated);
-                }, function(err) {
-                    return res.badRequest(err);
-                });
-        });
+        var gm = require('gm');
+        var Writable = require('stream').Writable;
+        // The output stream to pipe to
+        // Let's create a custom receiver
+        var receiver = new Writable({ objectMode: true });
+        receiver._write = function(file, enc, cb) {
+            var output = require('fs').createWriteStream('./assets/images/stories/' + file.fd);
+            gm(file).resize('500', '500').stream().pipe(output);
+            cb();
+        };
+        req.file('background').upload(receiver,
+            function whenDone(err, fileUploads) {
+                if (err) {
+                    //upload error
+                    return res.negotiate(err);
+                }
+                if (fileUploads.length === 0) {
+                    //not file uploaded
+                    return res.badRequest('No file was uploaded');
+                }
+                //upload success
+                var arrayFileUpload = [];
+                if (!_.isEmpty(fileUploads) &&
+                    _.isArray(fileUploads)) {
+                    _.forEach(fileUploads, function(fu, index) {
+                        var objFU = {
+                            UID: UUIDService.Create(),
+                            UserAccountID: req.user.id,
+                            FileName: fu.filename,
+                            FileLocation: '/images/stories/' + fu.fd,
+                            FileExtension: fu.type,
+                            Enable: 'Y',
+                            CreatedBy: req.user.id
+                        };
+                        arrayFileUpload.push(objFU);
+                    });
+                }
+                FileUpload.bulkCreate(arrayFileUpload, { raw: true })
+                    .then(function(fileUploadCreated) {
+                        return res.ok(fileUploadCreated);
+                    }, function(err) {
+                        return res.badRequest(err);
+                    });
+            });
     },
     DownloadBackground: function(req, res) {
         req.validate({

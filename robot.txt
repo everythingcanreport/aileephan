@@ -1,9 +1,0 @@
-Disallow: /uploads/
-Disallow: /api/ 
-Disallow: /assets/
-Disallow: /config/
-Disallow: /node_modules/ 
-Disallow: /tasks/
-Allow:/
-
-

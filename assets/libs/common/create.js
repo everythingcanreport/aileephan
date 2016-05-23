@@ -4,6 +4,7 @@ define(function() {
             $.ajax({
                 type: 'POST',
                 url: "http://aileephan.com/admin/create",
+                // url: "http://localhost:1337/admin/create",
                 data: {
                     data: dataCreate
                 },

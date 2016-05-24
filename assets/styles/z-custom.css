@@ -30,8 +30,8 @@ body {
 }
 
 .font-header {
-    font-family: UTMIsadoraBold;
-    text-transform: capitalize;
+    font-family: UTMIsadoraBold !important;
+    text-transform: capitalize !important;
 }
 
 .font-brand {

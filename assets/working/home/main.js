@@ -38,7 +38,8 @@ define(function(require) {
         fbInit();
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
-                response.status === 'connected') {} else {
+                response.status === 'connected') {
+            } else {
                 $('.menu-loader').removeClass('active');
                 $('.connected').addClass('hide');
                 $('.unknown').removeClass('hide');
@@ -55,7 +56,7 @@ define(function(require) {
         }
         js = d.createElement(s);
         js.id = id;
-        js.src = "//connect.facebook.net/vi_VN/sdk.js";
+        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1032633966817570";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
     //end facebook plugin
@@ -126,7 +127,9 @@ function renderData(response) {
                 stories.FileUploads &&
                 stories.FileUploads[0]) ? stories.FileUploads[0].FileLocation : null;
             var imageBackground = uidBackground ? '<div class="ui small image">' +
-                '<a href="/truyen/' + stories.SpeakingUrl + '" class="ui image">' +
+                '<a href="/truyen/' + stories.SpeakingUrl + '" class="ui image"' +
+                'title="' + stories.Title +
+                '" alt="truyện ngắn ailee phan">' +
                 '<img alt="truyện ngắn ailee phan" class="height-image-home" src="' +
                 uidBackground + '"/></a></div>' : '';
             var title = (stories &&
@@ -138,6 +141,11 @@ function renderData(response) {
                 '">' +
                 stories.Title +
                 '</a></span></div></h1>' : '';
+            var follow = '<span class="float-right"><div class="fb-follow"' +
+                ' data-href="https://www.facebook.com/profile.php?user_id=' +
+                stories.CreatedBy +
+                '" data-layout="button_count" data-show-faces="false" ' +
+                'data-colorscheme="light"></div></span>';
             var content = ''
             var detail = '<div class="description"><p class="font-content">' +
                 stories.ShortContent +
@@ -146,9 +154,10 @@ function renderData(response) {
                 '"class = "ui mini pink button font-button">Chi tiết</a></div>';
             $('.home-main').append('<div class="ui segment">' +
                 ribbon + homeDate + '<div class="ui very relaxed items"><div class="item">' +
-                imageBackground + '<div class="content">' + title + detail +
+                imageBackground + '<div class="content">' + title + follow + detail +
                 '</div></div></div></div>');
         });
+        FB.XFBML.parse();
         appending = false;
         rows += response.rows.length;
     }

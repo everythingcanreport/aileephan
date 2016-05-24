@@ -3,7 +3,7 @@ module.exports = function(data) {
     var defer = $q.defer();
     var pagination = Pagination(data, Stories);
     Stories.findAndCountAll({
-            attributes: ['SpeakingUrl', 'Title', 'ShortContent', 'Content', 'CreatedDate'],
+            attributes: ['SpeakingUrl', 'Title', 'ShortContent', 'Content', 'CreatedDate', 'CreatedBy'],
             include: [{
                 attributes: ['UID', 'FileLocation'],
                 model: FileUpload,
@@ -13,7 +13,9 @@ module.exports = function(data) {
             where: pagination.Stories,
             limit: pagination.limit,
             offset: pagination.offset,
-            order: [['CreatedDate', 'DESC']]
+            order: [
+                ['CreatedDate', 'DESC']
+            ]
         })
         .then(function(listStories) {
             defer.resolve({ data: listStories });

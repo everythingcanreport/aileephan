@@ -1,7 +1,7 @@
 module.exports = {
     GetListStories: function(req, res) {
         Stories.findAndCountAll({
-                attributes: ['SpeakingUrl', 'Title', 'ShortContent', 'CreatedDate'],
+                attributes: ['SpeakingUrl', 'Title', 'ShortContent', 'CreatedDate', 'CreatedBy'],
                 include: [{
                     attributes: ['FileLocation'],
                     model: FileUpload,

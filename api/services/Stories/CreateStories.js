@@ -1,6 +1,7 @@
 module.exports = function(data, userInfo) {
     var $q = require('q');
     var defer = $q.defer();
+    var storiesObject = null;
     if (!_.isEmpty(data) &&
         !_.isEmpty(data.Stories)) {
         var dataStories = data.Stories;
@@ -12,6 +13,7 @@ module.exports = function(data, userInfo) {
                         transaction: t
                     })
                     .then(function(storiesCreated) {
+                        storiesObject = JSON.parse(JSON.stringify(storiesCreated));
                         if (!_.isEmpty(storiesCreated) &&
                             !_.isEmpty(data.FileUploads) &&
                             _.isArray(data.FileUploads)) {
@@ -31,7 +33,8 @@ module.exports = function(data, userInfo) {
                     .then(function(relStorieFileUploadCreated) {
                         defer.resolve({
                             status: 'success',
-                            transaction: t
+                            transaction: t,
+                            data: storiesObject
                         });
                     }, function(err) {
                         defer.reject({

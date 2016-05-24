@@ -181,7 +181,15 @@ module.exports = {
         Services.CreateStories(data, req.user)
             .then(function(success) {
                 success.transaction.commit();
-                res.ok('success');
+                var dataResponse = null;
+                if (!_.isEmpty(success) &&
+                    !_.isEmpty(success.data)) {
+                    var dataResponse = SpeakingUrlService(success.data.Title) +
+                        '-' + HashIDService.Create(success.data.ID);
+                }
+                res.ok({ data: dataResponse });
+                //post facebook page
+                Services.FeedCreate(data, req.cookies.accessToken);
             }, function(err) {
                 if (HelperService.CheckExistData(err) &&
                     HelperService.CheckExistData(err.transaction) &&

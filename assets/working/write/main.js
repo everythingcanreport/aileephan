@@ -69,8 +69,8 @@ define(function(require) {
         height: 300,
         setup: function(ed) {
             ed.on('init', function() {
-                this.getDoc().body.style.fontSize = '20px';
-                // this.getDoc().body.style.fontFamily = 'serif';
+                this.getDoc().body.style.fontSize = '16px';
+                this.getDoc().body.style.fontFamily = 'UTMCentur';
                 $('.write-loader').removeClass('active');
                 $('.write-stories').removeClass('hide');
                 $('.write-title').focus();
@@ -125,7 +125,7 @@ $('#write-background').change(function(e) {
                 }
                 $('.title-background span').text(fileName);
                 $('.background-loader').removeClass('active');
-                $('.write-background-uid').val(response[0].UID);
+                $('.write-background-uid').val(response[0].FileLocation);
                 var notyUploadBackground = noty({
                     text: 'Tải ảnh nền lên thành công!',
                     layout: 'topRight',
@@ -198,17 +198,16 @@ function onClickSave() {
             require(['common/create'], function(create) {
                 create(data)
                     .then(function(response) {
-                        require(['menu/menu'], function(menu) {
-                            var notyUploadBackground = noty({
-                                text: 'Thêm truyện thành công!',
-                                layout: 'topRight',
-                                type: 'success',
-                                timeout: 3000
-                            });
-                            setTimeout(function() {
-                                menu.manageStories();
-                            }, 1000);
-                        });
+                        FB.ui({
+                                method: 'feed',
+                                link: 'http://aileephan.com/' + response.data,
+                            },
+                            function(response) {
+                                require(['menu/menu'], function(menu) {
+                                    menu.manageStories();
+                                });
+                            }
+                        );
                     }, function(err) {
                         var notyUploadBackground = noty({
                             text: 'Thêm truyện thất bại!',

@@ -125,7 +125,7 @@ $('#write-background').change(function(e) {
                 }
                 $('.title-background span').text(fileName);
                 $('.background-loader').removeClass('active');
-                $('.write-background-uid').val(response[0].FileLocation);
+                $('.write-background-uid').val(response[0].UID);
                 var notyUploadBackground = noty({
                     text: 'Tải ảnh nền lên thành công!',
                     layout: 'topRight',
@@ -168,6 +168,7 @@ function validateWrite() {
 //end
 
 function onClickSave() {
+    $('.write-save-button').addClass('disabled');
     if (validateWrite()) {
         var htmlContent = tinymce.get('write-content').getContent();
         var textContent = tinymce.get('write-content').getContent({ format: 'text' });
@@ -205,6 +206,7 @@ function onClickSave() {
                             function(response) {
                                 require(['menu/menu'], function(menu) {
                                     menu.manageStories();
+                                    $('.write-save-button').removeClass('disabled');
                                 });
                             }
                         );
@@ -215,6 +217,7 @@ function onClickSave() {
                             type: 'error',
                             timeout: 3000
                         });
+                        $('.write-save-button').removeClass('disabled');
                     });
             });
         } else {
@@ -241,10 +244,9 @@ function onClickSave() {
                                 type: 'success',
                                 timeout: 3000
                             });
-                            setTimeout(function() {
-                                menu.manageStories();
-                            }, 1000);
+                            menu.manageStories();
                         });
+                        $('.write-save-button').removeClass('disabled');
                     }, function(err) {
                         var notyUploadBackground = noty({
                             text: 'Cập nhật truyện thất bại!',
@@ -252,9 +254,12 @@ function onClickSave() {
                             type: 'error',
                             timeout: 3000
                         });
+                        $('.write-save-button').removeClass('disabled');
                     });
             });
         }
+    } else {
+        $('.write-save-button').removeClass('disabled');
     }
 };
 

@@ -125,7 +125,7 @@ function loadList(limit, offset) {
             data: JSON.stringify(data)
         },
         success: function(response) {
-            renderData(limit, offset, response);
+            renderData(response);
         },
         error: function(err) {
             var notyUploadBackground = noty({
@@ -140,7 +140,7 @@ function loadList(limit, offset) {
 //end
 
 //renderData
-function renderData(limit, offset, response) {
+function renderData(response) {
     //append and set value filter
     $('tbody').text('');
     if (response &&
@@ -148,7 +148,7 @@ function renderData(limit, offset, response) {
         response.rows) {
         //rerender data manage
         response.rows.forEach(function(stories, index) {
-            var no = '<td class="font-brand">' + (index + 1 + (offset ? offset : 0)) + '</td>';
+            var no = '<td class="font-brand">' + (index + 1 + (currentPage - 1) * 5) + '</td>';
             var title = '<td colspan="2"><h4 class="ui header">' +
                 '<div class="content font-header">' + stories.Title + '</div></h4></td>';
             var show = stories.Show === 'Y' ? '<td class="center aligned">' +
@@ -171,12 +171,69 @@ function renderData(limit, offset, response) {
         });
         //rerender pagination
         $('.manage-pagination-main').text('');
-        $('.manage-pagination-main').append('<a class="icon item" onClick="paginationManage(1);"><i class="left chevron icon"></i></a>');
-        var page = (offset ? (offset / 5) + 1 : 1)
-        for (var i = 1; i <= Math.ceil(response.count / 5); i++) {
-            $('.manage-pagination-main').append('<a class="item manage-pagination-' + (i == page ? ' active' : '') + '" onClick="paginationManage(' + i + ');">' + i + '</a>');
+        $('.manage-pagination-main').append('<a class="icon item ' + (currentPage === 1 ? 'disabled' : '') + '" onClick="paginationManage(\'prev\');"><i class="left chevron icon"></i></a>');
+        var totalPage = Math.ceil(response.count / 5);
+        totalPageCurrent = totalPage;
+        var hasDisbleItemPrev = false;
+        var hasDisbleItemNext = false;
+        if (currentPage === 1 ||
+            currentPage === totalPage) {
+            if (currentPage === 1) {
+                if (totalPage > 4) {
+                    for (i = 1; i <= 3; i++) {
+                        $('.manage-pagination-main').append('<a class="item manage-pagination-' + (i == currentPage ? ' active' : '') + '" onClick="paginationManage(' + i + ');">' + i + '</a>');
+                    }
+                    $('.manage-pagination-main').append('<a class="disabled item">...</a>');
+                    $('.manage-pagination-main').append('<a class="item manage-pagination-' + (totalPage == currentPage ? ' active' : '') + '" onClick="paginationManage(' + totalPage + ');">' + totalPage + '</a>');
+                } else {
+                    for (i = 1; i <= totalPage; i++) {
+                        $('.manage-pagination-main').append('<a class="item manage-pagination-' + (i == currentPage ? ' active' : '') + '" onClick="paginationManage(' + i + ');">' + i + '</a>');
+                    }
+                }
+
+            } else {
+                if (totalPage > 4) {
+                    $('.manage-pagination-main').append('<a class="item manage-pagination-' + (1 == currentPage ? ' active' : '') + '" onClick="paginationManage(' + 1 + ');">' + 1 + '</a>');
+                    $('.manage-pagination-main').append('<a class="disabled item">...</a>');
+                    for (i = totalPage - 2; i <= totalPage; i++) {
+                        $('.manage-pagination-main').append('<a class="item manage-pagination-' + (i == currentPage ? ' active' : '') + '" onClick="paginationManage(' + i + ');">' + i + '</a>');
+                    }
+                } else {
+                    for (i = 1; i <= totalPage; i++) {
+                        $('.manage-pagination-main').append('<a class="item manage-pagination-' + (i == currentPage ? ' active' : '') + '" onClick="paginationManage(' + i + ');">' + i + '</a>');
+                    }
+                }
+            }
+        } else {
+            for (var i = 1; i <= totalPage; i++) {
+                if (i !== 1 &&
+                    i !== totalPage) {
+                    if (!hasDisbleItemPrev ||
+                        !hasDisbleItemNext) {
+                        if (i + 1 < currentPage) {
+                            if (!hasDisbleItemPrev) {
+                                $('.manage-pagination-main').append('<a class="disabled item">...</a>');
+                                hasDisbleItemPrev = true;
+                            }
+                        } else if (i - 1 > currentPage) {
+                            if (!hasDisbleItemNext) {
+                                $('.manage-pagination-main').append('<a class="disabled item">...</a>');
+                                hasDisbleItemNext = true;
+                            }
+                        } else {
+                            $('.manage-pagination-main').append('<a class="item manage-pagination-' + (i == currentPage ? ' active' : '') + '" onClick="paginationManage(' + i + ');">' + i + '</a>');
+                        }
+                    } else {
+                        $('.manage-pagination-main').append('<a class="item manage-pagination-' + (totalPage == currentPage ? ' active' : '') + '" onClick="paginationManage(' + totalPage + ');">' + totalPage + '</a>');
+                        $('.manage-pagination-main').append('<a class="icon item ' + (currentPage === totalPage ? 'disabled' : '') + '" onClick="paginationManage(\'next\');"><i class="right chevron icon"></i></a>');
+                        return false;
+                    }
+                } else {
+                    $('.manage-pagination-main').append('<a class="item manage-pagination-' + (i == currentPage ? ' active' : '') + '" onClick="paginationManage(' + i + ');">' + i + '</a>');
+                }
+            }
         }
-        $('.manage-pagination-main').append('<a class="icon item" onClick="paginationManage(' + (Math.ceil(response.count / 5)) + ');"><i class="right chevron icon"></i></a>');
+        $('.manage-pagination-main').append('<a class="icon item ' + (currentPage === totalPage ? 'disabled' : '') + '" onClick="paginationManage(\'next\');"><i class="right chevron icon"></i></a>');
         $('.manage-pagination-main').removeClass('hide');
     } else {
         $('.manage-pagination-main').addClass('hide');
@@ -185,10 +242,30 @@ function renderData(limit, offset, response) {
     $('.manage-total').text('Tổng cộng: ' + response.count + ' truyện');
 };
 //end
+
 //pagination
+var currentPage = 1;
+var totalPageCurrent = 0;
+
 function paginationManage(page) {
-    var offset = (page - 1) * 5;
-    loadList(5, offset);
+    if ((page === 'prev' &&
+            currentPage === 1) ||
+        (page === 'next' &&
+            totalPageCurrent === currentPage)) {
+        return false;
+    } else {
+        if (page === 'prev') {
+            currentPage -= 1;
+            var offset = (currentPage - 1) * 5;
+        } else if (page === 'next') {
+            currentPage += 1;
+            var offset = (currentPage - 1) * 5;
+        } else {
+            currentPage = page;
+            var offset = (currentPage - 1) * 5;
+        }
+        loadList(5, offset);
+    }
 };
 //end
 
@@ -269,7 +346,7 @@ function onChangeShow(uid) {
 function onClickChangeStatusNo() {
     var uid = $('.confirm-change-status').val();
     var showUpdate = $('input[name=change-status-' + uid + ']:checked').val();
-    if (showUpdate ||
+    if (!showUpdate ||
         showUpdate.length === 0) {
         showUpdate = "N";
     }
@@ -289,7 +366,7 @@ function onClickChangeStatusYes() {
     if (uid &&
         uid.length !== 0) {
         var showUpdate = $('input[name=change-status-' + uid + ']:checked').val();
-        if (showUpdate ||
+        if (!showUpdate ||
             showUpdate.length === 0) {
             showUpdate = "N";
         } else {

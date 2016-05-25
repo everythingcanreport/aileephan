@@ -5,7 +5,7 @@
      Trang chủ
      </a>
         <div class="field validate-title">
-          <label class="font-brand">Tiêu đề:</label>
+          <span class="font-brand">Tiêu đề:</span>
           <%if(locals &&
               locals.data) {%>
           <input type="text"  class="write-title font-header" value="<%=locals.data.Title%>"/>
@@ -63,7 +63,7 @@
           </div>
         </div>
         <div class="field">
-          <label class="font-brand">Nội dung:</label>
+          <span class="font-brand">Nội dung:</span>
           <textarea id='write-content'></textarea>
         </div>
         <div class="actions align-right">

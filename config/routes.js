@@ -3,7 +3,7 @@ module.exports.routes = {
         controller: 'HomeController',
         action: 'GetListStories'
     },
-    'GET /truyen/:title': {
+    'GET /:title': {
         controller: 'StoriesController',
         action: 'ViewStories'
     },

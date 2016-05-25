@@ -20,7 +20,7 @@
 						stories.FileUploads &&
 						stories.FileUploads[0]){%>
 						<div class="ui small image">
-							<a href="/truyen/<%=stories.SpeakingUrl%>" class="ui image" title="<%=stories.Title%>">
+							<a href="/<%=stories.SpeakingUrl%>" class="ui image" title="<%=stories.Title%>">
 								<img alt="truyện ngắn ailee phan" class="height-image-home" src="<%=stories.FileUploads[0].FileLocation%>" />
 							</a>
 						</div>
@@ -31,7 +31,7 @@
 								<h1 class="ui pink header">
 								  	<div class="content">
 								    	<span class="font-header capitalize">
-								    	<a href="/truyen/<%=stories.SpeakingUrl%>">
+								    	<a href="/<%=stories.SpeakingUrl%>">
 								    	<%=stories.Title%>
 								    	</a>
 								    	</span>
@@ -42,7 +42,7 @@
 								<p class="font-content">
 									<%=stories.ShortContent%>
 								</p>
-								<a href="/truyen/<%=stories.SpeakingUrl%>" 
+								<a href="/<%=stories.SpeakingUrl%>" 
 								class="ui mini pink button font-button">Chi tiết</a>
 							</div>
 						</div>

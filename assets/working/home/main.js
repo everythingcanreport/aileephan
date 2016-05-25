@@ -126,7 +126,7 @@ function renderData(response) {
                 stories.FileUploads &&
                 stories.FileUploads[0]) ? stories.FileUploads[0].FileLocation : null;
             var imageBackground = uidBackground ? '<div class="ui small image">' +
-                '<a href="/truyen/' + stories.SpeakingUrl + '" class="ui image"' +
+                '<a href="/' + stories.SpeakingUrl + '" class="ui image"' +
                 'title="' + stories.Title +
                 '" alt="truyện ngắn ailee phan">' +
                 '<img alt="truyện ngắn ailee phan" class="height-image-home" src="' +
@@ -136,14 +136,14 @@ function renderData(response) {
                     stories.Title &&
                     stories.Title.length !== 0) ? '<h1 class="ui pink header">' +
                 '<div class="content">' +
-                '<span class="font-header capitalize"><a href="/truyen/' + stories.SpeakingUrl +
+                '<span class="font-header capitalize"><a href="/' + stories.SpeakingUrl +
                 '">' +
                 stories.Title +
                 '</a></span></div></h1>' : '';
             var content = ''
             var detail = '<div class="description"><p class="font-content">' +
                 stories.ShortContent +
-                '</p><a href="/truyen/' +
+                '</p><a href="/' +
                 stories.SpeakingUrl +
                 '"class = "ui mini pink button font-button">Chi tiết</a></div>';
             $('.home-main').append('<div class="ui segment">' +

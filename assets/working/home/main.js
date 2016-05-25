@@ -38,8 +38,7 @@ define(function(require) {
         fbInit();
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
-                response.status === 'connected') {
-            } else {
+                response.status === 'connected') {} else {
                 $('.menu-loader').removeClass('active');
                 $('.connected').addClass('hide');
                 $('.unknown').removeClass('hide');
@@ -141,11 +140,6 @@ function renderData(response) {
                 '">' +
                 stories.Title +
                 '</a></span></div></h1>' : '';
-            var follow = '<span class="float-right"><div class="fb-follow"' +
-                ' data-href="https://www.facebook.com/profile.php?user_id=' +
-                stories.CreatedBy +
-                '" data-layout="button_count" data-show-faces="false" ' +
-                'data-colorscheme="light"></div></span>';
             var content = ''
             var detail = '<div class="description"><p class="font-content">' +
                 stories.ShortContent +
@@ -154,10 +148,9 @@ function renderData(response) {
                 '"class = "ui mini pink button font-button">Chi tiết</a></div>';
             $('.home-main').append('<div class="ui segment">' +
                 ribbon + homeDate + '<div class="ui very relaxed items"><div class="item">' +
-                imageBackground + '<div class="content">' + title + follow + detail +
+                imageBackground + '<div class="content">' + title + detail +
                 '</div></div></div></div>');
         });
-        FB.XFBML.parse();
         appending = false;
         rows += response.rows.length;
     }

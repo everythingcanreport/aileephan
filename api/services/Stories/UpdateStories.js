@@ -10,7 +10,8 @@ module.exports = function(data, userInfo) {
                 return Stories.findOne({
                         attributes: ['ID'],
                         where: {
-                            UID: dataStories.UID
+                            UID: dataStories.UID,
+                            CreatedBy: userInfo.id
                         },
                         raw: true
                     }).then(function(stories) {

@@ -185,6 +185,10 @@ body {
     margin-top: 10px
 }
 
+.margin-top-5 {
+    margin-top: 5px;
+}
+
 .margin-top-20 {
     margin-top: 20px
 }
@@ -344,4 +348,9 @@ a:hover {
 .ui.pink.segment:not(.inverted) {
     border-top: 2px solid #e03997;
     background: rgba(255, 176, 220, 0.34);
+}
+
+.fb-like {
+    height: 25px;
+    overflow: hidden;
 }

@@ -1,7 +1,13 @@
-module.exports = function(data) {
+module.exports = function(data, userInfo) {
     var $q = require('q');
     var defer = $q.defer();
     var pagination = Pagination(data, Stories);
+    if (!HelperService.CheckExistData(pagination.Stories)) {
+        pagination.Stories = [];
+    }
+    if (!_.isEmpty(userInfo)) {
+        pagination.Stories.push({ CreatedBy: userInfo.id });
+    }
     Stories.findAndCountAll({
             attributes: ['UID', 'SpeakingUrl', 'Show', 'Title'],
             where: pagination.Stories,

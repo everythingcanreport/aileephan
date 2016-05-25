@@ -7,7 +7,9 @@
 					<%=locals.data.Title%>
 					<!--end-->
 				</span>
-				<a href="/" class="go-home floated-right margin-top-5 size-18 color-pink" title="Trang chủ"><i class="icon home"></i></a>
+				<a href="/" title="Về trang chủ" class="go-home ui mini circular font-brand button floated-right pink">
+     				Trang chủ
+     			</a>
 			</h1>
 			<div class="ui images align-center">
 			<%if(locals &&
@@ -34,33 +36,17 @@
 			</div>
 		</div>
 	</div>
-	<div class="ui two segments">
-	<div class="ui segment align-right">
-		<div class="fb-like" data-href="http://aileephan.com/truyen/<%=locals.data.SpeakingUrl%>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-	</div>
 		<div class="ui segment">
-		    <div class="ui threaded comments margin-bottom-40">
-		  		<h3 class="ui dividing header pink font-ribbon">Bình luận</h3>
-				<div class="fb-comments"
-			     data-href="http://aileephan.com/truyen/<%=locals.data.SpeakingUrl%>"
-			     data-numposts="5"
-			     data-width="100%"
-			     data-colorscheme="light">
-			     </div>
-			</div>
+		<div class="align-right">
+			<div class="fb-like" data-href="http://aileephan.com/truyen/<%=locals.data.SpeakingUrl%>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 		</div>
-		<svg height="0" width="0">
-		  <filter id="fb-filter">
-		    <feColorMatrix type="hueRotate" values="90"/>
-		  </filter>
-		</svg>
-		<style>
-		  .fb-like, .fb-share-button {
-		    -webkit-filter: url(#fb-filter); 
-		    filter: url(#fb-filter);
-		  }
-		</style>
-	</div>
+			<div class="fb-comments"
+		     data-href="http://aileephan.com/truyen/<%=locals.data.SpeakingUrl%>"
+		     data-numposts="5"
+		     data-width="100%"
+		     data-colorscheme="light">
+		     </div>
+		</div>
 	<br/>
 	<br/>
 	<br/>

@@ -37,10 +37,6 @@
 								    	</span>
 								  	</div>
 								</h1>
-								<span class="float-right">
-									<div class="fb-follow" data-href="https://www.facebook.com/profile.php?user_id=<%=stories.CreatedBy%>" data-layout="button_count" data-show-faces="false" data-colorscheme="light">
-									</div>
-								</span>
 							<%}%>
 							<div class="description">
 								<p class="font-content">
@@ -73,17 +69,6 @@
 			</div>
 			<%}%>
 		</div>
-		<div class="ui centered inline loader home-loader"></div>
-		<svg height="0" width="0">
-		  <filter id="fb-filter">
-		    <feColorMatrix type="hueRotate" values="90"/>
-		  </filter>
-		</svg>
-		<style>
-		  .fb-follow {
-		    -webkit-filter: url(#fb-filter); 
-		    filter: url(#fb-filter);
-		  }
-		</style>	
+		<div class="ui centered inline loader home-loader"></div>	
 	</div>
 </div>

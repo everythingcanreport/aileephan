@@ -86,7 +86,10 @@ module.exports = {
                 limit: 5,
                 order: [
                     ['CreatedDate', 'DESC']
-                ]
+                ],
+                where: {
+                    CreatedBy: req.user.id
+                }
             })
             .then(function(stories) {
                 res.view('stories/manage', {
@@ -205,7 +208,7 @@ module.exports = {
         if (data === false) {
             res.serverError('data failed');
         } else {
-            Services.GetListStoriesManage(data)
+            Services.GetListStoriesManage(data, req.user)
                 .then(function(success) {
                     res.ok(success.data);
                 }, function(err) {

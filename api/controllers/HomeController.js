@@ -20,7 +20,7 @@ module.exports = {
             .then(function(listStories) {
                 res.view('home/home', {
                     locals: {
-                        baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/appHome',
+                        baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/app/appHome',
                         data: listStories,
                         title: 'Ailee Phan - Truyện ngôn tình trong đời sống'
                     }

@@ -26,7 +26,7 @@ module.exports = {
                     res.view('stories/view', {
                         locals: {
                             url: req.url,
-                            baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/appViewStories',
+                            baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/app/appViewStories',
                             data: stories,
                             title: 'Ailee Phan - Truyện ngôn tình trong đời sống'
                         }
@@ -62,7 +62,7 @@ module.exports = {
                     res.view('stories/write', {
                         locals: {
                             url: req.url,
-                            baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/appWriteStories',
+                            baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/app/appWriteStories',
                             data: stories,
                             title: 'Ailee Phan - Truyện ngôn tình trong đời sống'
                         }
@@ -74,7 +74,7 @@ module.exports = {
             res.view('stories/write', {
                 locals: {
                     url: req.url,
-                    baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/appWriteStories'
+                    baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/app/appWriteStories'
                 }
             });
         }
@@ -96,7 +96,7 @@ module.exports = {
                     locals: {
                         data: stories,
                         url: req.url,
-                        baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/appManageStories',
+                        baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/app/appManageStories',
                         title: 'Ailee Phan - Truyện ngôn tình trong đời sống'
                     }
                 });

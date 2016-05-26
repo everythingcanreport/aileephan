@@ -105,21 +105,15 @@ module.exports = {
             });
     },
     UploadBackground: function(req, res) {
-        console.log('on action upload........');
         var gm = require('gm');
         var Writable = require('stream').Writable;
-        var resize = require('image-resize-stream')(100)
-        // The output stream to pipe to
-        // Let's create a custom receiver
         var receiver = new Writable({ objectMode: true });
         receiver._write = function(file, enc, cb) {
             var output = require('fs').createWriteStream('./assets/images/stories/' + file.fd);
-            // gm(file).resize('500', '500').stream().pipe(output);
-              file.pipe(resize).pipe(output);
+            gm(file).resize('500', '500').stream().pipe(output);
+            console.log('file', file);
             cb();
-            console.log('on receiver', cb);
         };
-        console.log('go out messase..............');
         req.file('background').upload(receiver,
             function whenDone(err, fileUploads) {
                 console.log('on whenDone......');

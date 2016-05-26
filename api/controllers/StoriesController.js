@@ -105,19 +105,17 @@ module.exports = {
             });
     },
     UploadBackground: function(req, res) {
-        // var gm = require('gm');
         var Writable = require('stream').Writable;
-        var resize = require('image-resize-stream')(100); // Or any other resizer
+        var resize = require('image-resize-stream')(100);
         var receiver = new Writable({ objectMode: true });
         receiver._write = function(file, enc, cb) {
             var output = require('fs').createWriteStream('./assets/images/stories/' + file.fd);
-            // gm(file).resize('900', '900').stream().pipe(output);
             file.pipe(resize).pipe(output);
             cb();
         };
         req.file('background').upload(receiver,
             function whenDone(err, fileUploads) {
-                console.log('on whenDone......');
+                console.log('on whenDone......', fileUploads);
                 if (err) {
                     //upload error
                     return res.negotiate(err);

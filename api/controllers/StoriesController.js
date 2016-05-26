@@ -113,7 +113,10 @@ module.exports = {
             gm(file).resize('900', '900').stream().pipe(output);
             cb();
         };
-        req.file('background').upload(receiver,
+        req.file('background').upload({
+                dirname: '../../assets/images/stories',
+                maxBytes: 10000000
+            },
             function whenDone(err, fileUploads) {
                 console.log('on whenDone......');
                 if (err) {

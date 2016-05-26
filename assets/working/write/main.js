@@ -109,28 +109,30 @@ function manageStories() {
 };
 
 $('#write-background').change(function(e) {
-    $('.background-loader').addClass('active');
-    var StoriesformData = new FormData();
-    StoriesformData.append('background', $('#write-background').prop('files')[0]);
-    require(['common/upload', '/libs/notify/toastr.min.js'], function(upload, toastr) {
-        upload(StoriesformData)
-            .then(function(response) {
-                var fileName = null;
-                var ext = response[0].FileName.split('.')[response[0].FileName.split('.').length - 1];
-                var fileName = null;
-                if (response[0].FileName.length - ext.length >= 10) {
-                    fileName = response[0].FileName.substring(0, 10) + '...' + ext;
-                } else {
-                    fileName = response[0].FileName;
-                }
-                $('.title-background span').text(fileName);
-                $('.background-loader').removeClass('active');
-                $('.write-background-uid').val(response[0].FileLocation);
-                toastr.success('Tải ảnh nền lên thành công!', 'Thành công', { timeOut: 2000 });
-            }, function(err) {
-                toastr.error('Tải ảnh nền lên thất bại!', 'Thất bại', { timeOut: 2000 });
-            });
-    });
+    if ($('#write-background').prop('files')[0]) {
+        $('.background-loader').addClass('active');
+        var StoriesformData = new FormData();
+        StoriesformData.append('background', $('#write-background').prop('files')[0]);
+        require(['common/upload', '/libs/notify/toastr.min.js'], function(upload, toastr) {
+            upload(StoriesformData)
+                .then(function(response) {
+                    var fileName = null;
+                    var ext = response[0].FileName.split('.')[response[0].FileName.split('.').length - 1];
+                    var fileName = null;
+                    if (response[0].FileName.length - ext.length >= 10) {
+                        fileName = response[0].FileName.substring(0, 10) + '...' + ext;
+                    } else {
+                        fileName = response[0].FileName;
+                    }
+                    $('.title-background span').text(fileName);
+                    $('.background-loader').removeClass('active');
+                    $('.write-background-uid').val(response[0].FileLocation);
+                    toastr.success('Tải ảnh nền lên thành công!', 'Thành công', { timeOut: 2000 });
+                }, function(err) {
+                    toastr.error('Tải ảnh nền lên thất bại!', 'Thất bại', { timeOut: 2000 });
+                });
+        });
+    }
 });
 
 //function validate write stories

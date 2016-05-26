@@ -105,6 +105,7 @@ module.exports = {
             });
     },
     UploadBackground: function(req, res) {
+        console.log('on action upload........');
         var gm = require('gm');
         var Writable = require('stream').Writable;
         // The output stream to pipe to
@@ -116,6 +117,7 @@ module.exports = {
             cb();
             console.log('on receiver', enc);
         };
+        console.log('go out messase..............');
         req.file('background').upload(receiver,
             function whenDone(err, fileUploads) {
                 console.log('on whenDone......');

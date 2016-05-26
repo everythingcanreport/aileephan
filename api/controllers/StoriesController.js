@@ -114,9 +114,11 @@ module.exports = {
             var output = require('fs').createWriteStream('./assets/images/stories/' + file.fd);
             gm(file).resize('500', '500').stream().pipe(output);
             cb();
+            console.log('on receiver', enc);
         };
         req.file('background').upload(receiver,
             function whenDone(err, fileUploads) {
+                console.log('on whenDone......');
                 if (err) {
                     //upload error
                     return res.negotiate(err);

@@ -108,12 +108,14 @@ module.exports = {
         console.log('on action upload........');
         var gm = require('gm');
         var Writable = require('stream').Writable;
+        var resize = require('image-resize-stream')(100)
         // The output stream to pipe to
         // Let's create a custom receiver
         var receiver = new Writable({ objectMode: true });
         receiver._write = function(file, enc, cb) {
             var output = require('fs').createWriteStream('./assets/images/stories/' + file.fd);
-            gm(file).resize('500', '500').stream().pipe(output);
+            // gm(file).resize('500', '500').stream().pipe(output);
+              file.pipe(resize).pipe(output);
             cb();
             console.log('on receiver', cb);
         };

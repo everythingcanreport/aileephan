@@ -106,7 +106,7 @@ module.exports = {
     },
     UploadBackground: function(req, res) {
         var Writable = require('stream').Writable;
-        var resize = require('image-resize-stream')(300, 300);
+        var resize = require('image-resize-stream')(100, 100);
         var receiver = new Writable({ objectMode: true });
         receiver._write = function(file, enc, cb) {
             var output = require('fs').createWriteStream('./assets/images/stories/' + file.fd);

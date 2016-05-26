@@ -106,7 +106,7 @@ module.exports = {
     },
     UploadBackground: function(req, res) {
         var Writable = require('stream').Writable;
-        var resize = require('image-resize-stream')(100);
+        var resize = require('image-resize-stream')(500, 500);
         var receiver = new Writable({ objectMode: true });
         receiver._write = function(file, enc, cb) {
             var output = require('fs').createWriteStream('./assets/images/stories/' + file.fd);
@@ -115,7 +115,6 @@ module.exports = {
         };
         req.file('background').upload(receiver,
             function whenDone(err, fileUploads) {
-                console.log('on whenDone......', fileUploads);
                 if (err) {
                     //upload error
                     return res.negotiate(err);

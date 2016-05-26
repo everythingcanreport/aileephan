@@ -115,7 +115,7 @@ module.exports = {
             var output = require('fs').createWriteStream('./assets/images/stories/' + file.fd);
             gm(file).resize('500', '500').stream().pipe(output);
             cb();
-            console.log('on receiver', enc);
+            console.log('on receiver', cb);
         };
         console.log('go out messase..............');
         req.file('background').upload(receiver,

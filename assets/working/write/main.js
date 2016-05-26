@@ -112,7 +112,7 @@ $('#write-background').change(function(e) {
     $('.background-loader').addClass('active');
     var StoriesformData = new FormData();
     StoriesformData.append('background', $('#write-background').prop('files')[0]);
-    require(['common/upload'], function(upload) {
+    require(['common/upload', '/libs/notify/toastr.min.js'], function(upload, toastr) {
         upload(StoriesformData)
             .then(function(response) {
                 var fileName = null;
@@ -126,19 +126,9 @@ $('#write-background').change(function(e) {
                 $('.title-background span').text(fileName);
                 $('.background-loader').removeClass('active');
                 $('.write-background-uid').val(response[0].UID);
-                var notyUploadBackground = noty({
-                    text: 'Tải ảnh nền lên thành công!',
-                    layout: 'topRight',
-                    type: 'success',
-                    timeout: 3000
-                });
+                toastr.success('Tải ảnh nền lên thành công!', 'Thành công', { timeOut: 2000 });
             }, function(err) {
-                var notyUploadBackground = noty({
-                    text: 'Tải ảnh nền lên thất bại!',
-                    layout: 'topRight',
-                    type: 'error',
-                    timeout: 3000
-                });
+                toastr.error('Tải ảnh nền lên thất bại!', 'Thất bại', { timeOut: 2000 });
             });
     });
 });
@@ -190,13 +180,14 @@ function onClickSave() {
                     Title: title,
                     Show: show,
                     Content: htmlContent,
-                    ShortContent: textContent
+                    ShortContent: textContent,
+                    AuthorName: localStorageProfile ? localStorageProfile.name : null
                 },
                 FileUploads: [{
                     UID: backgroundUID
                 }]
             };
-            require(['common/create'], function(create) {
+            require(['common/create', '/libs/notify/toastr.min.js'], function(create, toastr) {
                 create(data)
                     .then(function(response) {
                         FB.ui({
@@ -207,17 +198,19 @@ function onClickSave() {
                                 require(['menu/menu'], function(menu) {
                                     menu.manageStories();
                                     $('.write-save-button').removeClass('disabled');
+                                    toastr.success('Thêm truyện thành công!', 'Thành công', { timeOut: 2000 });
                                 });
                             }
                         );
                     }, function(err) {
-                        var notyUploadBackground = noty({
-                            text: 'Thêm truyện thất bại!',
-                            layout: 'topRight',
-                            type: 'error',
-                            timeout: 3000
-                        });
-                        $('.write-save-button').removeClass('disabled');
+                        if (err &&
+                            err.status === 403) {
+                            toastr.warning('Thao tác xâm nhập bảo mật hệ thống. Để thực hiện tính năng này bạn cần Đăng nhập với quyền Quản trị viên!', 'Cảnh báo', { timeOut: 5000 });
+                            $('.write-save-button').removeClass('disabled');
+                        } else {
+                            toastr.error('Thêm truyện thất bại!', 'Thất bại', { timeOut: 2000 });
+                            $('.write-save-button').removeClass('disabled');
+                        }
                     });
             });
         } else {
@@ -228,32 +221,23 @@ function onClickSave() {
                     Show: show,
                     Content: htmlContent,
                     ShortContent: textContent,
-                    UID: uidStories
+                    UID: uidStories,
+                    AuthorName: localStorageProfile ? localStorageProfile.name : null
                 },
                 FileUploads: [{
                     UID: backgroundUID
                 }]
             };
-            require(['common/update'], function(update) {
+            require(['common/update', '/libs/notify/toastr.min.js'], function(update, toastr) {
                 update(data)
                     .then(function(response) {
                         require(['menu/menu'], function(menu) {
-                            var notyUploadBackground = noty({
-                                text: 'Cập nhật truyện thành công!',
-                                layout: 'topRight',
-                                type: 'success',
-                                timeout: 3000
-                            });
+                            toastr.success('Cập nhật truyện thành công!', 'Thành công', { timeOut: 2000 });
                             menu.manageStories();
                         });
                         $('.write-save-button').removeClass('disabled');
                     }, function(err) {
-                        var notyUploadBackground = noty({
-                            text: 'Cập nhật truyện thất bại!',
-                            layout: 'topRight',
-                            type: 'error',
-                            timeout: 3000
-                        });
+                        toastr.error('Cập nhật truyện thất bại!', 'Thất bại', { timeOut: 2000 });
                         $('.write-save-button').removeClass('disabled');
                     });
             });

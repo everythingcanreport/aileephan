@@ -72,6 +72,16 @@ module.exports = {
                 }
             }
         },
+        AuthorName: {
+            type: Sequelize.STRING(255),
+            allowNull: true,
+            validate: {
+                len: {
+                    args: [0, 255],
+                    msg: 'Too long!'
+                }
+            }
+        },
         CreatedDate: {
             type: Sequelize.DATE,
             allowNull: true,

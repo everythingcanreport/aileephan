@@ -1,11 +1,11 @@
 <div class="ui container text margin-top-40 margin-bottom-40">
   <div class="ui segment tall stacked">
+  <div class="float-right margin-bottom-20">
+    <a href="/" title="Về trang chủ"><i class="icon home pink" style="font-size:2em;"></i></a>
+  </div>
     <h1 class="ui left  floated header pink font-menu">
       <span class="font-brand">Danh sách truyện</span>
     </h1>
-    <a href="/" title="Về trang chủ" class="go-home ui mini circular font-brand button floated-right pink">
-     Trang chủ
-     </a>
     <div class="ui clearing divider"></div>
     <div class="ui form">
      <div class="fields inline">
@@ -84,7 +84,7 @@
                 <%} else if(i<=4) {%>
                 <a class="item manage-pagination-<%=i+(i==1?' active': '')%>" onClick="paginationManage(<%=i%>);"><%=i%></a>
               <%}}%>
-              <a class="icon item" onClick="paginationManage('next');"><i class="right chevron icon"></i></a>
+              <a class="icon item <%=(Math.ceil(locals.data.count/5)===1?'disabled':'')%>" onClick="paginationManage('next');"><i class="right chevron icon"></i></a>
             </div>
             <div class="manage-total font-brand">Tổng cộng: <%=locals.data.count%> truyện</div>
           </th>

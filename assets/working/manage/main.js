@@ -128,11 +128,8 @@ function loadList(limit, offset) {
             renderData(response);
         },
         error: function(err) {
-            var notyUploadBackground = noty({
-                text: 'Load list failed!',
-                layout: 'topRight',
-                type: 'error',
-                timeout: 3000
+            require(['/libs/notify/toastr.min.js'], function(toastr) {
+                toastr.error('Tải truyện thất bại!', 'Thất bại', { timeOut: 2000 });
             });
         }
     });
@@ -245,7 +242,7 @@ function renderData(response) {
 
 //pagination
 var currentPage = 1;
-var totalPageCurrent = 0;
+var totalPageCurrent = 1;
 
 function paginationManage(page) {
     if ((page === 'prev' &&
@@ -279,7 +276,7 @@ function onClickEdit(uid) {
 
 //view stories
 function onClickView(uid) {
-    require(['common/manageViewStories'], function(manageViewStories) {
+    require(['common/manageViewStories', '/libs/notify/toastr.min.js'], function(manageViewStories, toastr) {
         manageViewStories(uid)
             .then(function(stories) {
                 if (stories) {
@@ -308,20 +305,10 @@ function onClickView(uid) {
                     $('.review-date').append(dateWriteReviewShow);
                     $('.long.modal').modal('show');
                 } else {
-                    noty({
-                        text: 'Tải truyện thất bại!',
-                        layout: 'topRight',
-                        type: 'error',
-                        timeout: 3000
-                    });
+                    toastr.error('Tải truyện thất bại!', 'Thất bại', { timeOut: 2000 });
                 }
             }, function(err) {
-                noty({
-                    text: 'Tải truyện thất bại!',
-                    layout: 'topRight',
-                    type: 'error',
-                    timeout: 3000
-                });
+                toastr.error('Tải truyện thất bại!', 'Thất bại', { timeOut: 2000 });
             });
     });
 };
@@ -372,7 +359,7 @@ function onClickChangeStatusYes() {
         } else {
             showUpdate = "Y";
         }
-        require(['common/updateStatus'], function(updateStatus) {
+        require(['common/updateStatus', '/libs/notify/toastr.min.js'], function(updateStatus, toastr) {
             var dataUpdateStatus = {
                 data: {
                     Show: showUpdate,
@@ -382,12 +369,7 @@ function onClickChangeStatusYes() {
             updateStatus(dataUpdateStatus)
                 .then(function(response) {
                     $('.small.modal.change-status').modal('hide');
-                    noty({
-                        text: 'Cập nhật trạng thái truyện thành công!',
-                        layout: 'topRight',
-                        type: 'success',
-                        timeout: 3000
-                    });
+                    toastr.success('Cập nhật trạng thái truyện thành công!!', 'Thành công', { timeOut: 2000 });
                 }, function(err) {
                     //rollback checkbox status
                     if (showUpdate === 'N') {
@@ -396,21 +378,11 @@ function onClickChangeStatusYes() {
                         $('input[name=change-status-' + uid + ']').removeAttr('checked');
                     }
                     $('.small.modal.change-status').modal('hide');
-                    noty({
-                        text: 'Cập nhật trạng thái truyện thất bại!',
-                        layout: 'topRight',
-                        type: 'error',
-                        timeout: 3000
-                    });
+                    toastr.error('Cập nhật trạng thái truyện thất bại!', 'Thất bại', { timeOut: 2000 });
                 });
         });
     } else {
-        noty({
-            text: 'Cập nhật trạng thái truyện thất bại!',
-            layout: 'topRight',
-            type: 'error',
-            timeout: 3000
-        });
+        toastr.error('Cập nhật trạng thái truyện thất bại!', 'Thất bại', { timeOut: 2000 });
     }
 };
 //end

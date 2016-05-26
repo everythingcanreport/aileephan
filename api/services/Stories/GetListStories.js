@@ -3,7 +3,7 @@ module.exports = function(data) {
     var defer = $q.defer();
     var pagination = Pagination(data, Stories);
     Stories.findAndCountAll({
-            attributes: ['SpeakingUrl', 'Title', 'ShortContent', 'Content', 'CreatedDate', 'CreatedBy'],
+            attributes: ['SpeakingUrl', 'Title', 'ShortContent', 'Content', 'AuthorName', 'CreatedDate', 'CreatedBy'],
             include: [{
                 attributes: ['UID', 'FileLocation'],
                 model: FileUpload,

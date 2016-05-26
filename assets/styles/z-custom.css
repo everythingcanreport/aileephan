@@ -354,3 +354,7 @@ a:hover {
     height: 25px;
     overflow: hidden;
 }
+
+.toast {
+    font-family: UTMCentur !important;
+}

@@ -1,15 +1,18 @@
 <div class="ui container text margin-top-40">
 	<div class="ui piled segments">
 		<div class="ui segment">
+		<div class="float-right margin-bottom-20">
+    		<a href="/" title="Về trang chủ"><i class="icon home pink" style="font-size:2em;"></i></a>
+  		</div>
 			<h1 class="ui header pink">
 				<span class="font-header">
 					<!--title stories-->
 					<%=locals.data.Title%>
 					<!--end-->
 				</span>
-				<a href="/" title="Về trang chủ" class="go-home ui mini circular font-brand button floated-right pink">
-     				Trang chủ
-     			</a>
+				<span class="sub header">
+					<%=locals && locals.data && locals.data.AuthorName?locals.data.AuthorName:''%>
+				</span>
 			</h1>
 			<div class="ui images align-center">
 			<%if(locals &&

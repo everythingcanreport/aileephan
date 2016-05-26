@@ -4,8 +4,6 @@ requirejs.config({
         app: '../working/home',
     }
 });
-requirejs(['jquery.min',
-    '/libs/noty/js/noty/packaged/jquery.noty.packaged.min.js'
-], function($, noty) {
+requirejs(['jquery.min'], function($) {
     requirejs(['app/main']);
 });

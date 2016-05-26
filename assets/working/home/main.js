@@ -139,7 +139,9 @@ function renderData(response) {
                 '<span class="font-header capitalize"><a href="/' + stories.SpeakingUrl +
                 '">' +
                 stories.Title +
-                '</a></span></div></h1>' : '';
+                '</a></span>' +
+                '<span class="sub header">' + (stories && stories.AuthorName ? stories.AuthorName : '') +
+                '</span></div></h1>' : '';
             var content = ''
             var detail = '<div class="description"><p class="font-content">' +
                 stories.ShortContent +

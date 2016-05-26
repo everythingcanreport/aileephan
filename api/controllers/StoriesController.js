@@ -5,7 +5,7 @@ module.exports = {
         });
         var title = req.param('title');
         Stories.findOne({
-                attributes: ['UID', 'SpeakingUrl', 'Show', 'Title', 'Content', 'CreatedDate'],
+                attributes: ['UID', 'SpeakingUrl', 'Show', 'Title', 'Content', 'AuthorName', 'CreatedDate'],
                 include: [{
                     model: FileUpload,
                     attributes: ['FileLocation'],

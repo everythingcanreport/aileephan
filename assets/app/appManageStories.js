@@ -4,9 +4,7 @@ requirejs.config({
         app: '../working/manage'
     }
 });
-requirejs(['jquery.min',
-        '/libs/noty/js/noty/packaged/jquery.noty.packaged.min.js'
-    ],
+requirejs(['jquery.min'],
     function($, noty) {
         requirejs(['semantic.min'], function(semantic) {
             requirejs(['app/main']);

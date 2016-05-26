@@ -36,7 +36,6 @@ module.exports.http = {
                 return true;
             }
         }),
-        bodyParser: require('skipper'),
         order: [
             'startRequestTimer',
             'cookieParser',

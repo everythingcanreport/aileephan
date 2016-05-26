@@ -110,8 +110,7 @@ module.exports = {
         var receiver = new Writable({ objectMode: true });
         receiver._write = function(file, enc, cb) {
             var output = require('fs').createWriteStream('./assets/images/stories/' + file.fd);
-            gm(file).resize('500', '500').stream().pipe(output);
-            console.log('file', file);
+            gm(file).resize('900', '900').stream().pipe(output);
             cb();
         };
         req.file('background').upload(receiver,

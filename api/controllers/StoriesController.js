@@ -120,6 +120,7 @@ module.exports = {
                 if (err) {
                     //upload error
                     console.log('err', err);
+                    console.log('fileUploads', fileUploads);
                     return res.negotiate(err);
                 }
                 if (fileUploads.length === 0) {

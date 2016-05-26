@@ -109,15 +109,12 @@ function manageStories() {
 };
 
 $('#write-background').change(function(e) {
-    console.log('image change>>>>>>>>>>>');
     $('.background-loader').addClass('active');
     var StoriesformData = new FormData();
     StoriesformData.append('background', $('#write-background').prop('files')[0]);
     require(['common/upload', '/libs/notify/toastr.min.js'], function(upload, toastr) {
-        console.log('call api staring>>>>>>>>')
         upload(StoriesformData)
             .then(function(response) {
-                console.log('api response success');
                 var fileName = null;
                 var ext = response[0].FileName.split('.')[response[0].FileName.split('.').length - 1];
                 var fileName = null;
@@ -131,7 +128,6 @@ $('#write-background').change(function(e) {
                 $('.write-background-uid').val(response[0].FileLocation);
                 toastr.success('Tải ảnh nền lên thành công!', 'Thành công', { timeOut: 2000 });
             }, function(err) {
-                console.log('call api error>>>>>>>>');
                 toastr.error('Tải ảnh nền lên thất bại!', 'Thất bại', { timeOut: 2000 });
             });
     });

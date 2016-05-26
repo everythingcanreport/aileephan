@@ -81,7 +81,7 @@ define(function(require) {
                 var fileName = $('.write-background-filename-hidden').val();
                 if (fileName) {
                     var ext = fileName.split('.')[fileName.split('.').length - 1];
-                    fileName = fileName.length >= 10 ? fileName.substring(0, 10) + '...' + ext : fileName;
+                    fileName = (fileName.length - ext.length) >= 10 ? fileName.substring(0, 10) + '...' + ext : fileName;
                     $('.title-background span').text(fileName);
                 }
                 //check status create or edit
@@ -125,7 +125,7 @@ $('#write-background').change(function(e) {
                 }
                 $('.title-background span').text(fileName);
                 $('.background-loader').removeClass('active');
-                $('.write-background-uid').val(response[0].UID);
+                $('.write-background-uid').val(response[0].FileLocation);
                 toastr.success('Tải ảnh nền lên thành công!', 'Thành công', { timeOut: 2000 });
             }, function(err) {
                 toastr.error('Tải ảnh nền lên thất bại!', 'Thất bại', { timeOut: 2000 });
@@ -184,7 +184,7 @@ function onClickSave() {
                     AuthorName: localStorageProfile ? localStorageProfile.name : null
                 },
                 FileUploads: [{
-                    UID: backgroundUID
+                    FileLocation: backgroundUID
                 }]
             };
             require(['common/create', '/libs/notify/toastr.min.js'], function(create, toastr) {
@@ -225,7 +225,7 @@ function onClickSave() {
                     AuthorName: localStorageProfile ? localStorageProfile.name : null
                 },
                 FileUploads: [{
-                    UID: backgroundUID
+                    FileLocation: backgroundUID
                 }]
             };
             require(['common/update', '/libs/notify/toastr.min.js'], function(update, toastr) {

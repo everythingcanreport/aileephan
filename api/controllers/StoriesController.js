@@ -119,8 +119,6 @@ module.exports = {
             function whenDone(err, fileUploads) {
                 if (err) {
                     //upload error
-                    console.log('err', err);
-                    console.log('fileUploads', fileUploads);
                     return res.negotiate(err);
                 }
                 if (fileUploads.length === 0) {
@@ -144,13 +142,10 @@ module.exports = {
                         arrayFileUpload.push(objFU);
                     });
                 }
-                console.log('before bulk create.....');
                 FileUpload.bulkCreate(arrayFileUpload, { raw: true })
                     .then(function(fileUploadCreated) {
-                        console.log('ok success......');
                         return res.ok(fileUploadCreated);
                     }, function(err) {
-                        console.log('error err......');
                         return res.badRequest(err);
                     });
             });

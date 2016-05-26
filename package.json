@@ -25,6 +25,7 @@
     "sails": "~0.12.3",
     "sails-disk": "~0.10.9",
     "shrinkwrap": "^0.4.0",
+    "skipper": "^0.5.5",
     "speakingurl": "^9.0.0"
   },
   "scripts": {

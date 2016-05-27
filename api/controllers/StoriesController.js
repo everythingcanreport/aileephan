@@ -144,10 +144,6 @@ module.exports = {
                         var newFileName = fu.fd.substring(fu.fd.indexOf('uploads/') + 8, fu.fd.length);
                         var thumbPathHome = path.resolve(__dirname, '..', '..', 'assets/images/stories/home');
                         var thumbPathView = path.resolve(__dirname, '..', '..', 'assets/images/stories/view');
-                        console.log('newPath', newPath);
-                        console.log('thumbPathHome',thumbPathHome);
-                        console.log('thumbPathView', thumbPathView);
-                        console.log('newFileName', newFileName);
                         im.resize({
                             srcPath: newPath,
                             dstPath: thumbPathHome + '/' + newFileName,
@@ -155,8 +151,7 @@ module.exports = {
                             height: 300
                         }, function(err, stdout, stderr) {
                             if (err) {
-                                console.log('error1', err);
-                                // throw err;
+                                throw err;
                             }
                             im.resize({
                                 srcPath: newPath,
@@ -165,8 +160,7 @@ module.exports = {
                                 height: 600
                             }, function(err, stdout, stderr) {
                                 if (err) {
-                                    console.log('error2', err);
-                                    // throw err;
+                                    throw err;
                                 }
                             });
                         });

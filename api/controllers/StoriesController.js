@@ -126,7 +126,6 @@ module.exports = {
                 if (!_.isEmpty(fileUploads) &&
                     _.isArray(fileUploads)) {
                     _.forEach(fileUploads, function(fu, index) {
-                        console.log('fu', fu);
                         //push info fileuploads to array
                         var indexCut = fu.fd.indexOf('uploads/') + 8;
                         var objFU = {
@@ -145,6 +144,9 @@ module.exports = {
                         var newFileName = fu.fd.substring(fu.fd.indexOf('uploads/') + 8, fu.fd.length);
                         var thumbPathHome = path.resolve(__dirname, '..', '..', 'assets/images/stories/home');
                         var thumbPathView = path.resolve(__dirname, '..', '..', 'assets/images/stories/view');
+                        console.log('newPath', newPath);
+                        console.log('thumbPathHome',thumbPathHome);
+                        console.log('thumbPathView', thumbPathView);
                         im.resize({
                             srcPath: newPath,
                             dstPath: thumbPathHome + '/' + newFileName,
@@ -159,7 +161,6 @@ module.exports = {
                                 height: 600
                             }, function(err, stdout, stderr) {
                                 if (err) throw err;
-
                             });
                         });
                     });

@@ -39,7 +39,10 @@
         </tr>
       </thead>
       <tbody>
-      <%locals.data.rows.forEach(function(stories, index){%>
+      <%if(locals &&
+        locals.data &&
+        locals.data.count!==0){
+         locals.data.rows.forEach(function(stories, index){%>
       <tr>
         <td class="font-brand">
           <%=index+1%>
@@ -66,7 +69,15 @@
           </div>
         </td>
       </tr>
-      <%})%>
+      <%})
+    } else {%>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+      <%}%>
       </tbody>
       <tfoot class="full-width">
         <tr>

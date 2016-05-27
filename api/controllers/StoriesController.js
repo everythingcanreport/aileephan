@@ -105,15 +105,13 @@ module.exports = {
             });
     },
     UploadBackground: function(req, res) {
-        var gm = require('gm');
-        var Writable = require('stream').Writable;
-        var receiver = new Writable({ objectMode: true });
-        receiver._write = function(file, enc, cb) {
-            var output = require('fs').createWriteStream('./assets/images/stories/' + file.fd);
-            gm(file).resize('500', '500').stream().pipe(output);
-            cb();
-        };
-        req.file('background').upload(receiver,
+        var path = require('path');
+        var fs = require('fs');
+        var im = require('imagemagick');
+        req.file('background').upload({
+                dirname: '../../uploads',
+                maxBytes: 10000000
+            },
             function whenDone(err, fileUploads) {
                 if (err) {
                     //upload error
@@ -128,16 +126,42 @@ module.exports = {
                 if (!_.isEmpty(fileUploads) &&
                     _.isArray(fileUploads)) {
                     _.forEach(fileUploads, function(fu, index) {
+                        console.log('fu', fu);
+                        //push info fileuploads to array
+                        var indexCut = fu.fd.indexOf('uploads/') + 8;
                         var objFU = {
                             UID: UUIDService.Create(),
                             UserAccountID: req.user.id,
                             FileName: fu.filename,
-                            FileLocation: '/images/stories/' + fu.fd,
+                            FileLocation: fu.fd.substring(indexCut, fu.fd.length),
                             FileExtension: fu.type,
                             Enable: 'Y',
                             CreatedBy: req.user.id
                         };
                         arrayFileUpload.push(objFU);
+
+                        //resize image for searh home - view detail
+                        var newPath = fu.fd;
+                        var newFileName = fu.fd.substring(fu.fd.indexOf('uploads/') + 8, fu.fd.length);
+                        var thumbPathHome = path.resolve(__dirname, '..', '..', 'assets/images/stories/home');
+                        var thumbPathView = path.resolve(__dirname, '..', '..', 'assets/images/stories/view');
+                        im.resize({
+                            srcPath: newPath,
+                            dstPath: thumbPathHome + '/' + newFileName,
+                            width: 225,
+                            height: 300
+                        }, function(err, stdout, stderr) {
+                            if (err) throw err;
+                            im.resize({
+                                srcPath: newPath,
+                                dstPath: thumbPathView + '/' + newFileName,
+                                width: 600,
+                                height: 600
+                            }, function(err, stdout, stderr) {
+                                if (err) throw err;
+
+                            });
+                        });
                     });
                 }
                 FileUpload.bulkCreate(arrayFileUpload, { raw: true })

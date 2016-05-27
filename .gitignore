@@ -38,9 +38,8 @@
 #    development.
 # 
 ################################################
-
-assets/images/stories/*
 node_modules/*
+uploads/*
 
 
 

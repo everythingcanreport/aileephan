@@ -129,7 +129,7 @@ function renderData(response) {
                 '<a href="/' + stories.SpeakingUrl + '" class="ui image"' +
                 'title="' + stories.Title +
                 '" alt="truyện ngắn ailee phan">' +
-                '<img alt="truyện ngắn ailee phan" class="height-image-home" src="' +
+                '<img alt="truyện ngắn ailee phan" class="height-image-home" src="/images/stories/home/' +
                 uidBackground + '"/></a></div>' : '';
             var title = (stories &&
                     stories.Title &&

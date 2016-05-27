@@ -153,14 +153,20 @@ module.exports = {
                             width: 225,
                             height: 300
                         }, function(err, stdout, stderr) {
-                            if (err) throw err;
+                            if (err) {
+                                console.log('error1', err);
+                                // throw err;
+                            }
                             im.resize({
                                 srcPath: newPath,
                                 dstPath: thumbPathView + '/' + newFileName,
                                 width: 600,
                                 height: 600
                             }, function(err, stdout, stderr) {
-                                if (err) throw err;
+                                if (err) {
+                                    console.log('error2', err);
+                                    // throw err;
+                                }
                             });
                         });
                     });

@@ -147,6 +147,7 @@ module.exports = {
                         console.log('newPath', newPath);
                         console.log('thumbPathHome',thumbPathHome);
                         console.log('thumbPathView', thumbPathView);
+                        console.log('newFileName', newFileName);
                         im.resize({
                             srcPath: newPath,
                             dstPath: thumbPathHome + '/' + newFileName,

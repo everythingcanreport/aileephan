@@ -193,8 +193,8 @@ function onClickSave() {
                 create(data)
                     .then(function(response) {
                         require(['menu/menu'], function(menu) {
-                            $('.write-save-button').removeClass('disabled');
                             toastr.success('Thêm truyện thành công!', 'Thành công', { timeOut: 2000 });
+                            $('.write-save-button').removeClass('disabled');
                             menu.manageStories();
                         });
                     }, function(err) {

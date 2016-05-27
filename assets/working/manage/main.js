@@ -1,6 +1,6 @@
 //check localStorageAvatar - localStorageProfile
-var localStorageAvatar = localStorage.getItem('localStorageAvatar');
-var localStorageProfile = localStorage.getItem('localStorageProfile');
+var localStorageAvatar = window.localStorage.getItem('localStorageAvatar');
+var localStorageProfile = window.localStorage.getItem('localStorageProfile');
 if (localStorageAvatar &&
     localStorageProfile) {
     localStorageAvatar = JSON.parse(localStorageAvatar);
@@ -14,7 +14,7 @@ if (localStorageAvatar &&
 //end
 
 //check localStorageMenu
-var localStorageMenu = localStorage.getItem('localStorageMenu');
+var localStorageMenu = window.localStorage.getItem('localStorageMenu');
 if (localStorageMenu) {
     localStorageMenu = JSON.parse(localStorageMenu);
     //render menu

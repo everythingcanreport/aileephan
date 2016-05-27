@@ -1,7 +1,7 @@
 var isCreate = true;
 //check localStorageAvatar - localStorageProfile
-var localStorageAvatar = localStorage.getItem('localStorageAvatar');
-var localStorageProfile = localStorage.getItem('localStorageProfile');
+var localStorageAvatar = window.localStorage.getItem('localStorageAvatar');
+var localStorageProfile = window.localStorage.getItem('localStorageProfile');
 if (localStorageAvatar &&
     localStorageProfile) {
     localStorageAvatar = JSON.parse(localStorageAvatar);
@@ -15,7 +15,7 @@ if (localStorageAvatar &&
 //end
 
 //check localStorageMenu
-var localStorageMenu = localStorage.getItem('localStorageMenu');
+var localStorageMenu = window.localStorage.getItem('localStorageMenu');
 if (localStorageMenu) {
     localStorageMenu = JSON.parse(localStorageMenu);
     //render menu
@@ -192,18 +192,11 @@ function onClickSave() {
             require(['common/create', '/libs/notify/toastr.min.js'], function(create, toastr) {
                 create(data)
                     .then(function(response) {
-                        FB.ui({
-                                method: 'feed',
-                                link: 'http://aileephan.com/' + response.data,
-                            },
-                            function(response) {
-                                require(['menu/menu'], function(menu) {
-                                    menu.manageStories();
-                                    $('.write-save-button').removeClass('disabled');
-                                    toastr.success('Thêm truyện thành công!', 'Thành công', { timeOut: 2000 });
-                                });
-                            }
-                        );
+                        require(['menu/menu'], function(menu) {
+                            $('.write-save-button').removeClass('disabled');
+                            toastr.success('Thêm truyện thành công!', 'Thành công', { timeOut: 2000 });
+                            menu.manageStories();
+                        });
                     }, function(err) {
                         if (err &&
                             err.status === 403) {
@@ -262,7 +255,7 @@ function onClickView() {
     } else {
         $('.review-background').addClass('hide');
     }
-    $('.review-background').attr('src', '/images/stories/view/'+backgroundUID);
+    $('.review-background').attr('src', '/images/stories/view/' + backgroundUID);
     var dateWriteReview = new Date();
     if ($('.write-date').val()) {
         dateWriteReview = new Date($('.write-date').val());

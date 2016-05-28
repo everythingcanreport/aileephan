@@ -362,16 +362,7 @@ a:hover {
     display: block;
 }
 
-.fb_like {
+.fb-like-ailee {
     overflow: hidden;
     width: 90px;
-}
-
-.fb_like iframe {
-    left: 0 !important;
-}
-
-.fb-like,
-.addthis_button_facebook_like {
-    height: 25px overflow: hidden
 }

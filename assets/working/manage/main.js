@@ -286,7 +286,7 @@ function onClickView(uid) {
                     $('.review-description').text('');
                     $('.review-description').append(htmlContent);
                     $('.review-title').text(title);
-                    var backgroundUID = (stories && stories.FileUploads && stories.FileUploads[0] ? stories.FileUploads[0].FileLocation : null);
+                    var backgroundUID = (stories && stories.FileUploads && stories.FileUploads[0] ? stories.FileUploads[0].UID : null);
                     if (backgroundUID !== null) {
                         $('.review-background').removeClass('hide');
                     } else {

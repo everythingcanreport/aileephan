@@ -361,3 +361,12 @@ a:hover {
 .display-block {
     display: block;
 }
+
+.fb_like {
+    overflow: hidden;
+    width: 90px;
+}
+
+.fb_like iframe {
+    left: 0 !important;
+}

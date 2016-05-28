@@ -2,7 +2,7 @@ module.exports = {
     'StoriesController': {
         // 'ManageStories': true,
         // 'WriteStories': true,
-        // 'GetListStories': true,
+        'GetListStories': true,
         'DownloadBackground': true,
         'ViewStories': true
     },

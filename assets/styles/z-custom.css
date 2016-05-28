@@ -363,6 +363,6 @@ a:hover {
 }
 
 .fb-like-ailee {
-    overflow: hidden !important;
-    width: 150px !important;
+    overflow: hidden;
+    width: 150px;
 }

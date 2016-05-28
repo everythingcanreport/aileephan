@@ -355,8 +355,7 @@ a:hover {
 }
 
 .fb-like {
-    position: relative !important;
-    height: 100% !important;
+    height: 25px !important;
     overflow: hidden !important;
 }
 

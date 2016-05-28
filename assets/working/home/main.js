@@ -137,7 +137,7 @@ function renderData(response) {
                 'title="' + stories.Title +
                 '" alt="truyện ngắn ailee phan">' +
                 '<img alt="truyện ngắn ailee phan" class="height-image-home" src="/download-background/' +
-                uidBackground + '/home"/></a></div>' : '';
+                uidBackground + '"/></a></div>' : '';
             var title = (stories &&
                     stories.Title &&
                     stories.Title &&

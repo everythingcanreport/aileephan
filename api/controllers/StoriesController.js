@@ -105,18 +105,10 @@ module.exports = {
             });
     },
     UploadBackground: function(req, res) {
-        var gm = require('gm').subClass({ imageMagick: true });;
-        var Writable = require('stream').Writable;
-        var outputHome = null;
-        var receiver = new Writable({ objectMode: true });
-        receiver._write = function(file, enc, cb) {
-            outputHome = require('fs').createWriteStream('./uploads/home/' + file.fd);
-            outputView = require('fs').createWriteStream('./uploads/view/' + file.fd);
-            gm(file).resize('600', '600').stream().pipe(outputHome);
-            gm(file).resize('225', '300').stream().pipe(outputView);
-            cb();
-        };
-        req.file('background').upload(receiver,
+        req.file('background').upload({
+                dirname: '../../uploads/home',
+                maxBytes: 10000000
+            },
             function whenDone(err, fileUploads) {
                 if (err) {
                     //upload error
@@ -155,12 +147,11 @@ module.exports = {
         var path = require('path');
         req.validate({
             UID: 'string',
-            type: 'string'
         });
         FileUpload.findOne({
                 attributes: ['FileLocation'],
                 where: {
-                    FileLocation: req.param('UID')
+                    UID: req.param('UID')
                 }
             })
             .then(function(fileUpload) {
@@ -170,8 +161,7 @@ module.exports = {
                 }
                 var SkipperDisk = require('skipper-disk');
                 var fileAdapter = SkipperDisk();
-                var pathFileDownload = path.resolve(__dirname, '..', '..', 'uploads') + '/' + req.param('type') + '/' + fileUpload.FileLocation;
-                fileAdapter.read(pathFileDownload)
+                fileAdapter.read(fileUpload.FileLocation)
                     .on('error', function(err) {
                         return res.serverError(err);
                     })

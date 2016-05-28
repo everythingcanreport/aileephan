@@ -20,7 +20,7 @@
 				locals.data.FileUploads &&
 				locals.data.FileUploads[0]) {%>
 			<a class="ui image" title="<%=locals.data.Title%>">
-			<img name="<%=locals.data.SpeakingUrl%>" alt="<%=locals.data.Title%>" class="review-background ui big centered image max-height-image-view" src="/download-background/<%=locals.data.FileUploads[0].FileLocation%>/view" width="100%" height="15%" />
+			<img name="<%=locals.data.SpeakingUrl%>" alt="<%=locals.data.Title%>" class="review-background ui big centered image max-height-image-view" src="/download-background/<%=locals.data.FileUploads[0].UID%>" width="100%" height="15%" />
 			</a>
 			<%}%>
 			</div>

@@ -126,7 +126,7 @@ $('#write-background').change(function(e) {
                     }
                     $('.title-background span').text(fileName);
                     $('.background-loader').removeClass('active');
-                    $('.write-background-uid').val(response[0].FileLocation);
+                    $('.write-background-uid').val(response[0].UID);
                     toastr.success('Tải ảnh nền lên thành công!', 'Thành công', { timeOut: 2000 });
                 }, function(err) {
                     $('.background-loader').removeClass('active');
@@ -256,7 +256,7 @@ function onClickView() {
     } else {
         $('.review-background').addClass('hide');
     }
-    $('.review-background').attr('src', '/download-background/' + backgroundUID + '/view');
+    $('.review-background').attr('src', '/download-background/' + backgroundUID);
     var dateWriteReview = new Date();
     if ($('.write-date').val()) {
         dateWriteReview = new Date($('.write-date').val());

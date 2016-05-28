@@ -309,7 +309,7 @@ function onClickView(uid) {
                         onShow: function() {
                             setTimeout(function() {
                                 selfModal.modal('refresh');
-                            }, 150);
+                            }, 200);
                         }
                     });
                     selfModal.modal('show');

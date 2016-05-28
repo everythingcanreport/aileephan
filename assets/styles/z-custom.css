@@ -370,3 +370,8 @@ a:hover {
 .fb_like iframe {
     left: 0 !important;
 }
+
+.fb-like,
+.addthis_button_facebook_like {
+    height: 25px overflow: hidden
+}

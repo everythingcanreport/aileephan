@@ -6,7 +6,7 @@ module.exports = function(uid) {
                 attributes: ['UID', 'Show', 'Title', 'Content', 'CreatedDate'],
                 include: [{
                     model: FileUpload,
-                    attributes: ['FileLocation'],
+                    attributes: ['UID'],
                     where: {
                         Enable: 'Y'
                     },

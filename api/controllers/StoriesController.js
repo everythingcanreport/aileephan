@@ -8,7 +8,7 @@ module.exports = {
                 attributes: ['UID', 'SpeakingUrl', 'Show', 'Title', 'Content', 'AuthorName', 'CreatedDate'],
                 include: [{
                     model: FileUpload,
-                    attributes: ['FileLocation'],
+                    attributes: ['UID'],
                     where: {
                         Enable: 'Y'
                     },

@@ -114,6 +114,13 @@ $(document).scroll(function() {
     }
     oldPosition = $(window).scrollTop() + $(window).height();
 });
+$('window').on('touchmove', function(event) {
+    //Prevent the window from being scrolled.
+    event.preventDefault();
+    alert('touchmove>>>>>>>>...');
+    //Do something like call window.scrollTo to mimic the scrolling
+    //request the user made.
+});
 //login facebook
 function onClickLoginFacebook() {
     if (navigator.userAgent.match('CriOS'))

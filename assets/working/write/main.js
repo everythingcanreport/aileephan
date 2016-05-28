@@ -265,7 +265,16 @@ function onClickView() {
     var dateWriteReviewShow = d + '/' + m + '/' + y;
     $('.review-date').text('');
     $('.review-date').append(dateWriteReviewShow);
-    $('.long.modal').modal('show');
+    //show long modal fixed
+    var selfModal = $('.ui.long.modal');
+    selfModal.modal({
+        onShow: function() {
+            setTimeout(function() {
+                selfModal.modal('refresh');
+            }, 110);
+        }
+    });
+    selfModal.modal('show');
 };
 
 function onClickAttachImage() {

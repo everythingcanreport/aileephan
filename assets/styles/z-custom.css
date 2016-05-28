@@ -66,9 +66,11 @@ body {
     font-family: UTMIsadoraBold !important;
     font-size: 16px !important;
 }
+
 .min-height-768px {
     min-height: 768px;
 }
+
 .main.container {
     margin-top: 2em;
 }
@@ -356,6 +358,10 @@ a:hover {
     position: relative !important;
     height: 100% !important;
     overflow: hidden !important;
+}
+
+.fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr {
+    display: none !important;
 }
 
 .toast {

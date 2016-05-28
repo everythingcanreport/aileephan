@@ -94,6 +94,7 @@ window.scrollTo(0, 0);
 $(document).scroll(function() {
     if ($(window).scrollTop() + $(window).height() + 400 >= $(document).height() &&
         $(window).scrollTop() + $(window).height() >= oldPosition) {
+        alert('vao scroll>>>>>>>>');
         if (rows < count && !appending) {
             appending = true;
             require(['common/listStories'], function(listStories) {

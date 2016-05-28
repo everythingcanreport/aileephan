@@ -187,7 +187,7 @@ function onClickSave() {
                     AuthorName: localStorageProfile ? localStorageProfile.name : null
                 },
                 FileUploads: [{
-                    FileLocation: backgroundUID
+                    UID: backgroundUID
                 }]
             };
             require(['common/create', '/libs/notify/toastr.min.js'], function(create, toastr) {
@@ -221,7 +221,7 @@ function onClickSave() {
                     AuthorName: localStorageProfile ? localStorageProfile.name : null
                 },
                 FileUploads: [{
-                    FileLocation: backgroundUID
+                    UID: backgroundUID
                 }]
             };
             require(['common/update', '/libs/notify/toastr.min.js'], function(update, toastr) {

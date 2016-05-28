@@ -271,7 +271,7 @@ function onClickView() {
         onShow: function() {
             setTimeout(function() {
                 selfModal.modal('refresh');
-            }, 110);
+            }, 250);
         }
     });
     selfModal.modal('show');

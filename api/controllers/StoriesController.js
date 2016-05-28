@@ -106,7 +106,7 @@ module.exports = {
     },
     UploadBackground: function(req, res) {
         req.file('background').upload({
-                dirname: '../../uploads/home',
+                dirname: '../../uploads/view',
                 maxBytes: 10000000
             },
             function whenDone(err, fileUploads) {

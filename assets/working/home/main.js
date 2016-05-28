@@ -89,6 +89,8 @@ var count = $('.home-count').val();
 var appending = false;
 //load data when scroll last page
 var oldPosition = 0;
+//set scroll init
+window.scrollTo(0, 0);
 $(document).scroll(function() {
     if ($(window).scrollTop() + $(window).height() + 400 >= $(document).height() &&
         $(window).scrollTop() + $(window).height() >= oldPosition) {

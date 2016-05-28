@@ -112,9 +112,6 @@ $(document).scroll(function() {
             });
         }
     }
-    else {
-        alert('$(window).scrollTop() + $(window).height()',$(window).scrollTop() + $(window).height()+400,$(document).height());
-    }
     oldPosition = $(window).scrollTop() + $(window).height();
 });
 //login facebook

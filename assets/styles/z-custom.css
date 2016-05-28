@@ -354,15 +354,6 @@ a:hover {
     background: rgba(255, 176, 220, 0.34);
 }
 
-.fb-like {
-    height: 25px !important;
-    overflow: hidden !important;
-}
-
-.fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr {
-    display: none !important;
-}
-
 .toast {
     font-family: UTMCentur !important;
 }

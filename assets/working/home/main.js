@@ -88,11 +88,10 @@ var rows = 5;
 var count = $('.home-count').val();
 var appending = false;
 //load data when scroll last page
+var oldPosition = 0;
 $(document).scroll(function() {
-    console.log('a', $(window).scrollTop() + $(window).height());
-    console.log('b', $(document).height());
-
-    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+    if ($(window).scrollTop() + $(window).height() + 400 >= $(document).height() &&
+        $(window).scrollTop() + $(window).height() >= oldPosition) {
         if (rows < count && !appending) {
             appending = true;
             require(['common/listStories'], function(listStories) {
@@ -111,6 +110,7 @@ $(document).scroll(function() {
             });
         }
     }
+    oldPosition = $(window).scrollTop() + $(window).height();
 });
 //login facebook
 function onClickLoginFacebook() {

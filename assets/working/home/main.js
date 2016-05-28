@@ -89,6 +89,9 @@ var count = $('.home-count').val();
 var appending = false;
 //load data when scroll last page
 $(document).scroll(function() {
+    console.log('a', $(window).scrollTop() + $(window).height());
+    console.log('b', $(document).height());
+
     if ($(window).scrollTop() + $(window).height() == $(document).height()) {
         if (rows < count && !appending) {
             appending = true;

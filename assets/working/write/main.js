@@ -195,7 +195,6 @@ function onClickSave() {
                     .then(function(response) {
                         toastr.success('Thêm truyện thành công!', 'Thành công', { timeOut: 2000 });
                         require(['menu/menu'], function(menu) {
-                            $('.write-save-button').removeClass('disabled');
                             menu.manageStories();
                         });
                     }, function(err) {
@@ -231,7 +230,6 @@ function onClickSave() {
                             toastr.success('Cập nhật truyện thành công!', 'Thành công', { timeOut: 2000 });
                             menu.manageStories();
                         });
-                        $('.write-save-button').removeClass('disabled');
                     }, function(err) {
                         toastr.error('Cập nhật truyện thất bại!', 'Thất bại', { timeOut: 2000 });
                         $('.write-save-button').removeClass('disabled');

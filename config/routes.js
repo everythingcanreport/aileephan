@@ -35,7 +35,7 @@ module.exports.routes = {
         controller: 'StoriesController',
         action: 'UpdateStories'
     },
-    'GET /user/download-background/:UID': {
+    'GET /download-background/:UID/:type': {
         controller: 'StoriesController',
         action: 'DownloadBackground'
     },

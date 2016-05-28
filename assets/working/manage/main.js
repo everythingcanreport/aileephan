@@ -292,7 +292,7 @@ function onClickView(uid) {
                     } else {
                         $('.review-background').addClass('hide');
                     }
-                    $('.review-background').attr('src', '/images/stories/view/' + backgroundUID);
+                    $('.review-background').attr('src', '/download-background/' + backgroundUID + '/view');
                     var dateWriteReview = new Date();
                     if (stories.CreatedDate) {
                         dateWriteReview = new Date(stories.CreatedDate);

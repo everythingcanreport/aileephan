@@ -105,13 +105,18 @@ module.exports = {
             });
     },
     UploadBackground: function(req, res) {
-        var path = require('path');
-        var fs = require('fs');
-        var im = require('imagemagick');
-        req.file('background').upload({
-                dirname: '../../uploads',
-                maxBytes: 10000000
-            },
+        var gm = require('gm').subClass({ imageMagick: true });;
+        var Writable = require('stream').Writable;
+        var outputHome = null;
+        var receiver = new Writable({ objectMode: true });
+        receiver._write = function(file, enc, cb) {
+            outputHome = require('fs').createWriteStream('./uploads/home/' + file.fd);
+            outputView = require('fs').createWriteStream('./uploads/view/' + file.fd);
+            gm(file).resize('600', '600').stream().pipe(outputHome);
+            gm(file).resize('225', '300').stream().pipe(outputView);
+            cb();
+        };
+        req.file('background').upload(receiver,
             function whenDone(err, fileUploads) {
                 if (err) {
                     //upload error
@@ -126,44 +131,16 @@ module.exports = {
                 if (!_.isEmpty(fileUploads) &&
                     _.isArray(fileUploads)) {
                     _.forEach(fileUploads, function(fu, index) {
-                        //push info fileuploads to array
-                        var indexCut = fu.fd.indexOf('uploads/') + 8;
                         var objFU = {
                             UID: UUIDService.Create(),
                             UserAccountID: req.user.id,
                             FileName: fu.filename,
-                            FileLocation: fu.fd.substring(indexCut, fu.fd.length),
+                            FileLocation: fu.fd,
                             FileExtension: fu.type,
                             Enable: 'Y',
                             CreatedBy: req.user.id
                         };
                         arrayFileUpload.push(objFU);
-
-                        //resize image for searh home - view detail
-                        var newPath = fu.fd;
-                        var newFileName = fu.fd.substring(fu.fd.indexOf('uploads/') + 8, fu.fd.length);
-                        var thumbPathHome = path.resolve(__dirname, '..', '..', 'assets/images/stories/home');
-                        var thumbPathView = path.resolve(__dirname, '..', '..', 'assets/images/stories/view');
-                        im.resize({
-                            srcPath: newPath,
-                            dstPath: thumbPathHome + '/' + newFileName,
-                            width: 225,
-                            height: 300
-                        }, function(err, stdout, stderr) {
-                            if (err) {
-                                throw err;
-                            }
-                            im.resize({
-                                srcPath: newPath,
-                                dstPath: thumbPathView + '/' + newFileName,
-                                width: 600,
-                                height: 600
-                            }, function(err, stdout, stderr) {
-                                if (err) {
-                                    throw err;
-                                }
-                            });
-                        });
                     });
                 }
                 FileUpload.bulkCreate(arrayFileUpload, { raw: true })
@@ -175,13 +152,15 @@ module.exports = {
             });
     },
     DownloadBackground: function(req, res) {
+        var path = require('path');
         req.validate({
-            UID: 'string'
+            UID: 'string',
+            type: 'string'
         });
         FileUpload.findOne({
                 attributes: ['FileLocation'],
                 where: {
-                    UID: req.param('UID')
+                    FileLocation: req.param('UID')
                 }
             })
             .then(function(fileUpload) {
@@ -191,7 +170,8 @@ module.exports = {
                 }
                 var SkipperDisk = require('skipper-disk');
                 var fileAdapter = SkipperDisk();
-                fileAdapter.read(fileUpload.FileLocation)
+                var pathFileDownload = path.resolve(__dirname, '..', '..', 'uploads') + '/' + req.param('type') + '/' + fileUpload.FileLocation;
+                fileAdapter.read(pathFileDownload)
                     .on('error', function(err) {
                         return res.serverError(err);
                     })

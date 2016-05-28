@@ -256,7 +256,7 @@ function onClickView() {
     } else {
         $('.review-background').addClass('hide');
     }
-    $('.review-background').attr('src', '/images/stories/view/' + backgroundUID);
+    $('.review-background').attr('src', '/download-background/' + backgroundUID + '/view');
     var dateWriteReview = new Date();
     if ($('.write-date').val()) {
         dateWriteReview = new Date($('.write-date').val());

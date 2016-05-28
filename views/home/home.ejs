@@ -1,4 +1,4 @@
-<div class="ui container text margin-top-20 margin-bottom-40">
+<div class="ui container text margin-top-20 margin-bottom-40 min-height-768px">
 	<div class="ui tall stacked segments home-main" id="border-top">
 		<!--count input-->
 		<input type="hidden" class="home-count" value="<%=locals.data.count%>" />
@@ -21,7 +21,7 @@
 						stories.FileUploads[0]){%>
 						<div class="ui small image">
 							<a href="/<%=stories.SpeakingUrl%>" class="ui image" title="<%=stories.Title%>">
-								<img alt="truyện ngắn ailee phan" class="height-image-home" src="/images/stories/home/<%=stories.FileUploads[0].FileLocation%>" />
+								<img alt="truyện ngắn ailee phan" class="height-image-home" src="/download-background/<%=stories.FileUploads[0].FileLocation%>/home" />
 							</a>
 						</div>
 						<%}%>

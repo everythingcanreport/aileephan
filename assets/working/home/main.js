@@ -109,7 +109,14 @@ $(document).scroll(function() {
         }
     }
 });
-
+//login facebook
+function onClickLoginFacebook() {
+    if (navigator.userAgent.match('CriOS'))
+        window.open('https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri=' + document.location.href + '&scope=email,public_profile', '', null);
+    else
+        FB.login(null, { scope: 'email,public_profile' });
+};
+//end
 //render data
 function renderData(response) {
     if (response && response.rows) {
@@ -129,8 +136,8 @@ function renderData(response) {
                 '<a href="/' + stories.SpeakingUrl + '" class="ui image"' +
                 'title="' + stories.Title +
                 '" alt="truyện ngắn ailee phan">' +
-                '<img alt="truyện ngắn ailee phan" class="height-image-home" src="/images/stories/home/' +
-                uidBackground + '"/></a></div>' : '';
+                '<img alt="truyện ngắn ailee phan" class="height-image-home" src="/download-background/' +
+                uidBackground + '/home"/></a></div>' : '';
             var title = (stories &&
                     stories.Title &&
                     stories.Title &&

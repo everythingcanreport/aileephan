@@ -129,6 +129,7 @@ $('#write-background').change(function(e) {
                     $('.write-background-uid').val(response[0].FileLocation);
                     toastr.success('Tải ảnh nền lên thành công!', 'Thành công', { timeOut: 2000 });
                 }, function(err) {
+                    $('.background-loader').removeClass('active');
                     toastr.error('Tải ảnh nền lên thất bại!', 'Thất bại', { timeOut: 2000 });
                 });
         });
@@ -192,8 +193,8 @@ function onClickSave() {
             require(['common/create', '/libs/notify/toastr.min.js'], function(create, toastr) {
                 create(data)
                     .then(function(response) {
+                        toastr.success('Thêm truyện thành công!', 'Thành công', { timeOut: 2000 });
                         require(['menu/menu'], function(menu) {
-                            toastr.success('Thêm truyện thành công!', 'Thành công', { timeOut: 2000 });
                             $('.write-save-button').removeClass('disabled');
                             menu.manageStories();
                         });

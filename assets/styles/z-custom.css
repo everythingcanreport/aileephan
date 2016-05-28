@@ -353,6 +353,7 @@ a:hover {
 .fb-like {
     height: 25px;
     overflow: hidden;
+    overflow-x: hidden;
 }
 
 .toast {

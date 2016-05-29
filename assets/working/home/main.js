@@ -38,7 +38,9 @@ define(function(require) {
         fbInit();
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
-                response.status === 'connected') {} else {
+                response.status === 'connected') {
+                console.log('on connected');
+            } else {
                 $('.menu-loader').removeClass('active');
                 $('.connected').addClass('hide');
                 $('.unknown').removeClass('hide');
@@ -113,13 +115,6 @@ $(document).scroll(function() {
         }
     }
     oldPosition = $(window).scrollTop() + $(window).height();
-});
-$('window').on('touchmove', function(event) {
-    //Prevent the window from being scrolled.
-    event.preventDefault();
-    alert('touchmove>>>>>>>>...');
-    //Do something like call window.scrollTo to mimic the scrolling
-    //request the user made.
 });
 //login facebook
 function onClickLoginFacebook() {

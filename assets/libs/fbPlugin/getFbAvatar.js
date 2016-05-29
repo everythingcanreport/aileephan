@@ -13,6 +13,7 @@ define(function() {
                         document.cookie = cname + "=" + cvalue + "; " + expires;
                     }
                     //set cookieAvatar
+                    setCookie('cookieAvatar', JSON.stringify(response.data), 1);
                     //function get cookie
                     function getCookie(cname) {
                         var name = cname + "=";
@@ -28,8 +29,7 @@ define(function() {
                         }
                         return "";
                     };
-                    setCookie('cookieAvatar', JSON.stringify(response.data), 1);
-                    alert(getCookie('cookieAvatar'));
+                    alert('avartar', getCookie('cookieAvatar'));
                     $('.connected-avatar').attr('src', response.data.url);
                     resolve({ status: 'success' });
                 } else {

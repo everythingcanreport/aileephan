@@ -124,10 +124,7 @@ $('window').on('touchmove', function(event) {
 //login facebook
 function onClickLoginFacebook() {
     if (navigator.userAgent.match('CriOS')) {
-        var loginFB = window.open('https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri=' + document.location.href + '&scope=email,public_profile', '', null);
-        loginFB.onload = function() {
-            alert('vaovaovaovoao');
-        }
+        window.open('https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri=' + document.location.href + '&scope=email,public_profile&response_type=token', '', true);
     } else {
         FB.login(null, { scope: 'email,public_profile' });
     }

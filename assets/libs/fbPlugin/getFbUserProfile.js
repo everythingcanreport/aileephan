@@ -14,7 +14,7 @@ define(function() {
                     //end
                     setCookie('cookieProfile', JSON.stringify(userProfile), 0);
                     $('.connected-name span').text(userProfile.name);
-                    resolve({ status: 'success' });
+                    resolve({ status: 'success', data: userProfile });
                 } else {
                     reject({ status: 'error' });
                 }

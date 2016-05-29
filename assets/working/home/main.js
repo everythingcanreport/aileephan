@@ -52,12 +52,7 @@ define(function(require) {
     window.fbAsyncInit = function() {
         fbInit();
         FB.getLoginStatus(function(response) {
-            if (getUrlParameter('code')) {
-                console.log('no ne', getUrlParameter('code'));
-                FB.api('/me', function(response) {
-                    console.log('response', response);
-                });
-            }
+            console.log('get status login', response);
             if (typeof response === 'object' &&
                 response.status === 'connected') {} else {
                 $('.menu-loader').removeClass('active');

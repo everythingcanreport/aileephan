@@ -1,4 +1,4 @@
-//check param to call api get infomation - menu
+//function get params url
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
@@ -13,13 +13,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
-if(getUrlParameter('code')){
-    console.log('no ne', getUrlParameter('code'));
-    FB.api('/me', function(response){
-        console.log('response', response);
-    });
-}
-//ends
+//end
 //check localStorageAvatar - localStorageProfile
 var localStorageAvatar = window.localStorage.getItem('localStorageAvatar');
 var localStorageProfile = window.localStorage.getItem('localStorageProfile');
@@ -58,6 +52,12 @@ define(function(require) {
     window.fbAsyncInit = function() {
         fbInit();
         FB.getLoginStatus(function(response) {
+            if (getUrlParameter('code')) {
+                console.log('no ne', getUrlParameter('code'));
+                FB.api('/me', function(response) {
+                    console.log('response', response);
+                });
+            }
             if (typeof response === 'object' &&
                 response.status === 'connected') {} else {
                 $('.menu-loader').removeClass('active');

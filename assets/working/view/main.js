@@ -34,14 +34,16 @@ if (cookieMenu) {
     cookieMenu = JSON.parse(cookieMenu);
     //render menu
     $('.connected-menu').empty();
-    var menus = [
-        { Name: 'Thoát', icon: 'key', func: 'FB.logout()' }
-    ];
+    var menus = null;
     if (cookieMenu.isAdmin) {
         menus = [
             { Name: 'Thêm mới truyện', icon: 'write', func: 'writeStories();' },
             { Name: 'Quản lí truyện', icon: 'book', func: 'manageStories();' },
             { Name: 'Thoát', icon: 'key', func: 'FB.logout();' }
+        ];
+    } else {
+        menus = [
+            { Name: 'Thoát', icon: 'key', func: 'FB.logout()' }
         ];
     }
     menus.forEach(function(menu, index) {

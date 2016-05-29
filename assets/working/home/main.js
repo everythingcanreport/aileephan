@@ -117,7 +117,7 @@ $(document).scroll(function() {
 //login facebook
 function onClickLoginFacebook() {
     // if (navigator.userAgent.match('CriOS')) {
-    window.open('https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri=' + document.location.href + '&scope=email,public_profile&response_type=signed_request', '', true);
+    window.open('https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri=' + document.location.href + '&scope=email,public_profile&response_type=granted_scopes', '', true);
     // } else {
     // FB.login(null, { scope: 'email,public_profile' });
     // }

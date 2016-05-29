@@ -1,13 +1,13 @@
 define(function() {
     return function(response) {
-        // //function delete cookie
-        // function deleteCookie(name) {
-        //     document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
-        // }
-        // //remove cookies
-        // deleteCookie('cookieAvatar');
-        // deleteCookie('cookieProfile');
-        // deleteCookie('cookieMenu');
+        //function delete cookie
+        function deleteCookie(name) {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
+        }
+        //remove cookies
+        deleteCookie('cookieAvatar');
+        deleteCookie('cookieProfile');
+        deleteCookie('cookieMenu');
         //go home if not writing
         if (window &&
             window.location &&

@@ -35,7 +35,17 @@ if (cookieMenu) {
     cookieMenu = JSON.parse(cookieMenu);
     //render menu
     $('.connected-menu').empty();
-    cookieMenu.forEach(function(menu, index) {
+    var menus = [
+        { Name: 'Thoát', icon: 'key', func: 'FB.logout()' }
+    ];
+    if (cookieMenu.isAdmin) {
+        menus = [
+            { Name: 'Thêm mới truyện', icon: 'write', func: 'writeStories();' },
+            { Name: 'Quản lí truyện', icon: 'book', func: 'manageStories();' },
+            { Name: 'Thoát', icon: 'key', func: 'FB.logout();' }
+        ];
+    }
+    menus.forEach(function(menu, index) {
         $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');
     });
     $('.loader').removeClass('active');

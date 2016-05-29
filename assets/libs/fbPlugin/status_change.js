@@ -21,27 +21,21 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
             var urlPicture = '/' + response.authResponse.userID + '/picture';
             Promise.all([getFbUserProfile(), getFbAvatar(urlPicture), getMenu(response)])
                 .then(function(successAll) {
-                    alert('after'+JSON.stringify(successAll[2].data))
-                    // setCookie('cookieMenu', JSON.stringify(successAll[2].data), 1);
-                    document.cookie = 'cookieMenu = '+JSON.stringify(successAll[2].data);
-
-                    function getCookie(cname) {
-                        var name = cname + "=";
-                        var ca = document.cookie.split(';');
-                        for (var i = 0; i < ca.length; i++) {
-                            var c = ca[i];
-                            while (c.charAt(0) == ' ') {
-                                c = c.substring(1);
-                            }
-                            if (c.indexOf(name) == 0) {
-                                return c.substring(name.length, c.length);
-                            }
-                        }
-                        return "";
-                    };
-                    alert('cookieMenu'+document.cookie);
+                    setCookie('cookieMenu', JSON.stringify(successAll[2].data), 0);
                     $('.connected-menu').empty();
-                    successAll[2].data.forEach(function(menu, index) {
+                    //check role isAdmin
+                    var menus = [
+                        { Name: 'Thoát', icon: 'key', func: 'FB.logout()' }
+                    ];
+                    if (successAll[2].data &&
+                        successAll[2].data.isAdmin) {
+                        menus = [
+                            { Name: 'Thêm mới truyện', icon: 'write', func: 'writeStories();' },
+                            { Name: 'Quản lí truyện', icon: 'book', func: 'manageStories();' },
+                            { Name: 'Thoát', icon: 'key', func: 'FB.logout();' }
+                        ];
+                    }
+                    menus.forEach(function(menu, index) {
                         $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');
                     });
                     $('.menu-loader').removeClass('active');

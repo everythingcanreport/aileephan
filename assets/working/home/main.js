@@ -1,46 +1,3 @@
-//thanh
-function openFBLoginDialogManually(){
-  // Open your auth window containing FB auth page 
-  // with forward URL to your Opened Window handler page (below)
-
-  var redirect_uri = "&redirect_uri=" + ABSOLUTE_URI + "fbjscomplete";
-  var scope = "&scope=public_profile,email,user_friends";
-  var url = "https://www.facebook.com/dialog/oauth?client_id=" + FB_ID + redirect_uri + scope;
-
-  // notice the lack of other param in window.open
-  // for some reason the opener is set to null
-  // and the opened window can NOT reference it
-  // if params are passed. #Chrome iOS Bug
-  window.open(url);
-
-}
-
-function fbCompleteLogin(){
-
-  FB.getLoginStatus(function(response) {
-    // Calling this with the extra setting "true" forces
-    // a non-cached request and updates the FB cache.
-    // Since the auth login elsewhere validated the user
-    // this update will now asyncronously mark the user as authed
-  }, true);
-
-}
-
-function requireLogin(callback){
-
-    FB.getLoginStatus(function(response) {
-        if (response.status != "connected"){
-            showLogin();
-        }else{
-            checkAuth(response.authResponse.accessToken, response.authResponse.userID, function(success){
-              // Check FB tokens against your API to make sure user is valid
-            });
-        }
-    });
-
-}
-
-//end
 //check localStorageAvatar - localStorageProfile
 var localStorageAvatar = window.localStorage.getItem('localStorageAvatar');
 var localStorageProfile = window.localStorage.getItem('localStorageProfile');
@@ -81,9 +38,7 @@ define(function(require) {
         fbInit();
         FB.getLoginStatus(function(response) {
             if (typeof response === 'object' &&
-                response.status === 'connected') {
-                console.log('on connected');
-            } else {
+                response.status === 'connected') {} else {
                 $('.menu-loader').removeClass('active');
                 $('.connected').addClass('hide');
                 $('.unknown').removeClass('hide');
@@ -162,9 +117,9 @@ $(document).scroll(function() {
 //login facebook
 function onClickLoginFacebook() {
     // if (navigator.userAgent.match('CriOS')) {
-        window.open('https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri=' + document.location.href + '&scope=email,public_profile&response_type=token', '', true);
+    window.open('https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri=' + document.location.href + '/#fbjscomplete' + '&scope=email,public_profile&response_type=token', '', true);
     // } else {
-        // FB.login(null, { scope: 'email,public_profile' });
+    // FB.login(null, { scope: 'email,public_profile' });
     // }
 };
 //end

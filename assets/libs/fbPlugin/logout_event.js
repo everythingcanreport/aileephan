@@ -8,6 +8,8 @@ define(function() {
         deleteCookie('cookieAvatar');
         deleteCookie('cookieProfile');
         deleteCookie('cookieMenu');
+        //clean menu html
+        $('.connected-menu').empty();
         //go home if not writing
         if (window &&
             window.location &&

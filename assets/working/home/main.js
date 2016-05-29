@@ -1,17 +1,3 @@
-if (typeof localStorage === 'object') {
-    try {
-        localStorage.setItem('localStorage', 1);
-        localStorage.removeItem('localStorage');
-        alert('in try ok.....');
-    } catch (e) {
-        Storage.prototype._setItem = Storage.prototype.setItem;
-        Storage.prototype.setItem = function() {};
-        alert('Your web browser does not support storing settings locally. In Safari, the most common cause of this is using "Private Browsing Mode". Some settings may not save or some features may not work properly for you.');
-    }
-}
-else {
-    alert('not object......');
-}
 //check localStorageAvatar - localStorageProfile
 var localStorageAvatar = window.localStorage.getItem('localStorageAvatar');
 var localStorageProfile = window.localStorage.getItem('localStorageProfile');

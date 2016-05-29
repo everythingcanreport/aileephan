@@ -8,6 +8,7 @@ define(function() {
         deleteCookie('cookieAvatar');
         deleteCookie('cookieProfile');
         deleteCookie('cookieMenu');
+        $('.connected').dropdown('restore defaults');
         //go home if not writing
         if (window &&
             window.location &&

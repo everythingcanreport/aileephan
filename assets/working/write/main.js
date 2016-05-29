@@ -1,3 +1,5 @@
+//dropdown menu
+$('.connected').dropdown();
 var isCreate = true;
 //function get cookie
 function getCookie(cname) {

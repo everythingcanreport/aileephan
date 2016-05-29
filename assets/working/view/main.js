@@ -1,3 +1,5 @@
+//dropdown menu
+$('.connected').dropdown();
 //function get cookie
 function getCookie(cname) {
     var name = cname + "=";

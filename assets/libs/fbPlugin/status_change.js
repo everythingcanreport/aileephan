@@ -38,7 +38,7 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
                         }
                         return "";
                     };
-                    alert('cookieMenu'+getCookie('cookieMenu'));
+                    alert('cookieMenu'+document.cookie);
                     $('.connected-menu').empty();
                     successAll[2].data.forEach(function(menu, index) {
                         $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');

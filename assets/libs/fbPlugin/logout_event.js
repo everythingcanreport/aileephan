@@ -9,7 +9,7 @@ define(function() {
         deleteCookie('cookieProfile');
         deleteCookie('cookieMenu');
         //clean menu html
-        $('.connected-menu').empty();
+        $('.connected').dropdown('refresh');
         //go home if not writing
         if (window &&
             window.location &&

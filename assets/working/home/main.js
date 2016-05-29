@@ -1,3 +1,46 @@
+//thanh
+function openFBLoginDialogManually(){
+  // Open your auth window containing FB auth page 
+  // with forward URL to your Opened Window handler page (below)
+
+  var redirect_uri = "&redirect_uri=" + ABSOLUTE_URI + "fbjscomplete";
+  var scope = "&scope=public_profile,email,user_friends";
+  var url = "https://www.facebook.com/dialog/oauth?client_id=" + FB_ID + redirect_uri + scope;
+
+  // notice the lack of other param in window.open
+  // for some reason the opener is set to null
+  // and the opened window can NOT reference it
+  // if params are passed. #Chrome iOS Bug
+  window.open(url);
+
+}
+
+function fbCompleteLogin(){
+
+  FB.getLoginStatus(function(response) {
+    // Calling this with the extra setting "true" forces
+    // a non-cached request and updates the FB cache.
+    // Since the auth login elsewhere validated the user
+    // this update will now asyncronously mark the user as authed
+  }, true);
+
+}
+
+function requireLogin(callback){
+
+    FB.getLoginStatus(function(response) {
+        if (response.status != "connected"){
+            showLogin();
+        }else{
+            checkAuth(response.authResponse.accessToken, response.authResponse.userID, function(success){
+              // Check FB tokens against your API to make sure user is valid
+            });
+        }
+    });
+
+}
+
+//end
 //check localStorageAvatar - localStorageProfile
 var localStorageAvatar = window.localStorage.getItem('localStorageAvatar');
 var localStorageProfile = window.localStorage.getItem('localStorageProfile');

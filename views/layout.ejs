@@ -18,8 +18,15 @@
     <!--STYLES END-->
     <link rel="stylesheet" href="/libs/notify/toastr.min.css">
     <script type="text/javascript" src="/libs/require.js" data-main="<%=locals.baseUrlServer%>"></script>
+    <script type="text/javascript">
+function handleAuth(){
+    // once the window is open 
+    window.opener.fbCompleteLogin();
+    window.close();    
+}
+</script>
   </head>
-  <body>
+  <body onload="handleAuth();">
     <%- partial ('header.ejs') %>
     <%- body %>
     <%- partial ('footer.ejs') %>

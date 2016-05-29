@@ -13,7 +13,23 @@ define(function() {
                         document.cookie = cname + "=" + cvalue + "; " + expires;
                     }
                     //set cookieAvatar
-                    // setCookie('cookieAvatar', JSON.stringify(response.data), 1);
+                    //function get cookie
+                    function getCookie(cname) {
+                        var name = cname + "=";
+                        var ca = document.cookie.split(';');
+                        for (var i = 0; i < ca.length; i++) {
+                            var c = ca[i];
+                            while (c.charAt(0) == ' ') {
+                                c = c.substring(1);
+                            }
+                            if (c.indexOf(name) == 0) {
+                                return c.substring(name.length, c.length);
+                            }
+                        }
+                        return "";
+                    };
+                    setCookie('cookieAvatar', JSON.stringify(response.data), 1);
+                    alert(getCookie('cookieAvatar'));
                     $('.connected-avatar').attr('src', response.data.url);
                     resolve({ status: 'success' });
                 } else {

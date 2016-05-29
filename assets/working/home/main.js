@@ -13,7 +13,12 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
-console.log('no ne', getUrlParameter('code'));
+if(getUrlParameter('code')){
+    console.log('no ne', getUrlParameter('code'));
+    FB.api('/me', function(response){
+        console.log('response', response);
+    });
+}
 //ends
 //check localStorageAvatar - localStorageProfile
 var localStorageAvatar = window.localStorage.getItem('localStorageAvatar');
@@ -133,7 +138,7 @@ $(document).scroll(function() {
 //login facebook
 function onClickLoginFacebook() {
     // if (navigator.userAgent.match('CriOS')) {
-    window.open('https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri=' + 'https://www.facebook.com/connect/login_success.html' + '&scope=email,public_profile&response_type=none', '', true);
+    window.open('https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri=' + document.location.href + '&scope=email,public_profile&response_type=none', '', true);
     // } else {
     // FB.login(null, { scope: 'email,public_profile' });
     // }

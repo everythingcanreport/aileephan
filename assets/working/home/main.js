@@ -52,7 +52,6 @@ define(function(require) {
     window.fbAsyncInit = function() {
         fbInit();
         FB.getLoginStatus(function(response) {
-            console.log('get status login', response);
             if (typeof response === 'object' &&
                 response.status === 'connected') {} else {
                 $('.menu-loader').removeClass('active');
@@ -137,6 +136,19 @@ function onClickLoginFacebook() {
     // } else {
     // FB.login(null, { scope: 'email,public_profile' });
     // }
+};
+//end
+//logout facebook
+function onClickLogoutFacebook() {
+    FB.login(function(response) {
+        if (response.authResponse) {
+            // Login success, check auth_nonce...
+            console.log('logout success');
+        } else {
+            // User cancelled
+            console.log('user cancel logout');
+        }
+    }, { auth_type: 'reauthenticate', auth_nonce: '{random-nonce}' })
 };
 //end
 //render data

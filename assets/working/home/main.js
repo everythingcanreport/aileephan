@@ -124,12 +124,21 @@ $('window').on('touchmove', function(event) {
 //login facebook
 function onClickLoginFacebook() {
     if (navigator.userAgent.match('CriOS'))
-        // window.open('https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri=' + document.location.href + '&scope=email,public_profile', '', null);
-    FB.ui({
-        method: 'login'
-    }, function(response){
-        alert('response'+response);
-    })
+    // window.open('https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri=' + document.location.href + '&scope=email,public_profile', '', null);
+        FB.ui({
+        method: 'oauth',
+        client_id: '1032633966817570',
+        api_key: '1032633966817570',
+        app_id: '1032633966817570',
+        fbconnect: '1',
+        response_type: 'code token',
+        perms: 'email',
+        scope: 'email',
+        redirect_uri: window.location.href,
+        display: 'iframe'
+    }, function(response) {
+        alert('response' + response);
+    });
     else
         FB.login(null, { scope: 'email,public_profile' });
 };

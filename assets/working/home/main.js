@@ -140,7 +140,7 @@ function onClickLoginFacebook() {
 //end
 //logout facebook
 function onClickLogoutFacebook() {
-    FB.login(function(response) {
+    FB.logout(function(response) {
         if (response.authResponse) {
             // Login success, check auth_nonce...
             console.log('logout success');
@@ -148,7 +148,7 @@ function onClickLogoutFacebook() {
             // User cancelled
             console.log('user cancel logout');
         }
-    }, { auth_type: 'reauthenticate', auth_nonce: '{random-nonce}' })
+    });
 };
 //end
 //render data

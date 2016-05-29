@@ -14,8 +14,8 @@ define(function() {
                     }
                     //set cookieAvatar
                     setCookie('cookieAvatar', JSON.stringify(response.data), 0);
-                    $('.connected-avatar').attr('src', response.data.url);
-                    resolve({ status: 'success' });
+                    // $('.connected-avatar').attr('src', response.data.url);
+                    resolve({ data: response.data });
                 } else {
                     reject({ status: 'error' });
                 }

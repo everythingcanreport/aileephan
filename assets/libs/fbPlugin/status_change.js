@@ -35,11 +35,11 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
                             { Name: 'Thoát', icon: 'key', func: 'FB.logout();' }
                         ];
                     }
-                    console.log('vaovaovoa', successAll);
-                    $('.connected-name').empty();
                     menus.forEach(function(menu, index) {
                         $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');
                     });
+                    $('.connected-name span').text(successAll[0].data.name);
+                    $('.connected-avatar').attr('src', successAll[1].data.url);
                     $('.menu-loader').removeClass('active');
                     $('.connected').removeClass('hide');
                     $('.unknown').addClass('hide');

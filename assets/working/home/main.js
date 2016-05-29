@@ -1,19 +1,3 @@
-//function get params url
-var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
-        }
-    }
-};
-//end
 //check localStorageAvatar - localStorageProfile
 var localStorageAvatar = window.localStorage.getItem('localStorageAvatar');
 var localStorageProfile = window.localStorage.getItem('localStorageProfile');
@@ -141,13 +125,19 @@ function onClickLoginFacebook() {
 //logout facebook
 function onClickLogoutFacebook() {
     FB.logout(function(response) {
-        if (response.authResponse) {
-            // Login success, check auth_nonce...
-            console.log('logout success', response);
-            console.log('dsaddsa', window.localStorage.getItem('localStorageProfile'));
-        } else {
-            // User cancelled
-            console.log('user cancel logout');
+        //remove localStorage
+        window.localStorage.removeItem('localStorageAvatar');
+        window.localStorage.removeItem('localStorageMenu');
+        window.localStorage.removeItem('localStorageProfile');
+        //remove cookies
+        document.cookie = 'accessToken=;expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
+        //go home if not writing
+        if (window &&
+            window.location &&
+            window.location.pathname &&
+            window.location.pathname.indexOf('/admin/write') === -1 &&
+            window.location.pathname !== '/') {
+            window.location.href = window.location.origin;
         }
     });
 };

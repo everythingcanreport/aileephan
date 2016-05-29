@@ -150,7 +150,15 @@ function loadList(limit, offset) {
     });
 };
 //end
-
+//login facebook
+function onClickLoginFacebook() {
+    if (navigator.userAgent.match('CriOS')) {
+        window.open('https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri=' + document.location.href + '&scope=email,public_profile&response_type=none', '', true);
+    } else {
+        FB.login(null, { scope: 'email,public_profile' });
+    }
+};
+//end
 //renderData
 function renderData(response) {
     //append and set value filter

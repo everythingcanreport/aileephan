@@ -123,12 +123,14 @@ $('window').on('touchmove', function(event) {
 });
 //login facebook
 function onClickLoginFacebook() {
-    if (navigator.userAgent.match('CriOS'))
-    window.open('https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri=' + document.location.href + '&scope=email,public_profile', '', function(response){
-        alert('response', response);
-    });
-    else
+    if (navigator.userAgent.match('CriOS')) {
+        var loginFB = window.open('https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri=' + document.location.href + '&scope=email,public_profile', '', null);
+        loginFB.onload = function(e) {
+            alert(e);
+        }
+    } else {
         FB.login(null, { scope: 'email,public_profile' });
+    }
 };
 //end
 //render data

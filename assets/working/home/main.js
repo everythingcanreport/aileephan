@@ -12,7 +12,7 @@ if (localStorageAvatar &&
     $('.unknown').addClass('hide');
 }
 //end
-
+console.log('vaooooo');
 //check localStorageMenu
 var localStorageMenu = window.localStorage.getItem('localStorageMenu');
 if (localStorageMenu) {

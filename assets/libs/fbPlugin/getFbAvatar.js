@@ -29,7 +29,7 @@ define(function() {
                         }
                         return "";
                     };
-                    alert('avartar', getCookie('cookieAvatar'));
+                    alert('avartar' +getCookie('cookieAvatar'));
                     $('.connected-avatar').attr('src', response.data.url);
                     resolve({ status: 'success' });
                 } else {

@@ -28,7 +28,7 @@ define(function() {
                         }
                         return "";
                     };
-                    alert('cookieProfile', getCookie('cookieProfile'));
+                    alert('cookieProfile'+ getCookie('cookieProfile'));
                     $('.connected-name span').text(userProfile.name);
                     resolve({ status: 'success' });
                 } else {

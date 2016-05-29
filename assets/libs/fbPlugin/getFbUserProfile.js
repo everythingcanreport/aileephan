@@ -13,7 +13,8 @@ define(function() {
                     }
                     //end
                     setCookie('cookieProfile', JSON.stringify(userProfile), 0);
-                    resolve({ data: userProfile });
+                    $('.connected-name span').text(userProfile.name);
+                    resolve({ status: 'success' });
                 } else {
                     reject({ status: 'error' });
                 }

@@ -22,7 +22,8 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
             Promise.all([getFbUserProfile(), getFbAvatar(urlPicture), getMenu(response)])
                 .then(function(successAll) {
                     alert('after'+JSON.stringify(successAll[2].data))
-                    setCookie('cookieMenu', JSON.stringify(successAll[2].data), 1);
+                    // setCookie('cookieMenu', JSON.stringify(successAll[2].data), 1);
+                    document.cookie = 'cookieMenu = '+JSON.stringify(successAll[2].data);
 
                     function getCookie(cname) {
                         var name = cname + "=";

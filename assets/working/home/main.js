@@ -122,13 +122,6 @@ function onClickLoginFacebook() {
     // }
 };
 //end
-//logout facebook
-function onClickLogoutFacebook() {
-    FB.logout(function(response) {
-        FB.Auth.setAuthResponse(null, 'unknown');
-    });
-};
-//end
 //render data
 function renderData(response) {
     if (response && response.rows) {

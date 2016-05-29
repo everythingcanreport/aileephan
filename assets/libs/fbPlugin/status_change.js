@@ -35,7 +35,7 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
                             { Name: 'Thoát', icon: 'key', func: 'FB.logout();' }
                         ];
                     }
-                    $('.connected').val();
+                    $('.connected-name').empty();
                     menus.forEach(function(menu, index) {
                         $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');
                     });

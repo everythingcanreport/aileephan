@@ -8,8 +8,6 @@ define(function() {
         deleteCookie('cookieAvatar');
         deleteCookie('cookieProfile');
         deleteCookie('cookieMenu');
-        //clean menu html
-        $('.ui.inline.dropdown').dropdown('refresh');
         //go home if not writing
         if (window &&
             window.location &&

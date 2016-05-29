@@ -38,6 +38,8 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
                     menus.forEach(function(menu, index) {
                         $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');
                     });
+                    //refresh menu
+                    $('.ui.inline.dropdown').dropdown('refresh');
                     $('.menu-loader').removeClass('active');
                     $('.connected').removeClass('hide');
                     $('.unknown').addClass('hide');

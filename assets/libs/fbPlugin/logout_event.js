@@ -1,11 +1,13 @@
 define(function() {
     return function(response) {
-        //remove localStorage
-        window.localStorage.removeItem('localStorageAvatar');
-        window.localStorage.removeItem('localStorageMenu');
-        window.localStorage.removeItem('localStorageProfile');
+        //function delete cookie
+        function deleteCookie(name) {
+            document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
+        }
         //remove cookies
-        document.cookie = 'accessToken=;expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
+        deleteCookie('cookieAvatar');
+        deleteCookie('cookieProfile');
+        deleteCookie('cookieMenu');
         //go home if not writing
         if (window &&
             window.location &&

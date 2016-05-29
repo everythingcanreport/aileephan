@@ -4,7 +4,15 @@ define(function() {
             FB.api('/me', function(userProfile) {
                 if (typeof userProfile === 'object' &&
                     !userProfile.error) {
-                    window.localStorage.setItem('localStorageProfile', JSON.stringify(userProfile));
+                    //funcion setCookie
+                    function setCookie(cname, cvalue, exdays) {
+                        var d = new Date();
+                        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                        var expires = "expires=" + d.toUTCString();
+                        document.cookie = cname + "=" + cvalue + "; " + expires;
+                    }
+                    //end
+                    setCookie('cookieProfile', JSON.stringify(userProfile), 1);
                     $('.connected-name span').text(userProfile.name);
                     resolve({ status: 'success' });
                 } else {

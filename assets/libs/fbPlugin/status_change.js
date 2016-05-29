@@ -4,6 +4,13 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
             response.status === 'connected' &&
             typeof response.authResponse === 'object' &&
             response.authResponse.userID) {
+            //funcion setCookie - getCookie
+            function setCookie(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toUTCString();
+                document.cookie = cname + "=" + cvalue + "; " + expires;
+            }
             //set cookiesAccessToken
             var nowC = new Date();
             var timeC = nowC.getTime();
@@ -14,7 +21,7 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
             var urlPicture = '/' + response.authResponse.userID + '/picture';
             Promise.all([getFbUserProfile(), getFbAvatar(urlPicture), getMenu(response)])
                 .then(function(successAll) {
-                    window.localStorage.setItem('localStorageMenu', JSON.stringify(successAll[2].data));
+                    setCookie('cookieMenu', JSON.stringify(successAll[2].data), 1);
                     $('.connected-menu').empty();
                     successAll[2].data.forEach(function(menu, index) {
                         $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');

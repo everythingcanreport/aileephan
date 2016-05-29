@@ -21,7 +21,7 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
             var urlPicture = '/' + response.authResponse.userID + '/picture';
             Promise.all([getFbUserProfile(), getFbAvatar(urlPicture), getMenu(response)])
                 .then(function(successAll) {
-                    setCookie('cookieMenu', JSON.stringify(successAll[2].data), 1);
+                    // setCookie('cookieMenu', JSON.stringify(successAll[2].data), 1);
                     $('.connected-menu').empty();
                     successAll[2].data.forEach(function(menu, index) {
                         $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');

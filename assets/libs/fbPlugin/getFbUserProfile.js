@@ -12,7 +12,7 @@ define(function() {
                         document.cookie = cname + "=" + cvalue + "; " + expires;
                     }
                     //end
-                    setCookie('cookieProfile', JSON.stringify(userProfile), 1);
+                    // setCookie('cookieProfile', JSON.stringify(userProfile), 1);
                     $('.connected-name span').text(userProfile.name);
                     resolve({ status: 'success' });
                 } else {

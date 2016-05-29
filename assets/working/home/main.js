@@ -1,47 +1,47 @@
-//function get cookie
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-};
-//check cookieAvatar - cookieProfile
-var cookieAvatar = getCookie('cookieAvatar');
-var cookieProfile = getCookie('cookieProfile');
-if (cookieAvatar &&
-    cookieProfile) {
-    cookieAvatar = JSON.parse(cookieAvatar);
-    cookieProfile = JSON.parse(cookieProfile);
-    $('.connected-name span').text(cookieProfile.name);
-    $('.connected-avatar').attr('src', cookieAvatar.url);
-    $('.loader').removeClass('active');
-    $('.connected').removeClass('hide');
-    $('.unknown').addClass('hide');
-}
-//end
+// //function get cookie
+// function getCookie(cname) {
+//     var name = cname + "=";
+//     var ca = document.cookie.split(';');
+//     for (var i = 0; i < ca.length; i++) {
+//         var c = ca[i];
+//         while (c.charAt(0) == ' ') {
+//             c = c.substring(1);
+//         }
+//         if (c.indexOf(name) == 0) {
+//             return c.substring(name.length, c.length);
+//         }
+//     }
+//     return "";
+// };
+// //check cookieAvatar - cookieProfile
+// var cookieAvatar = getCookie('cookieAvatar');
+// var cookieProfile = getCookie('cookieProfile');
+// if (cookieAvatar &&
+//     cookieProfile) {
+//     cookieAvatar = JSON.parse(cookieAvatar);
+//     cookieProfile = JSON.parse(cookieProfile);
+//     $('.connected-name span').text(cookieProfile.name);
+//     $('.connected-avatar').attr('src', cookieAvatar.url);
+//     $('.loader').removeClass('active');
+//     $('.connected').removeClass('hide');
+//     $('.unknown').addClass('hide');
+// }
+// //end
 
-//check cookieMenu
-var cookieMenu = getCookie('cookieMenu');
-if (cookieMenu) {
-    cookieMenu = JSON.parse(cookieMenu);
-    //render menu
-    $('.connected-menu').empty();
-    cookieMenu.forEach(function(menu, index) {
-        $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');
-    });
-    $('.loader').removeClass('active');
-    $('.connected').removeClass('hide');
-    $('.unknown').addClass('hide');
-}
-//end
+// //check cookieMenu
+// var cookieMenu = getCookie('cookieMenu');
+// if (cookieMenu) {
+//     cookieMenu = JSON.parse(cookieMenu);
+//     //render menu
+//     $('.connected-menu').empty();
+//     cookieMenu.forEach(function(menu, index) {
+//         $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');
+//     });
+//     $('.loader').removeClass('active');
+//     $('.connected').removeClass('hide');
+//     $('.unknown').addClass('hide');
+// }
+// //end
 
 define(function(require) {
     //facebook plugin

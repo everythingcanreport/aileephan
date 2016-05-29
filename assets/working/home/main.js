@@ -143,7 +143,8 @@ function onClickLogoutFacebook() {
     FB.logout(function(response) {
         if (response.authResponse) {
             // Login success, check auth_nonce...
-            console.log('logout success');
+            console.log('logout success', response);
+            console.log('dsaddsa', window.localStorage.getItem('localStorageProfile'));
         } else {
             // User cancelled
             console.log('user cancel logout');

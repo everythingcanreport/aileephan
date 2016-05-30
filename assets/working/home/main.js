@@ -22,7 +22,7 @@ if (cookieAvatar &&
     cookieProfile) {
     cookieAvatar = JSON.parse(cookieAvatar);
     cookieProfile = JSON.parse(cookieProfile);
-    $('.connected span').text(cookieProfile.name);
+    $('.connected-name').text(cookieProfile.name);
     $('.connected-avatar').attr('src', cookieAvatar.url);
     $('.loader').removeClass('active');
     $('.connected').removeClass('hide');

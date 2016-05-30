@@ -396,7 +396,3 @@ a:hover {
 .uppercase {
     text-transform: uppercase;
 }
-
-.position {
-    position: fixed !important;
-}

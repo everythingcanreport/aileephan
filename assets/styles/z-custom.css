@@ -367,3 +367,32 @@ a:hover {
     overflow: hidden !important;
     width: 150px !important;
 }
+
+.connected-avatar {
+    width: 4em !important;
+    height: 4em !important;
+}
+
+.h404 {
+    font-size: 100px !important;
+    font-weight: bold;
+    font-family: Oswald;
+    color: #e03997;
+    text-shadow: 5px 2px 4px #61275B;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}

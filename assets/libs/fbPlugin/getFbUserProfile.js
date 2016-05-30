@@ -13,7 +13,11 @@ define(function() {
                     }
                     //end
                     setCookie('cookieProfile', JSON.stringify(userProfile), 0);
-                    $('.connected-name').text(userProfile.name);
+                    var lastName = '';
+                    if (userProfile.name) {
+                        lastName = userProfile.name.split(' ')[userProfile.name.split(' ').length - 1];
+                    }
+                    $('.connected-name').text(lastName);
                     resolve({ status: 'success' });
                 } else {
                     reject({ status: 'error' });

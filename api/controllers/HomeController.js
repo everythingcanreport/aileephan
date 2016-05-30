@@ -1,7 +1,7 @@
 module.exports = {
     GetListStories: function(req, res) {
         Stories.findAndCountAll({
-                attributes: ['SpeakingUrl', 'Title', 'ShortContent','AuthorName', 'CreatedDate', 'CreatedBy'],
+                attributes: ['SpeakingUrl', 'Title', 'ShortContent', 'AuthorName', 'CreatedDate', 'CreatedBy'],
                 include: [{
                     attributes: ['UID'],
                     model: FileUpload,
@@ -15,7 +15,12 @@ module.exports = {
                 }],
                 limit: 5,
                 offset: 0,
-                order: [['CreatedDate', 'DESC']]
+                where: {
+                    Show: 'Y'
+                },
+                order: [
+                    ['CreatedDate', 'DESC']
+                ]
             })
             .then(function(listStories) {
                 res.view('home/home', {

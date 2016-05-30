@@ -132,7 +132,12 @@ $(document).scroll(function() {
             require(['common/listStories'], function(listStories) {
                 var dataFilter = {
                     Limit: 5,
-                    Offset: rows
+                    Offset: rows,
+                    Filter: [{
+                        Stories: {
+                            Show: 'Y'
+                        }
+                    }]
                 };
                 $('.home-loader').addClass('active');
                 listStories(dataFilter)

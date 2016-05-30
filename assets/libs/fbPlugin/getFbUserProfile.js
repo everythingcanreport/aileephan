@@ -13,6 +13,7 @@ define(function() {
                     }
                     //end
                     setCookie('cookieProfile', JSON.stringify(userProfile), 0);
+                    console.log('userProfile.name fb',userProfile.name);
                     $('.connected-name').text(userProfile.name);
                     resolve({ status: 'success' });
                 } else {

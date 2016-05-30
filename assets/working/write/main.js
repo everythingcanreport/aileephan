@@ -225,7 +225,7 @@ function onClickSave() {
                     Show: show,
                     Content: htmlContent,
                     ShortContent: textContent,
-                    AuthorName: localStorageProfile ? localStorageProfile.name : null
+                    AuthorName: cookieProfile ? cookieProfile.name : null
                 },
                 FileUploads: [{
                     UID: backgroundUID
@@ -258,7 +258,7 @@ function onClickSave() {
                     Content: htmlContent,
                     ShortContent: textContent,
                     UID: uidStories,
-                    AuthorName: localStorageProfile ? localStorageProfile.name : null
+                    AuthorName: cookieProfile ? cookieProfile.name : null
                 },
                 FileUploads: [{
                     UID: backgroundUID

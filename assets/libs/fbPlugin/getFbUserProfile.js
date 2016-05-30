@@ -12,7 +12,7 @@ define(function() {
                         document.cookie = cname + "=" + cvalue + "; " + expires;
                     }
                     //end
-                    setCookie('cookieProfile', JSON.stringify(userProfile), 0);
+                    setCookie('cookieProfile', JSON.stringify(userProfile), 1);
                     var lastName = '';
                     if (userProfile.name) {
                         lastName = userProfile.name.split(' ')[userProfile.name.split(' ').length - 1];

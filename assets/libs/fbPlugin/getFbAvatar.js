@@ -13,7 +13,7 @@ define(function() {
                         document.cookie = cname + "=" + cvalue + "; " + expires;
                     }
                     //set cookieAvatar
-                    setCookie('cookieAvatar', JSON.stringify(response.data), 0);
+                    setCookie('cookieAvatar', JSON.stringify(response.data), 1);
                     $('.connected-avatar').attr('src', response.data.url);
                     resolve({ status: 'success' });
                 } else {

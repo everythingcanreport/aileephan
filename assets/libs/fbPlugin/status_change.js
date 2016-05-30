@@ -21,7 +21,7 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
             var urlPicture = '/' + response.authResponse.userID + '/picture';
             Promise.all([getFbUserProfile(), getFbAvatar(urlPicture), getMenu(response)])
                 .then(function(successAll) {
-                    setCookie('cookieMenu', JSON.stringify(successAll[2].data), 0);
+                    setCookie('cookieMenu', JSON.stringify(successAll[2].data), 1);
                     $('.connected-menu').empty();
                     //check role isAdmin
                     var menus = [

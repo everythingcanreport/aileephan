@@ -396,3 +396,8 @@ a:hover {
 .uppercase {
     text-transform: uppercase;
 }
+
+.position {
+    position: fixed;
+    top: 2em;
+}

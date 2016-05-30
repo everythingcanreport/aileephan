@@ -398,6 +398,5 @@ a:hover {
 }
 
 .position {
-    position: fixed;
-    top: 2em;
+    position: fixed !important;
 }

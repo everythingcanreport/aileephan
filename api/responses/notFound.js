@@ -66,12 +66,24 @@ module.exports = function notFound(data, options) {
     // Otherwise try to guess an appropriate view, or if that doesn't
     // work, just send JSON.
     if (options.view) {
-        return res.view(options.view, { data: viewData, title: 'Not Found' });
+        return res.view(options.view, {
+            locals: {
+                data: viewData,
+                title: 'Không tìm thấy',
+                baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/app/appError'
+            } { data: viewData, title: 'Not Found' }
+        });
     }
 
     // If no second argument provided, try to serve the default view,
     // but fall back to sending JSON(P) if any errors occur.
-    else return res.view('404', { data: viewData, title: 'Not Found' }, function(err, html) {
+    else return res.view('404', {
+        locals: {
+            data: viewData,
+            title: 'Không tìm thấy',
+            baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/app/appError'
+        }
+    }, function(err, html) {
 
         // If a view error occured, fall back to JSON(P).
         if (err) {

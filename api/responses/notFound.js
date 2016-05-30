@@ -71,7 +71,7 @@ module.exports = function notFound(data, options) {
                 data: viewData,
                 title: 'Không tìm thấy',
                 baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/app/appError'
-            } { data: viewData, title: 'Not Found' }
+            }
         });
     }
 

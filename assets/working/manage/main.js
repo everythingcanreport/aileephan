@@ -186,7 +186,7 @@ function renderData(response) {
         response.rows.forEach(function(stories, index) {
             var no = '<td class="font-brand">' + (index + 1 + (currentPage - 1) * 5) + '</td>';
             var title = '<td colspan="2"><h4 class="ui header">' +
-                '<div class="content font-header">' + stories.Title + '</div></h4></td>';
+                '<div class="content font-brand">' + stories.Title + '</div></h4></td>';
             var show = stories.Show === 'Y' ? '<td class="center aligned">' +
                 '<div class="ui fitted slider checkbox">' +
                 '<input type="checkbox" name="change-status-' + stories.UID +

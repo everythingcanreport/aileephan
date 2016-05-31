@@ -93,3 +93,15 @@ define(function(require) {
     }(document, 'script', 'facebook-jssdk'));
     //end facebook plugin
 });
+
+function writeStories() {
+    require(['menu/menu'], function(menu) {
+        menu.writeStories();
+    });
+};
+
+function manageStories() {
+    require(['menu/menu'], function(menu) {
+        menu.manageStories();
+    });
+};

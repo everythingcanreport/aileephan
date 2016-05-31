@@ -13,11 +13,9 @@ define(function() {
                     }
                     //end
                     setCookie('cookieProfile', JSON.stringify(userProfile), 1);
-                    var lastName = '';
                     if (userProfile.name) {
-                        lastName = userProfile.name.split(' ')[userProfile.name.split(' ').length - 1];
+                        $('.connected-name').text(userProfile.name);
                     }
-                    $('.connected-name').text(lastName);
                     resolve({ status: 'success' });
                 } else {
                     reject({ status: 'error' });

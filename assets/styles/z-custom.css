@@ -218,6 +218,14 @@ body {
     margin-bottom: 30px
 }
 
+.margin-top-60 {
+    margin-top: 60px !important;
+}
+
+.margin-bottom-60 {
+    margin-bottom: 60px !important;
+}
+
 .margin-bottom-40 {
     margin-bottom: 40px !important;
 }

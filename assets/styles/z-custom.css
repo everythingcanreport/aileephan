@@ -191,7 +191,7 @@ body {
 }
 
 .margin-top-20 {
-    margin-top: 20px
+    margin-top: 20px !important;
 }
 
 .margin-top-30 {
@@ -199,7 +199,7 @@ body {
 }
 
 .margin-top-40 {
-    margin-top: 40px
+    margin-top: 40px !important;
 }
 
 .margin-top-50 {
@@ -211,7 +211,7 @@ body {
 }
 
 .margin-bottom-20 {
-    margin-bottom: 20px
+    margin-bottom: 20px !important;
 }
 
 .margin-bottom-30 {
@@ -219,7 +219,7 @@ body {
 }
 
 .margin-bottom-40 {
-    margin-bottom: 40px
+    margin-bottom: 40px !important;
 }
 
 .margin-bottom-50 {

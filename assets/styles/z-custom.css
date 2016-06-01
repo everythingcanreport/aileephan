@@ -399,7 +399,7 @@ a:hover {
 @media (min-width: 376px) {
     .pos-r {
         position: relative !important;
-        margin-top: 20px !important;
+        padding-bottom:50px;
     }
     .pos-a {
         position: absolute;

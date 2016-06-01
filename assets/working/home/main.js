@@ -190,7 +190,7 @@ function renderData(response) {
                 '">' +
                 stories.Title +
                 '</a></span>' +
-                '<span class="sub header font-author">' + (stories && stories.AuthorName ? stories.AuthorName : '') +
+                '<span class="sub header font-author" title="Tác giả">' + (stories && stories.AuthorName ? stories.AuthorName : '') +
                 '</span></div></h1>' : '';
             var content = ''
             var detail = '<div class="description"><p class="font-content">' +

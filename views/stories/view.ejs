@@ -5,12 +5,12 @@
     		<a href="/" title="Về trang chủ"><i class="icon home pink" style="font-size:3em;"></i></a>
   		</div>
 			<h1 class="ui header pink margin-top-80 margin-bottom-20 text-center">
-				<span class="font-header">
+				<span class="font-header" title="Tiêu đề truyện">
 					<!--title stories-->
 					<%=locals.data.Title%>
 					<!--end-->
 				</span>
-				<span class="sub header font-author">
+				<span class="sub header font-author" title="Tác giả">
 					<%=locals && locals.data && locals.data.AuthorName?locals.data.AuthorName:''%>
 				</span>
 			</h1>
@@ -24,7 +24,7 @@
 			</a>
 			<%}%>
 			</div>
-			<h4 class="ui horizontal divider pink header review-date font-ribbon">
+			<h4 class="ui horizontal divider pink header review-date font-ribbon" title="Thời gian sáng tác">
 			  	<!--date write stoties-->
 			  	<!--end-->
 			</h4>

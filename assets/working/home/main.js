@@ -186,6 +186,7 @@ function renderData(response) {
                     stories.Title.length !== 0) ? '<h1 class="ui pink header">' +
                 '<div class="content">' +
                 '<span class="font-header capitalize"><a href="/' + stories.SpeakingUrl +
+                '" alt="' + stories + stories.Title +
                 '">' +
                 stories.Title +
                 '</a></span>' +
@@ -196,7 +197,7 @@ function renderData(response) {
                 stories.ShortContent +
                 '</p><a href="/' +
                 stories.SpeakingUrl +
-                '"class = "ui mini pink button font-button">Chi tiết</a></div>';
+                '"class = "ui mini pink button font-button" title="' + stories.Title + '">Chi tiết</a></div>';
             $('.home-main').append('<div class="ui segment">' +
                 ribbon + homeDate + '<div class="ui very relaxed items"><div class="item">' +
                 imageBackground + '<div class="content">' + title + detail +

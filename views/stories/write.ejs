@@ -11,13 +11,13 @@
           <span class="font-brand">Tiêu đề:</span>
           <%if(locals &&
               locals.data) {%>
-          <input type="text"  class="write-title font-header" value="<%=locals.data.Title%>"/>
+          <input type="text" title="Tiêu đề truyện"  class="write-title font-header" value="<%=locals.data.Title%>"/>
           <%} else {%>
-            <input type="text" name="write_title"  class="write-title font-header"/>
+            <input type="text" title="Tiêu đề truyện" name="write_title"  class="write-title font-header"/>
             <%}%>
         </div>
         <div class="fields margin-top-20">
-          <div class="field title-background" onClick="onClickAttachImage();">
+          <div title="Đính kèm ảnh nền" class="field title-background" onClick="onClickAttachImage();">
             <i class="attach icon">
             </i>
             <span class="font-brand">Đính kèm ảnh</span>
@@ -53,7 +53,7 @@
             &nbsp;
           </div>
           <div class="field">
-            <div class="ui slider checkbox">
+            <div class="ui slider checkbox" title="Ấn hiện bài viết trên trang chủ">
             <%if(locals &&
               locals.data &&
               locals.data.Show==='Y') {%>

@@ -26,7 +26,13 @@ body {
 }
 
 .font-header {
-    font-family: UTMIsadoraBold !important;
+    font-family: UTMCentur !important;
+    text-transform: capitalize !important;
+    font-size: 30px !important;
+}
+
+.font-header-normal {
+    font-family: UTMCentur !important;
     text-transform: capitalize !important;
 }
 

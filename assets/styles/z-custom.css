@@ -43,12 +43,12 @@ body {
 }
 
 .font-brand {
-    font-family: DejaVuSans !important;
+    font-family: UTMCentur !important;
     font-weight: normal !important;
 }
 
 .font-button {
-    font-family: DejaVuSans !important;
+    font-family: UTMCentur !important;
     font-size: 12px !important;
 }
 
@@ -63,6 +63,7 @@ body {
 
 .font-date {
     font-family: texgyrecursorregular !important;
+    font-size: 18px;
 }
 
 .font-content {

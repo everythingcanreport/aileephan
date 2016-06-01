@@ -56,8 +56,8 @@
         </td>
         <td class="center aligned">
           <div class="ui fitted slider checkbox">
-           <%if(stories.Show==='Y'){%> <input type="checkbox" name="change-status-<%=stories.UID%>" checked="true" value="Y" onChange="onChangeShow('<%=stories.UID%>');" /><%} else {%>
-            <input type="checkbox" name="change-status-<%=stories.UID%>" value="Y" onChange="onChangeShow('<%=stories.UID%>');" />
+           <%if(stories.Show==='Y'){%> <input title="Cập nhật trạng thái truyện" type="checkbox" name="change-status-<%=stories.UID%>" checked="true" value="Y" onChange="onChangeShow('<%=stories.UID%>');" /><%} else {%>
+            <input title="Cập nhật trạng thái truyện" type="checkbox" name="change-status-<%=stories.UID%>" value="Y" onChange="onChangeShow('<%=stories.UID%>');" />
             <%}%><label></label>
           </div>
         </td>
@@ -65,7 +65,8 @@
           <div class="ui buttons tiny icon">
             <a class="ui grey button font-button" onClick="onClickView('<%=stories.UID%>');" title="Xem lại truyện"><i class="icon search"></i>Xem</a>
             <div class="or"></div>
-            <a class="ui pink button font-button" onClick="onClickEdit('<%=stories.UID%>');"><i class="icon write" title="Cập nhật lại truyện"></i>Sửa</a>
+            <a class="ui pink button font-button" onClick="onClickEdit('<%=stories.UID%>');"
+            title="Cập nhật truyện"><i class="icon write" ></i>Sửa</a>
           </div>
         </td>
       </tr>

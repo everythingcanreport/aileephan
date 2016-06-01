@@ -189,25 +189,25 @@ function renderData(response) {
                 '<div class="content font-header-normal">' + stories.Title + '</div></h4></td>';
             var show = stories.Show === 'Y' ? '<td class="center aligned">' +
                 '<div class="ui fitted slider checkbox">' +
-                '<input type="checkbox" name="change-status-' + stories.UID +
+                '<input title="Cập nhật trạng thái truyện" type="checkbox" name="change-status-' + stories.UID +
                 '" onChange="onChangeShow(\'' + stories.UID + '\');"  checked="true"/>' +
                 '<label></label></div></td>' : '<td class="center aligned">' +
                 '<div class="ui fitted slider checkbox">' +
-                '<input type="checkbox" name="change-status-' + stories.UID +
+                '<input title="Cập nhật trạng thái truyện" type="checkbox" name="change-status-' + stories.UID +
                 '" onChange="onChangeShow(\'' + stories.UID + '\');"/>' +
                 '<label></label></div></td>';
             var action = '<td><div class="ui buttons tiny icon">' +
-                '<a class="ui grey button font-button" onClick="onClickView(\'' + stories.UID + '\');">' +
+                '<a title="Xem lại truyện" class="ui grey button font-button" onClick="onClickView(\'' + stories.UID + '\');">' +
                 '<i class="icon search"></i>Xem</a>' +
                 '<div class="or"></div>' +
-                '<a class="ui pink button font-button" onClick="onClickEdit(\'' + stories.UID + '\');">' +
+                '<a title="Cập nhật truyện" class="ui pink button font-button" onClick="onClickEdit(\'' + stories.UID + '\');">' +
                 '<i class="icon write"></i>Sửa</a></div></td>';
             $('tbody').append('<tr>' + no + title + show + action + '</tr>');
             $('.manage-pagination').removeClass('hide');
         });
         //rerender pagination
         $('.manage-pagination-main').text('');
-        $('.manage-pagination-main').append('<a class="icon item ' + (currentPage === 1 ? 'disabled' : '') + '" onClick="paginationManage(\'prev\');"><i class="left chevron icon"></i></a>');
+        $('.manage-pagination-main').append('<a title="Trang trước" class="icon item ' + (currentPage === 1 ? 'disabled' : '') + '" onClick="paginationManage(\'prev\');"><i class="left chevron icon"></i></a>');
         var totalPage = Math.ceil(response.count / 5);
         totalPageCurrent = totalPage;
         var hasDisbleItemPrev = false;
@@ -261,7 +261,7 @@ function renderData(response) {
                         }
                     } else {
                         $('.manage-pagination-main').append('<a class="item manage-pagination-' + (totalPage == currentPage ? ' active' : '') + '" onClick="paginationManage(' + totalPage + ');">' + totalPage + '</a>');
-                        $('.manage-pagination-main').append('<a class="icon item ' + (currentPage === totalPage ? 'disabled' : '') + '" onClick="paginationManage(\'next\');"><i class="right chevron icon"></i></a>');
+                        $('.manage-pagination-main').append('<a title="Trang sau" class="icon item ' + (currentPage === totalPage ? 'disabled' : '') + '" onClick="paginationManage(\'next\');"><i class="right chevron icon"></i></a>');
                         return false;
                     }
                 } else {
@@ -269,7 +269,7 @@ function renderData(response) {
                 }
             }
         }
-        $('.manage-pagination-main').append('<a class="icon item ' + (currentPage === totalPage ? 'disabled' : '') + '" onClick="paginationManage(\'next\');"><i class="right chevron icon"></i></a>');
+        $('.manage-pagination-main').append('<a title="Trang sau" class="icon item ' + (currentPage === totalPage ? 'disabled' : '') + '" onClick="paginationManage(\'next\');"><i class="right chevron icon"></i></a>');
         $('.manage-pagination-main').removeClass('hide');
     } else {
         $('.manage-pagination-main').addClass('hide');

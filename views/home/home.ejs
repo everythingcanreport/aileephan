@@ -11,7 +11,7 @@
 			locals.data.rows.forEach(function(stories, index){%>
 			<div class="ui segment">
 				<a class="ui pink font-ribbon ribbon large label">Ngôn tình</a>
-				<span class="float-right media-time font-date home-date">
+				<span class="float-right media-time font-ribbon home-date">
 				</span>
 				<input type="hidden" class="home-date-hidden" value="<%=stories.CreatedDate%>" />
 				<div class="ui very relaxed items">
@@ -35,7 +35,7 @@
 								    	<%=stories.Title%>
 								    	</a>
 								    	</span>
-								    	<span class="sub header font-ribbon">
+								    	<span class="sub header">
 								    		<%=(stories && stories.AuthorName?stories.AuthorName:'')%>
 								    	</span>
 								  	</div>

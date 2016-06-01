@@ -205,8 +205,8 @@ function onClickSave() {
         var htmlContent = tinymce.get('write-content').getContent();
         var textContent = tinymce.get('write-content').getContent({ format: 'text' });
         if (textContent &&
-            textContent.length > 200) {
-            var maxLengthCut = 200 // maximum number of characters to extract
+            textContent.length > 150) {
+            var maxLengthCut = 150 // maximum number of characters to extract
                 //trim the string to the maximum length
             var trimmedString = textContent.substr(0, maxLengthCut);
             //re-trim if we are in the middle of a word

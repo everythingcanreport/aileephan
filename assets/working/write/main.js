@@ -100,8 +100,8 @@ define(function(require) {
         height: 300,
         setup: function(ed) {
             ed.on('init', function() {
-                this.getDoc().body.style.fontSize = '16px';
-                this.getDoc().body.style.fontFamily = 'UTMCentur';
+                this.getDoc().body.style.fontSize = '18px';
+                this.getDoc().body.style.fontFamily = 'texgyrecursorregular';
                 $('.write-loader').removeClass('active');
                 $('.write-stories').removeClass('hide');
                 $('.write-title').focus();
@@ -205,8 +205,8 @@ function onClickSave() {
         var htmlContent = tinymce.get('write-content').getContent();
         var textContent = tinymce.get('write-content').getContent({ format: 'text' });
         if (textContent &&
-            textContent.length > 300) {
-            var maxLengthCut = 300 // maximum number of characters to extract
+            textContent.length > 200) {
+            var maxLengthCut = 200 // maximum number of characters to extract
                 //trim the string to the maximum length
             var trimmedString = textContent.substr(0, maxLengthCut);
             //re-trim if we are in the middle of a word

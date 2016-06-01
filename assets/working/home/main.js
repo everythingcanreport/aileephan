@@ -186,7 +186,7 @@ function renderData(response) {
                     stories.Title.length !== 0) ? '<h1 class="ui pink header">' +
                 '<div class="content">' +
                 '<span class="font-header capitalize"><a href="/' + stories.SpeakingUrl +
-                '" alt="' + stories + stories.Title +
+                '" title="' + stories + stories.Title +
                 '">' +
                 stories.Title +
                 '</a></span>' +

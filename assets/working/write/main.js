@@ -100,8 +100,8 @@ define(function(require) {
         height: 300,
         setup: function(ed) {
             ed.on('init', function() {
-                this.getDoc().body.style.fontSize = '18px';
-                this.getDoc().body.style.fontFamily = 'texgyrecursorregular';
+                this.getDoc().body.style.fontSize = '16px';
+                this.getDoc().body.style.fontFamily = 'UTMCentur';
                 $('.write-loader').removeClass('active');
                 $('.write-stories').removeClass('hide');
                 $('.write-title').focus();

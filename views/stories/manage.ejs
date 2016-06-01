@@ -11,17 +11,17 @@
      <div class="fields inline">
       <div class="field ">
        <div class="ui input">
-          <input type="text" placeholder="Tìm..." class="filter-title font-brand" onkeypress="onKeypressSearch(event);"/>
+          <input type="text" placeholder="Tìm..." class="filter-title font-brand" onkeypress="onKeypressSearch(event);" title="Nhập tiêu đề truyện cần tìm"/>
        </div>
       </div>
       <div class="field">
-       <div class="ui slider checkbox">
+       <div class="ui slider checkbox" title="Truyện được hiển thị trên trang chủ">
         <input type="checkbox" name="manage_show" id="manage-show-show"  value="Y" onChange="loadList();" checked="true" />
         <label for="manage-show-show" class="font-brand">Hiển thị</label>
        </div>
       </div>
       <div class="field">
-       <div class="ui slider checkbox">
+       <div class="ui slider checkbox" title="Truyện không hiển thị trên trang chủ">
         <input type="checkbox" name="manage_hide" id="manage-show-hide" value="Y" onChange="loadList();" checked="true" />
         <label for="manage-show-hide" class="font-brand">Không hiển thị</label>
        </div>
@@ -63,9 +63,9 @@
         </td>
         <td>
           <div class="ui buttons tiny icon">
-            <a class="ui grey button font-button" onClick="onClickView('<%=stories.UID%>');"><i class="icon search"></i>Xem</a>
+            <a class="ui grey button font-button" onClick="onClickView('<%=stories.UID%>');" title="Xem lại truyện"><i class="icon search"></i>Xem</a>
             <div class="or"></div>
-            <a class="ui pink button font-button" onClick="onClickEdit('<%=stories.UID%>');"><i class="icon write"></i>Sửa</a>
+            <a class="ui pink button font-button" onClick="onClickEdit('<%=stories.UID%>');"><i class="icon write" title="Cập nhật lại truyện"></i>Sửa</a>
           </div>
         </td>
       </tr>
@@ -119,7 +119,7 @@
         <tr>
           <th colspan="6">
             <div class="ui right floated pagination menu small manage-pagination-main <%=locals.data.count==0? 'hide': ''%>">
-              <a class="icon item disabled" onClick="paginationManage('prev');"><i class="left chevron icon"></i></a>
+              <a class="icon item disabled" onClick="paginationManage('prev');"><i class="left chevron icon" title="Trang trước"></i></a>
               <%
               for(var i=1; i<=Math.ceil(locals.data.count/5);i++){
                 if(i===4 && 
@@ -131,7 +131,7 @@
                 <%} else if(i<=4) {%>
                 <a class="item manage-pagination-<%=i+(i==1?' active': '')%>" onClick="paginationManage(<%=i%>);"><%=i%></a>
               <%}}%>
-              <a class="icon item <%=(Math.ceil(locals.data.count/5)===1?'disabled':'')%>" onClick="paginationManage('next');"><i class="right chevron icon"></i></a>
+              <a class="icon item <%=(Math.ceil(locals.data.count/5)===1?'disabled':'')%>" onClick="paginationManage('next');" title="Trang sau"><i class="right chevron icon"></i></a>
             </div>
             <div class="manage-total font-brand">Tổng cộng: <%=locals.data.count%> truyện</div>
           </th>
@@ -144,7 +144,7 @@
     <div class="ui long modal" >
     <div class="ui segment">
       <h1 class="ui header pink margin-top-20 margin-bottom-20 text-center">
-        <span class="font-header review-title">
+        <span class="font-header review-title" title="Tiêu đề truyện">
         </span>
       </h1>
       <div class="ui images align-center">
@@ -159,7 +159,7 @@
       <div class="ui divider">
       </div>
       <div class="actions align-right">
-        <div class="ui pink tiny approve button font-button">
+        <div class="ui pink tiny approve button font-button" title="Trở lại">
           Trở lại
           <i class="right chevron icon"></i>
         </div>

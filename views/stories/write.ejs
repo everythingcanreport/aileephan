@@ -11,9 +11,9 @@
           <span class="font-brand">Tiêu đề:</span>
           <%if(locals &&
               locals.data) {%>
-          <input type="text" title="Tiêu đề truyện"  class="write-title font-header" value="<%=locals.data.Title%>"/>
+          <input type="text" title="Tiêu đề truyện"  class="write-title font-header-normal" value="<%=locals.data.Title%>"/>
           <%} else {%>
-            <input type="text" title="Tiêu đề truyện" name="write_title"  class="write-title font-header"/>
+            <input type="text" title="Tiêu đề truyện" name="write_title"  class="write-title font-header-normal"/>
             <%}%>
         </div>
         <div class="fields margin-top-20">

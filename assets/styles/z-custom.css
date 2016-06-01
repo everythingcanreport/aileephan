@@ -12,6 +12,11 @@
     src: url('../../fonts/UTMIsadoraBold.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: texgyrecursorregular;
+    src: url('../../fonts/texgyrecursorregular.otf') format('truetype');
+}
+
 body {
     background: url('../../images/bg.gif') no-repeat 0 0 fixed;
     -webkit-background-size: 100% 100%;
@@ -50,7 +55,7 @@ body {
 }
 
 .font-content {
-    font-family: UTMCentur;
+    font-family: texgyrecursorregular;
     font-size: 16px !important;
 }
 
@@ -399,7 +404,7 @@ a:hover {
 @media (min-width: 376px) {
     .pos-r {
         position: relative !important;
-        padding-bottom:100px;
+        padding-bottom: 100px;
     }
     .pos-a {
         position: absolute;

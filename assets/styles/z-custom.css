@@ -49,7 +49,7 @@ body {
 
 .font-button {
     font-family: UTMCentur !important;
-    font-size: 12px !important;
+    /*font-size: 12px !important;*/
 }
 
 .capitalize {
@@ -63,7 +63,7 @@ body {
 
 .font-date {
     font-family: texgyrecursorregular !important;
-    font-size: 18px;
+    font-size: 18px !important;
 }
 
 .font-content {

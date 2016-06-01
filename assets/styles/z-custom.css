@@ -35,6 +35,11 @@ body {
     font-weight: normal !important;
 }
 
+.font-author: {
+    font-family: UTMCentur !important;
+    font-style: italic;
+}
+
 .font-button {
     font-family: UTMCentur !important;
     font-size: 12px !important;
@@ -399,7 +404,7 @@ a:hover {
 @media (min-width: 376px) {
     .pos-r {
         position: relative !important;
-        padding-bottom:100px;
+        padding-bottom: 100px;
     }
     .pos-a {
         position: absolute;

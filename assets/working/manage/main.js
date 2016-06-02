@@ -346,16 +346,15 @@ function onClickView(uid) {
                     $('.review-date').text('');
                     $('.review-date').append(dateWriteReviewShow);
                     //show long modal fixed
-                    // var selfModal = $('.ui.long.modal');
-                    // selfModal.modal({
-                    //     onShow: function() {
-                    //         setTimeout(function() {
-                    //             selfModal.modal('refresh');
-                    //         }, 250);
-                    //     }
-                    // });
-                    // selfModal.modal('show');
-                    $('.ui.modal').modal('show');
+                    var selfModal = $('.ui.long.modal');
+                    selfModal.modal({
+                        onShow: function() {
+                            setTimeout(function() {
+                                selfModal.modal('refresh');
+                            }, 1000);
+                        }
+                    });
+                    selfModal.modal('show');
                 } else {
                     toastr.error('Tải truyện thất bại!', 'Thất bại', { timeOut: 2000 });
                 }

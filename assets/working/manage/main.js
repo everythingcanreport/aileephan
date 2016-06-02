@@ -400,7 +400,7 @@ function onClickChangeStatusNo() {
 
 //confirm change status yes
 function onClickChangeStatusYes() {
-    $('button-yes').addClass('disabled');
+    $('.button-yes').addClass('disabled');
     var uid = $('.confirm-change-status').val();
     if (uid &&
         uid.length !== 0) {

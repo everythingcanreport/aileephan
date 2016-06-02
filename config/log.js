@@ -60,7 +60,7 @@ customLogger.add(Mail, {
     subject: 'Debug Production 3005',
     from: 'Ailee Phan Production <hotro.ailee.phan@gmail.com>',
     to: 'Thanh Dev <thanh.dev.node@gmail.com>',
-    level: 'error'
+    level: 'verbose'
 });
 var log = {};
 if (process.env.NODE_ENV === 'production') {

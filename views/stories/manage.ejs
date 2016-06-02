@@ -133,6 +133,7 @@
                 <a class="item manage-pagination-<%=i+(i==1?' active': '')%>" onClick="paginationManage(<%=i%>);"><%=i%></a>
               <%}}%>
               <a class="icon item <%=(Math.ceil(locals.data.count/5)===1?'disabled':'')%>" onClick="paginationManage('next');" title="Trang sau"><i class="right chevron icon"></i></a>
+              <input class="total-current-page-inpput" value="<%=Math.ceil(locals.data.count/5)%>" />
             </div>
             <div class="manage-total font-brand">Tổng cộng: <%=locals.data.count%> truyện</div>
           </th>

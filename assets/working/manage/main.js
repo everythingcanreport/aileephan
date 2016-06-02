@@ -284,7 +284,7 @@ function renderData(response) {
 
 //pagination
 var currentPage = 1;
-var totalPageCurrent = 1;
+var totalPageCurrent = $('.total-current-page-inpput').val();
 
 function paginationManage(page) {
     if ((page === 'prev' &&

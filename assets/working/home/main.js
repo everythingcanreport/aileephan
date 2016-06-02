@@ -173,7 +173,7 @@ function renderData(response) {
                 dateCreateShow + '</span>';
             var uidBackground = (stories &&
                 stories.FileUploads &&
-                stories.FileUploads[0]) ? stories.FileUploads[0].FileLocation : null;
+                stories.FileUploads[0]) ? stories.FileUploads[0].UID : null;
             var imageBackground = uidBackground ? '<div class="ui small image">' +
                 '<a href="/' + stories.SpeakingUrl + '" class="ui image"' +
                 'title="' + stories.Title +

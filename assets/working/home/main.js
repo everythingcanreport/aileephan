@@ -169,7 +169,7 @@ function renderData(response) {
             var y = dateCreate.getFullYear();
             var dateCreateShow = d + '/' + m + '/' + y;
             var ribbon = '<a class="ui pink font-ribbon ribbon large label">Ngôn tình</a>';
-            var homeDate = '<span class="float-right media-time font-ribbon home-date">' +
+            var homeDate = '<span title="Thời gian sáng tác" class="float-right media-time font-ribbon home-date">' +
                 dateCreateShow + '</span>';
             var uidBackground = (stories &&
                 stories.FileUploads &&

@@ -5,7 +5,7 @@ requirejs.config({
     }
 });
 requirejs(['jquery.min'], function($) {
-    requirejs(['semantic.min'], function(semantic) {
+    requirejs(['semantic.min', '/libs/tinymce/tinymce.min.js'], function(semantic, tinymce) {
         requirejs(['app/main']);
     });
 });

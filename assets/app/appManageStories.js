@@ -5,7 +5,7 @@ requirejs.config({
     }
 });
 requirejs(['jquery.min'],
-    function($, noty) {
+    function($) {
         requirejs(['semantic.min'], function(semantic) {
             requirejs(['app/main']);
         });

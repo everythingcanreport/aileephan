@@ -356,7 +356,7 @@ function onClickView(uid) {
                     // });
                     // selfModal.modal('show');
                     $('.ui.long.modal')
-                        .modal({}).modal('show');
+                        .modal({ detachable: false, observeChanges: true }).modal('show').modal('refresh');
                 } else {
                     toastr.error('Tải truyện thất bại!', 'Thất bại', { timeOut: 2000 });
                 }

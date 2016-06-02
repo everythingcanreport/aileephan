@@ -272,6 +272,9 @@ function renderData(response) {
         $('.manage-pagination-main').append('<a title="Trang sau" class="icon item ' + (currentPage === totalPage ? 'disabled' : '') + '" onClick="paginationManage(\'next\');"><i class="right chevron icon"></i></a>');
         $('.manage-pagination-main').removeClass('hide');
     } else {
+        for(var i=0;i<=6;i++){
+            $('tbody').append('<tr><td></td><td colspan="2"></td><td></td><td></td></tr>');
+        }
         $('.manage-pagination-main').addClass('hide');
     }
     //set total for pagination

@@ -68,7 +68,10 @@ p {
 .font-content {
     font-family: UTMCentur;
     font-size: 16px !important;
-    padding-bottom: 1.5em;
+}
+
+.padding-bottom-20 {
+    padding-bottom: 20px;
 }
 
 .font-ribbon {

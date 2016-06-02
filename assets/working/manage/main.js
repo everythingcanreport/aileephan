@@ -355,7 +355,10 @@ function onClickView(uid) {
                     //     }
                     // });
                     // selfModal.modal('show');
-                    $('.ui.long.modal').modal('setting', {allowMultiple: false}).modal('show');
+                    $('.ui.long.modal')
+                        .modal({ allowMultiple: false })
+                        .modal('show')
+                        .modal('attach events', '.ui.button');
                 } else {
                     toastr.error('Tải truyện thất bại!', 'Thất bại', { timeOut: 2000 });
                 }

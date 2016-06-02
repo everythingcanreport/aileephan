@@ -1,1 +1,321 @@
-function getCookie(e){for(var t=e+"=",n=document.cookie.split(";"),i=0;i<n.length;i++){for(var o=n[i];" "==o.charAt(0);)o=o.substring(1);if(0==o.indexOf(t))return o.substring(t.length,o.length)}return""}function writeStories(){require(["menu/menu"],function(e){e.writeStories()})}function manageStories(){require(["menu/menu"],function(e){e.manageStories()})}function onClickLoginFacebook(){navigator.userAgent.match("CriOS")?window.open("https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri="+document.location.href+"&scope=email,public_profile&response_type=none","",!0):FB.login(null,{scope:"email,public_profile"})}function validateWrite(){var e=$(".write-title").val();return e&&0!==e.length?e.length>255?($(".validate-title").addClass("error"),$(".error-message-write").text(""),$(".error-message-write").append('<ul class="list"><li>Tiêu đề không được quá 255 ký tự!</li></ul>'),$(".error-message-write").removeClass("hide"),!1):($(".validate-title").removeClass("error"),$(".error-message-write").addClass("hide"),!0):($(".validate-title").addClass("error"),$(".error-message-write").text(""),$(".error-message-write").append('<ul class="list"><li>Vui lòng nhập tiêu đề!</li></ul>'),$(".error-message-write").removeClass("hide"),!1)}function onClickSave(){if($(".write-save-button").addClass("disabled"),validateWrite()){var e=tinymce.get("write-content").getContent(),t=tinymce.get("write-content").getContent({format:"text"});if(t&&t.length>200){var n=200,i=t.substr(0,n);i=i.substr(0,Math.min(i.length,i.lastIndexOf(" "))),t=i+" ..."}var o=$(".write-title").val(),r=$(".write-show").val(),a=$(".write-background-uid").val();if(isCreate){var l={Stories:{Title:o,Show:r,Content:e,ShortContent:t,AuthorName:cookieProfile?cookieProfile.name:null},FileUploads:[{UID:a}]};require(["common/create","/libs/notify/toastr.min.js"],function(e,t){e(l).then(function(e){t.success("Thêm truyện thành công!","Thành công",{timeOut:2e3}),require(["menu/menu"],function(e){e.manageStories()})},function(e){e&&403===e.status?(t.warning("Thao tác xâm nhập bảo mật hệ thống. Để thực hiện tính năng này bạn cần Đăng nhập với quyền Quản trị viên!","Cảnh báo",{timeOut:5e3}),$(".write-save-button").removeClass("disabled")):(t.error("Thêm truyện thất bại!","Thất bại",{timeOut:2e3}),$(".write-save-button").removeClass("disabled"))})})}else{var s=$(".write-uid").val(),l={Stories:{Title:o,Show:r,Content:e,ShortContent:t,UID:s,AuthorName:cookieProfile?cookieProfile.name:null},FileUploads:[{UID:a}]};require(["common/update","/libs/notify/toastr.min.js"],function(e,t){e(l).then(function(e){require(["menu/menu"],function(e){t.success("Cập nhật truyện thành công!","Thành công",{timeOut:2e3}),e.manageStories()})},function(e){t.error("Cập nhật truyện thất bại!","Thất bại",{timeOut:2e3}),$(".write-save-button").removeClass("disabled")})})}}else $(".write-save-button").removeClass("disabled")}function onClickView(){var e=tinymce.get("write-content").getContent(),t=$(".write-title").val();$(".review-description").text(""),$(".review-description").append(e),$(".review-title").text(t);var n=$(".write-background-uid").val();n?$(".review-background").removeClass("hide"):$(".review-background").addClass("hide"),$(".review-background").attr("src","/download-background/"+n);var i=new Date;$(".write-date").val()&&(i=new Date($(".write-date").val()));var o=i.getDate()<=9?"0"+i.getDate():i.getDate(),r=i.getMonth()+1<=9?"0"+(i.getMonth()+1):i.getMonth()+1,a=i.getFullYear(),l=o+"/"+r+"/"+a;$(".review-date").text(""),$(".review-date").append(l);var s=$(".ui.long.modal");s.modal({onShow:function(){setTimeout(function(){s.modal("refresh")},250)}}),s.modal("show")}function onClickAttachImage(){document.getElementById("write-background").click()}$(".connected").dropdown();var isCreate=!0,cookieAvatar=getCookie("cookieAvatar"),cookieProfile=getCookie("cookieProfile");cookieAvatar&&cookieProfile&&(cookieAvatar=JSON.parse(cookieAvatar),cookieProfile=JSON.parse(cookieProfile),cookieProfile.name&&$(".connected-name").text(cookieProfile.name),$(".connected-avatar").attr("src",cookieAvatar.url),$(".loader").removeClass("active"),$(".connected").removeClass("hide"),$(".unknown").addClass("hide"));var cookieMenu=getCookie("cookieMenu");if(cookieMenu){cookieMenu=JSON.parse(cookieMenu),$(".connected-menu").empty();var menus=null;menus=cookieMenu.isAdmin?[{Name:"Thêm mới truyện",icon:"write",func:"writeStories();"},{Name:"Quản lí truyện",icon:"book",func:"manageStories();"},{Name:"Thoát",icon:"key",func:"FB.logout();"}]:[{Name:"Thoát",icon:"key",func:"FB.logout()"}],menus.forEach(function(e,t){$(".connected-menu").append('<a class="item" onClick="'+e.func+'"><i class="'+e.icon+' icon"></i>'+e.Name+"</a>")}),$(".loader").removeClass("active"),$(".connected").removeClass("hide"),$(".unknown").addClass("hide")}define(function(e){var t=e("fbPlugin/init"),n=e("fbPlugin/login_event"),i=e("fbPlugin/logout_event"),o=e("fbPlugin/status_change");window.fbAsyncInit=function(){t(),FB.getLoginStatus(function(e){"object"==typeof e&&"connected"===e.status||($(".menu-loader").removeClass("active"),$(".connected").addClass("hide"),$(".unknown").removeClass("hide"))}),FB.Event.subscribe("auth.login",n),FB.Event.subscribe("auth.logout",i),FB.Event.subscribe("auth.statusChange",o)},function(e,t,n){var i,o=e.getElementsByTagName(t)[0];e.getElementById(n)||(i=e.createElement(t),i.id=n,i.src="//connect.facebook.net/vi_VN/sdk.js",o.parentNode.insertBefore(i,o))}(document,"script","facebook-jssdk"),tinymce.init({selector:"textarea#write-content",elementpath:!1,max_height:500,menu:{},toolbar:"undo redo | bold italic underline | alignleft aligncenter alignright",height:300,setup:function(e){e.on("init",function(){this.getDoc().body.style.fontSize="16px",this.getDoc().body.style.fontFamily="UTMCentur",$(".write-loader").removeClass("active"),$(".write-stories").removeClass("hide"),$(".write-title").focus(),$(".write-content-hidden").val()&&tinymce.get("write-content").setContent($(".write-content-hidden").val());var e=$(".write-background-filename-hidden").val();if(e){var t=e.split(".")[e.split(".").length-1];e=e.length-t.length>=10?e.substring(0,10)+"..."+t:e,$(".title-background span").text(e)}$(".write-title").val()&&0!==$(".write-title").val().length&&(isCreate=!1,$(".write-save-button").text("Update"))})}})}),$("#write-background").change(function(e){if($("#write-background").prop("files")[0]){$(".background-loader").addClass("active");var t=new FormData;t.append("background",$("#write-background").prop("files")[0]),require(["common/upload","/libs/notify/toastr.min.js"],function(e,n){e(t).then(function(e){var t=null,i=e[0].FileName.split(".")[e[0].FileName.split(".").length-1],t=null;t=e[0].FileName.length-i.length>=10?e[0].FileName.substring(0,10)+"..."+i:e[0].FileName,$(".title-background span").text(t),$(".background-loader").removeClass("active"),$(".write-background-uid").val(e[0].UID),n.success("Tải ảnh nền lên thành công!","Thành công",{timeOut:2e3})},function(e){$(".background-loader").removeClass("active"),n.error("Tải ảnh nền lên thất bại!","Thất bại",{timeOut:2e3})})})}});
+//dropdown menu
+$('.connected').dropdown();
+var isCreate = true;
+//function get cookie
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+};
+//check cookieAvatar - cookieProfile
+var cookieAvatar = getCookie('cookieAvatar');
+var cookieProfile = getCookie('cookieProfile');
+if (cookieAvatar &&
+    cookieProfile) {
+    cookieAvatar = JSON.parse(cookieAvatar);
+    cookieProfile = JSON.parse(cookieProfile);
+    if (cookieProfile.name) {
+        $('.connected-name').text(cookieProfile.name);
+    }
+    $('.connected-avatar').attr('src', cookieAvatar.url);
+    $('.loader').removeClass('active');
+    $('.connected').removeClass('hide');
+    $('.unknown').addClass('hide');
+}
+//end
+
+//check cookieMenu
+var cookieMenu = getCookie('cookieMenu');
+if (cookieMenu) {
+    cookieMenu = JSON.parse(cookieMenu);
+    //render menu
+    $('.connected-menu').empty();
+    var menus = null;
+    if (cookieMenu.isAdmin) {
+        menus = [
+            { Name: 'Thêm mới truyện', icon: 'write', func: 'writeStories();' },
+            { Name: 'Quản lí truyện', icon: 'book', func: 'manageStories();' },
+            { Name: 'Thoát', icon: 'key', func: 'FB.logout();' }
+        ];
+    } else {
+        menus = [
+            { Name: 'Thoát', icon: 'key', func: 'FB.logout()' }
+        ];
+    }
+    menus.forEach(function(menu, index) {
+        $('.connected-menu').append('<a class="item" onClick="' + menu.func + '"><i class="' + menu.icon + ' icon"></i>' + menu.Name + '</a>');
+    });
+    $('.loader').removeClass('active');
+    $('.connected').removeClass('hide');
+    $('.unknown').addClass('hide');
+}
+//end
+define(function(require) {
+    //facebook plugin
+    var fbInit = require('fbPlugin/init');
+    var login_event = require('fbPlugin/login_event');
+    var logout_event = require('fbPlugin/logout_event');
+    var status_change = require('fbPlugin/status_change');
+    window.fbAsyncInit = function() {
+        fbInit();
+        FB.getLoginStatus(function(response) {
+            if (typeof response === 'object' &&
+                response.status === 'connected') {} else {
+                $('.menu-loader').removeClass('active');
+                $('.connected').addClass('hide');
+                $('.unknown').removeClass('hide');
+            }
+        });
+        FB.Event.subscribe('auth.login', login_event);
+        FB.Event.subscribe('auth.logout', logout_event);
+        FB.Event.subscribe('auth.statusChange', status_change);
+    };
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/vi_VN/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    //end facebook plugin
+    //tinymce plugin
+    tinymce.init({
+        selector: 'textarea#write-content',
+        elementpath: false,
+        max_height: 500,
+        menu: {},
+        toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright',
+        height: 300,
+        setup: function(ed) {
+            ed.on('init', function() {
+                this.getDoc().body.style.fontSize = '16px';
+                this.getDoc().body.style.fontFamily = 'UTMCentur';
+                $('.write-loader').removeClass('active');
+                $('.write-stories').removeClass('hide');
+                $('.write-title').focus();
+                //set value default edit
+                if ($('.write-content-hidden').val()) {
+                    tinymce.get('write-content').setContent($('.write-content-hidden').val());
+                }
+                var fileName = $('.write-background-filename-hidden').val();
+                if (fileName) {
+                    var ext = fileName.split('.')[fileName.split('.').length - 1];
+                    fileName = (fileName.length - ext.length) >= 10 ? fileName.substring(0, 10) + '...' + ext : fileName;
+                    $('.title-background span').text(fileName);
+                }
+                //check status create or edit
+                if ($('.write-title').val() &&
+                    $('.write-title').val().length !== 0) {
+                    isCreate = false;
+                    $('.write-save-button').text('Update');
+                }
+            });
+        }
+    });
+    //end tinymce plugin
+});
+
+function writeStories() {
+    require(['menu/menu'], function(menu) {
+        menu.writeStories();
+    });
+};
+
+function manageStories() {
+    require(['menu/menu'], function(menu) {
+        menu.manageStories();
+    });
+};
+//login facebook
+function onClickLoginFacebook() {
+    if (navigator.userAgent.match('CriOS')) {
+        window.open('https://www.facebook.com/dialog/oauth?client_id=1032633966817570&redirect_uri=' + document.location.href + '&scope=email,public_profile&response_type=none', '', true);
+    } else {
+        FB.login(null, { scope: 'email,public_profile' });
+    }
+};
+//end
+$('#write-background').change(function(e) {
+    if ($('#write-background').prop('files')[0]) {
+        $('.background-loader').addClass('active');
+        var StoriesformData = new FormData();
+        StoriesformData.append('background', $('#write-background').prop('files')[0]);
+        require(['common/upload', '/libs/notify/toastr.min.js'], function(upload, toastr) {
+            upload(StoriesformData)
+                .then(function(response) {
+                    var fileName = null;
+                    var ext = response[0].FileName.split('.')[response[0].FileName.split('.').length - 1];
+                    var fileName = null;
+                    if (response[0].FileName.length - ext.length >= 10) {
+                        fileName = response[0].FileName.substring(0, 10) + '...' + ext;
+                    } else {
+                        fileName = response[0].FileName;
+                    }
+                    $('.title-background span').text(fileName);
+                    $('.background-loader').removeClass('active');
+                    $('.write-background-uid').val(response[0].UID);
+                    toastr.success('Tải ảnh nền lên thành công!', 'Thành công', { timeOut: 2000 });
+                }, function(err) {
+                    $('.background-loader').removeClass('active');
+                    toastr.error('Tải ảnh nền lên thất bại!', 'Thất bại', { timeOut: 2000 });
+                });
+        });
+    }
+});
+
+//function validate write stories
+function validateWrite() {
+    var titleValidate = $('.write-title').val();
+    if (!titleValidate ||
+        titleValidate.length === 0) {
+        $('.validate-title').addClass('error');
+        $('.error-message-write').text('');
+        $('.error-message-write').append('<ul class="list"><li>Vui lòng nhập tiêu đề!</li></ul>');
+        $('.error-message-write').removeClass('hide');
+        return false;
+    } else if (titleValidate.length > 255) {
+        $('.validate-title').addClass('error');
+        $('.error-message-write').text('');
+        $('.error-message-write').append('<ul class="list"><li>Tiêu đề không được quá 255 ký tự!</li></ul>');
+        $('.error-message-write').removeClass('hide');
+        return false;
+    } else {
+        $('.validate-title').removeClass('error');
+        $('.error-message-write').addClass('hide');
+        return true;
+    }
+};
+//end
+
+function onClickSave() {
+    $('.write-save-button').addClass('disabled');
+    if (validateWrite()) {
+        var htmlContent = tinymce.get('write-content').getContent();
+        var textContent = tinymce.get('write-content').getContent({ format: 'text' });
+        if (textContent &&
+            textContent.length > 200) {
+            var maxLengthCut = 200 // maximum number of characters to extract
+                //trim the string to the maximum length
+            var trimmedString = textContent.substr(0, maxLengthCut);
+            //re-trim if we are in the middle of a word
+            trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+            textContent = trimmedString + ' ...';
+        }
+        var title = $('.write-title').val();
+        var show = $('.write-show').val();
+        var backgroundUID = $('.write-background-uid').val();
+        if (isCreate) {
+            var data = {
+                Stories: {
+                    Title: title,
+                    Show: show,
+                    Content: htmlContent,
+                    ShortContent: textContent,
+                    AuthorName: cookieProfile ? cookieProfile.name : null
+                },
+                FileUploads: [{
+                    UID: backgroundUID
+                }]
+            };
+            require(['common/create', '/libs/notify/toastr.min.js'], function(create, toastr) {
+                create(data)
+                    .then(function(response) {
+                        toastr.success('Thêm truyện thành công!', 'Thành công', { timeOut: 2000 });
+                        require(['menu/menu'], function(menu) {
+                            menu.manageStories();
+                        });
+                    }, function(err) {
+                        if (err &&
+                            err.status === 403) {
+                            toastr.warning('Thao tác xâm nhập bảo mật hệ thống. Để thực hiện tính năng này bạn cần Đăng nhập với quyền Quản trị viên!', 'Cảnh báo', { timeOut: 5000 });
+                            $('.write-save-button').removeClass('disabled');
+                        } else {
+                            toastr.error('Thêm truyện thất bại!', 'Thất bại', { timeOut: 2000 });
+                            $('.write-save-button').removeClass('disabled');
+                        }
+                    });
+            });
+        } else {
+            var uidStories = $('.write-uid').val();
+            var data = {
+                Stories: {
+                    Title: title,
+                    Show: show,
+                    Content: htmlContent,
+                    ShortContent: textContent,
+                    UID: uidStories,
+                    AuthorName: cookieProfile ? cookieProfile.name : null
+                },
+                FileUploads: [{
+                    UID: backgroundUID
+                }]
+            };
+            require(['common/update', '/libs/notify/toastr.min.js'], function(update, toastr) {
+                update(data)
+                    .then(function(response) {
+                        require(['menu/menu'], function(menu) {
+                            toastr.success('Cập nhật truyện thành công!', 'Thành công', { timeOut: 2000 });
+                            menu.manageStories();
+                        });
+                    }, function(err) {
+                        toastr.error('Cập nhật truyện thất bại!', 'Thất bại', { timeOut: 2000 });
+                        $('.write-save-button').removeClass('disabled');
+                    });
+            });
+        }
+    } else {
+        $('.write-save-button').removeClass('disabled');
+    }
+};
+
+function onClickView() {
+    //set data before show modal review
+    var htmlContent = tinymce.get('write-content').getContent();
+    var title = $('.write-title').val();
+    $('.review-description').text('');
+    $('.review-description').append(htmlContent);
+    $('.review-title').text(title);
+    var backgroundUID = $('.write-background-uid').val();
+    if (backgroundUID) {
+        $('.review-background').removeClass('hide');
+    } else {
+        $('.review-background').addClass('hide');
+    }
+    $('.review-background').attr('src', '/download-background/' + backgroundUID);
+    var dateWriteReview = new Date();
+    if ($('.write-date').val()) {
+        dateWriteReview = new Date($('.write-date').val());
+    }
+    var d = dateWriteReview.getDate() <= 9 ? '0' + dateWriteReview.getDate() : dateWriteReview.getDate();
+    var m = (dateWriteReview.getMonth() + 1) <= 9 ? ('0' + (dateWriteReview.getMonth() + 1)) : dateWriteReview.getMonth() + 1;
+    var y = dateWriteReview.getFullYear();
+    var dateWriteReviewShow = d + '/' + m + '/' + y;
+    $('.review-date').text('');
+    $('.review-date').append(dateWriteReviewShow);
+    //show long modal fixed
+    var selfModal = $('.ui.long.modal');
+    selfModal.modal({
+        onShow: function() {
+            setTimeout(function() {
+                selfModal.modal('refresh');
+            }, 250);
+        }
+    });
+    selfModal.modal('show');
+};
+
+function onClickAttachImage() {
+    document.getElementById('write-background').click();
+};

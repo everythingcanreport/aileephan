@@ -289,11 +289,11 @@ function onClickView() {
     $('.review-title').text(title);
     var backgroundUID = $('.write-background-uid').val();
     if (backgroundUID) {
+        $('.review-background').attr('src', '/download-background/' + backgroundUID);
         $('.review-background').removeClass('hide');
     } else {
         $('.review-background').addClass('hide');
     }
-    $('.review-background').attr('src', '/download-background/' + backgroundUID);
     var dateWriteReview = new Date();
     if ($('.write-date').val()) {
         dateWriteReview = new Date($('.write-date').val());

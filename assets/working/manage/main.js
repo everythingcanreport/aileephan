@@ -356,10 +356,7 @@ function onClickView(uid) {
                     var dateWriteReviewShow = d + '/' + m + '/' + y;
                     $('.review-date').text('');
                     $('.review-date').append(dateWriteReviewShow);
-                    setTimeout(function() {
-                        //show long modal
-                        $('.ui.long.modal').modal('show');
-                    }, 5000);
+                    $('.ui.long.modal').modal('show');
                 } else {
                     toastr.error('Tải truyện thất bại!', 'Thất bại', { timeOut: 2000 });
                 }

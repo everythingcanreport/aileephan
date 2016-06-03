@@ -205,6 +205,7 @@ function validateWrite() {
 function onClickSave() {
     $('.write-save-button').addClass('loading');
     $('.write-save-button').addClass('disabled');
+    $('.write-review-button').addClass('disabled');
     if (validateWrite()) {
         var htmlContent = tinymce.get('write-content').getContent();
         var textContent = tinymce.get('write-content').getContent({ format: 'text' });
@@ -243,6 +244,7 @@ function onClickSave() {
                     }, function(err) {
                         $('.write-save-button').removeClass('loading');
                         $('.write-save-button').removeClass('disabled');
+                        $('.write-review-button').removeClass('disabled');
                         if (err &&
                             err.status === 403) {
                             toastr.warning('Thao tác xâm nhập bảo mật hệ thống. Để thực hiện tính năng này bạn cần Đăng nhập với quyền Quản trị viên!', 'Cảnh báo', { timeOut: 5000 });
@@ -274,13 +276,22 @@ function onClickSave() {
                             menu.manageStories();
                         });
                     }, function(err) {
-                        toastr.error('Cập nhật truyện thất bại!', 'Thất bại', { timeOut: 2000 });
                         $('.write-save-button').removeClass('disabled');
+                        $('.write-save-button').removeClass('loading');
+                        $('.write-review-button').removeClass('disabled');
+                        if (err &&
+                            err.status === 403) {
+                            toastr.warning('Thao tác xâm nhập bảo mật hệ thống. Để thực hiện tính năng này bạn cần Đăng nhập với quyền Quản trị viên!', 'Cảnh báo', { timeOut: 5000 });
+                        } else {
+                            toastr.error('Cập nhật truyện thất bại!', 'Thất bại', { timeOut: 2000 });
+                        }
                     });
             });
         }
     } else {
         $('.write-save-button').removeClass('disabled');
+        $('.write-save-button').removeClass('loading');
+        $('.write-review-button').removeClass('disabled');
     }
 };
 

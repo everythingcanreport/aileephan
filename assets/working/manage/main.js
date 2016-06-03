@@ -310,8 +310,8 @@ function paginationManage(page) {
 
 //edit stories
 function onClickEdit(uid) {
-    $('.button-view-' + uid).addClass('loading');
-    $('.button-view-' + uid).addClass('disabled');
+    $('.button-edit-current-' + uid).addClass('loading');
+    $('.button-edit').addClass('disabled');
     require(['menu/menu'], function(menu) {
         menu.writeStories(uid);
     });
@@ -320,13 +320,13 @@ function onClickEdit(uid) {
 
 //view stories
 function onClickView(uid) {
-    $('.button-view-' + uid).addClass('loading');
-    $('.button-view-' + uid).addClass('disabled');
+    $('.button-view-current-' + uid).addClass('loading');
+    $('.button-view').addClass('disabled');
     require(['common/manageViewStories', '/libs/notify/toastr.min.js'], function(manageViewStories, toastr) {
         manageViewStories(uid)
             .then(function(stories) {
-                $('.button-view-' + uid).removeClass('loading');
-                $('.button-view-' + uid).removeClass('disabled');
+                $('.button-view-current-' + uid).removeClass('loading');
+                $('.button-view').removeClass('disabled');
                 if (stories) {
                     //set data before show modal review
                     var htmlContent = stories.Content;
@@ -365,8 +365,8 @@ function onClickView(uid) {
                     toastr.error('Tải truyện thất bại!', 'Thất bại', { timeOut: 2000 });
                 }
             }, function(err) {
-                $('.button-view-' + uid).removeClass('loading');
-                $('.button-view-' + uid).removeClass('disabled');
+                $('.button-view-current-' + uid).removeClass('loading');
+                $('.button-view').removeClass('disabled');
                 toastr.error('Tải truyện thất bại!', 'Thất bại', { timeOut: 2000 });
             });
     });

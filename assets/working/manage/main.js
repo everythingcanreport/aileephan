@@ -314,6 +314,7 @@ function paginationManage(page) {
 function onClickEdit(uid) {
     $('.button-edit-current-' + uid).addClass('loading');
     $('.button-edit').addClass('disabled');
+    $('.button-view').addClass('disabled');
     require(['menu/menu'], function(menu) {
         menu.writeStories(uid);
     });
@@ -324,11 +325,13 @@ function onClickEdit(uid) {
 function onClickView(uid) {
     $('.button-view-current-' + uid).addClass('loading');
     $('.button-view').addClass('disabled');
+    $('.button-edit').addClass('disabled');
     require(['common/manageViewStories', '/libs/notify/toastr.min.js'], function(manageViewStories, toastr) {
         manageViewStories(uid)
             .then(function(stories) {
                 $('.button-view-current-' + uid).removeClass('loading');
                 $('.button-view').removeClass('disabled');
+                $('.button-edit').removeClass('disabled');
                 if (stories) {
                     //set data before show modal review
                     var htmlContent = stories.Content;
@@ -369,6 +372,7 @@ function onClickView(uid) {
             }, function(err) {
                 $('.button-view-current-' + uid).removeClass('loading');
                 $('.button-view').removeClass('disabled');
+                $('.button-edit').removeClass('disabled');
                 toastr.error('Tải truyện thất bại!', 'Thất bại', { timeOut: 2000 });
             });
     });

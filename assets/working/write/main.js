@@ -328,7 +328,8 @@ function onClickView() {
     //         }, 250);
     //     }
     // });
-    selfModal.modal('show');
+    // selfModal.modal('show');
+    selfModal.modal({ detachable: false, observeChanges: true }).modal('show').modal('refresh');
 };
 
 function onClickAttachImage() {

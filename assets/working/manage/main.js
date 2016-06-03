@@ -359,7 +359,7 @@ function onClickView(uid) {
                     setTimeout(function() {
                         //show long modal
                         $('.ui.long.modal').modal('show');
-                    });
+                    }, 5000);
                 } else {
                     toastr.error('Tải truyện thất bại!', 'Thất bại', { timeOut: 2000 });
                 }

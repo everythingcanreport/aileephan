@@ -322,7 +322,7 @@ function onClickView() {
     setTimeout(function() {
         //show long modal
         $('.ui.long.modal').modal('show');
-    }, 1000);
+    }, 5000);
 };
 
 function onClickAttachImage() {

@@ -200,6 +200,7 @@ function validateWrite() {
 //end
 
 function onClickSave() {
+    $('.write-save-button').addClass('loading');
     $('.write-save-button').addClass('disabled');
     if (validateWrite()) {
         var htmlContent = tinymce.get('write-content').getContent();
@@ -237,13 +238,13 @@ function onClickSave() {
                             menu.manageStories();
                         });
                     }, function(err) {
+                        $('.write-save-button').removeClass('loading');
+                        $('.write-save-button').removeClass('disabled');
                         if (err &&
                             err.status === 403) {
                             toastr.warning('Thao tác xâm nhập bảo mật hệ thống. Để thực hiện tính năng này bạn cần Đăng nhập với quyền Quản trị viên!', 'Cảnh báo', { timeOut: 5000 });
-                            $('.write-save-button').removeClass('disabled');
                         } else {
                             toastr.error('Thêm truyện thất bại!', 'Thất bại', { timeOut: 2000 });
-                            $('.write-save-button').removeClass('disabled');
                         }
                     });
             });

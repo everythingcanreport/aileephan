@@ -197,10 +197,12 @@ function renderData(response) {
                 '" onChange="onChangeShow(\'' + stories.UID + '\');"/>' +
                 '<label></label></div></td>';
             var action = '<td><div class="ui buttons tiny icon">' +
-                '<a title="Xem lại truyện" class="ui grey button font-button" onClick="onClickView(\'' + stories.UID + '\');">' +
+                '<a title="Xem lại truyện" class="ui grey button font-button button-view button-view-current-' + stories.UID +
+                '" onClick="onClickView(\'' + stories.UID + '\');">' +
                 '<i class="icon search"></i>Xem</a>' +
                 '<div class="or"></div>' +
-                '<a title="Cập nhật truyện" class="ui pink button font-button" onClick="onClickEdit(\'' + stories.UID + '\');">' +
+                '<a title="Cập nhật truyện" class="ui pink button font-button button-edit button-edit-current-' + stories.UID +
+                '" onClick="onClickEdit(\'' + stories.UID + '\');">' +
                 '<i class="icon write"></i>Sửa</a></div></td>';
             $('tbody').append('<tr>' + no + title + show + action + '</tr>');
             $('.manage-pagination').removeClass('hide');

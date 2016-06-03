@@ -401,6 +401,7 @@ function onClickChangeStatusNo() {
 //confirm change status yes
 function onClickChangeStatusYes() {
     $('.button-yes').addClass('disabled');
+    $('.button-yes').addClass('loading');
     var uid = $('.confirm-change-status').val();
     if (uid &&
         uid.length !== 0) {
@@ -422,6 +423,7 @@ function onClickChangeStatusYes() {
                 .then(function(response) {
                     $('.small.modal.change-status').modal('hide');
                     $('.button-yes').removeClass('disabled');
+                    $('.button-yes').removeClass('loading');
                     toastr.success('Cập nhật trạng thái truyện thành công!!', 'Thành công', { timeOut: 2000 });
                 }, function(err) {
                     //rollback checkbox status
@@ -431,6 +433,8 @@ function onClickChangeStatusYes() {
                         $('input[name=change-status-' + uid + ']').removeAttr('checked');
                     }
                     $('.small.modal.change-status').modal('hide');
+                    $('.button-yes').removeClass('disabled');
+                    $('.button-yes').removeClass('loading');
                     toastr.error('Cập nhật trạng thái truyện thất bại!', 'Thất bại', { timeOut: 2000 });
                 });
         });

@@ -296,8 +296,6 @@ function onClickSave() {
 };
 
 function onClickView() {
-    //show long modal
-    $('.ui.long.modal').modal('show');
     //set data before show modal review
     var htmlContent = tinymce.get('write-content').getContent();
     var title = $('.write-title').val();
@@ -321,6 +319,10 @@ function onClickView() {
     var dateWriteReviewShow = d + '/' + m + '/' + y;
     $('.review-date').text('');
     $('.review-date').append(dateWriteReviewShow);
+    setTimeout(function() {
+        //show long modal
+        $('.ui.long.modal').modal('show');
+    }, 1000);
 };
 
 function onClickAttachImage() {

@@ -321,13 +321,13 @@ function onClickView() {
     $('.review-date').append(dateWriteReviewShow);
     //show long modal fixed
     var selfModal = $('.ui.long.modal');
-    selfModal.modal({
-        onShow: function() {
-            setTimeout(function() {
-                selfModal.modal('refresh');
-            }, 250);
-        }
-    });
+    // selfModal.modal({
+    //     onShow: function() {
+    //         setTimeout(function() {
+    //             selfModal.modal('refresh');
+    //         }, 250);
+    //     }
+    // });
     selfModal.modal('show');
 };
 

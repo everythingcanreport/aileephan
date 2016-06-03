@@ -333,6 +333,8 @@ function onClickView(uid) {
                 $('.button-view').removeClass('disabled');
                 $('.button-edit').removeClass('disabled');
                 if (stories) {
+                    //show long modal
+                    $('.ui.long.modal').modal('show');
                     //set data before show modal review
                     var htmlContent = stories.Content;
                     var title = stories.Title;
@@ -356,16 +358,6 @@ function onClickView(uid) {
                     var dateWriteReviewShow = d + '/' + m + '/' + y;
                     $('.review-date').text('');
                     $('.review-date').append(dateWriteReviewShow);
-                    //show long modal fixed
-                    var selfModal = $('.ui.long.modal');
-                    selfModal.modal({
-                        onShow: function() {
-                            setTimeout(function() {
-                                selfModal.modal('refresh');
-                            }, 1000);
-                        }
-                    });
-                    selfModal.modal('show');
                 } else {
                     toastr.error('Tải truyện thất bại!', 'Thất bại', { timeOut: 2000 });
                 }

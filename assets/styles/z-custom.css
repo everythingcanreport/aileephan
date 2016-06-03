@@ -355,7 +355,7 @@ a.go-home:hover {
     max-height: 550px !important;
 }
 
-min-height-image-view {
+.min-height-image-view {
     min-height: 400px !important;
 }
 

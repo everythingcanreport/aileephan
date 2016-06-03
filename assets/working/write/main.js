@@ -150,6 +150,7 @@ function onClickLoginFacebook() {
 $('#write-background').change(function(e) {
     if ($('#write-background').prop('files')[0]) {
         $('.background-loader').addClass('active');
+        $('.title-background').addClass('disabled');
         var StoriesformData = new FormData();
         StoriesformData.append('background', $('#write-background').prop('files')[0]);
         require(['common/upload', '/libs/notify/toastr.min.js'], function(upload, toastr) {
@@ -165,10 +166,12 @@ $('#write-background').change(function(e) {
                     }
                     $('.title-background span').text(fileName);
                     $('.background-loader').removeClass('active');
+                    $('.title-background').removeClass('disabled');
                     $('.write-background-uid').val(response[0].UID);
                     toastr.success('Tải ảnh nền lên thành công!', 'Thành công', { timeOut: 2000 });
                 }, function(err) {
                     $('.background-loader').removeClass('active');
+                    $('.title-background').removeClass('disabled');
                     toastr.error('Tải ảnh nền lên thất bại!', 'Thất bại', { timeOut: 2000 });
                 });
         });

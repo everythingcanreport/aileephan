@@ -12,6 +12,11 @@
     src: url('../../fonts/UTMIsadoraBold.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: SVNTheCarpenterBold;
+    src: url('../../fonts/SVNTheCarpenterBold.otf') format('truetype');
+}
+
 body {
     background: url('../../images/bg.gif') no-repeat 0 0 fixed;
     -webkit-background-size: 100% 100%;
@@ -25,10 +30,16 @@ body {
     background: transparent;
 }
 
-.font-header {
-    font-family: UTMCentur !important;
+.font-header-home {
+    font-family: SVNTheCarpenterBold !important;
     text-transform: capitalize !important;
-    font-size: 30px !important;
+    font-size: 40px !important;
+}
+
+.font-header {
+    font-family: SVNTheCarpenterBold !important;
+    text-transform: capitalize !important;
+    font-size: 60px !important;
 }
 
 .font-header-normal {

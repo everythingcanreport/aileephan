@@ -4,39 +4,51 @@ module.exports = {
             title: 'string'
         });
         var title = req.param('title');
-        Stories.findOne({
-                attributes: ['UID', 'SpeakingUrl', 'Show', 'Title', 'Content', 'AuthorName', 'CreatedDate'],
-                include: [{
-                    model: FileUpload,
-                    attributes: ['UID'],
+        if (title === 'favicon.ico') {
+            var path = require('path');
+            var pathFavicon = path.resolve(__dirname, '..', '..', 'assets/favicon.ico');
+            var SkipperDisk = require('skipper-disk');
+            var fileAdapter = SkipperDisk();
+            fileAdapter.read(pathFavicon)
+                .on('error', function(err) {
+                    return res.notFound(err);
+                })
+                .pipe(res);
+        } else {
+            Stories.findOne({
+                    attributes: ['UID', 'SpeakingUrl', 'Show', 'Title', 'Content', 'AuthorName', 'CreatedDate'],
+                    include: [{
+                        model: FileUpload,
+                        attributes: ['UID'],
+                        where: {
+                            Enable: 'Y'
+                        },
+                        through: {
+                            attributes: null
+                        },
+                        required: false
+                    }],
                     where: {
-                        Enable: 'Y'
+                        SpeakingUrl: title
                     },
-                    through: {
-                        attributes: null
-                    },
-                    required: false
-                }],
-                where: {
-                    SpeakingUrl: title
-                },
-            })
-            .then(function(stories) {
-                if (!_.isEmpty(stories)) {
-                    res.view('stories/view', {
-                        locals: {
-                            url: req.url,
-                            baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/app/appViewStories',
-                            data: stories,
-                            title: 'Ailee Phan - Truyện ngôn tình trong đời sống'
-                        }
-                    });
-                } else {
-                    res.notFound('stories.not.found');
-                }
-            }, function(err) {
-                res.serverError(err);
-            });
+                })
+                .then(function(stories) {
+                    if (!_.isEmpty(stories)) {
+                        res.view('stories/view', {
+                            locals: {
+                                url: req.url,
+                                baseUrlServer: sails.config.aileeConfig.baseUrlServer + '/app/appViewStories',
+                                data: stories,
+                                title: 'Ailee Phan - Truyện ngôn tình trong đời sống'
+                            }
+                        });
+                    } else {
+                        res.notFound('stories.not.found');
+                    }
+                }, function(err) {
+                    res.serverError(err);
+                });
+        }
     },
     WriteStories: function(req, res) {
         var uid = req.param('UID');

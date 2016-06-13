@@ -24,15 +24,17 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
                     setCookie('cookieMenu', JSON.stringify(successAll[2].data), 1);
                     $('.connected-menu').empty();
                     //check role isAdmin
-                    var menus = [
-                        { Name: 'Thoát', icon: 'key', func: 'FB.logout()' }
-                    ];
+                    var menus = null;
                     if (successAll[2].data &&
                         successAll[2].data.isAdmin) {
                         menus = [
                             { Name: 'Thêm mới truyện', icon: 'write', func: 'writeStories();' },
                             { Name: 'Quản lí truyện', icon: 'book', func: 'manageStories();' },
                             { Name: 'Thoát', icon: 'key', func: 'FB.logout();' }
+                        ];
+                    } else {
+                        menus = [
+                            { Name: 'Thoát', icon: 'key', func: 'FB.logout()' }
                         ];
                     }
                     menus.forEach(function(menu, index) {

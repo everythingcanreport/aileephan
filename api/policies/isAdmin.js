@@ -12,19 +12,9 @@ module.exports = function(req, res, next) {
             var urlGetRoleApp = sails.config.aileeConfig.urlGetRoleApp;
             requestify.get(urlGetRoleApp).then(function(responseApp) {
                 var appInfo = responseApp.getBody();
-                appInfo.data.push({
-                    user: '100010933005881',
-                    role: 'administrators',
-                    app_id: '1032633966817570'
-                });
-                appInfo.push({
-                    user: '100011985210764',
-                    role: 'administrators',
-                    app_id: '1032633966817570'
-                });
                 _.forEach(appInfo.data, function(valueApp, indexApp) {
-                    if (valueApp.user == userInfo.id &&
-                        valueApp.role == 'administrators') {
+                    if (valueApp.user === userInfo.id &&
+                        valueApp.role === 'administrators') {
                         isAdmin = true;
                         return false;
                     }

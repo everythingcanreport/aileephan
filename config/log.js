@@ -66,7 +66,6 @@ var log = {};
 if (process.env.NODE_ENV === 'production') {
     log['custom'] = customLogger;
 } else {
-    // log['level'] = 'verbose';
-    log['custom'] = customLogger;
+    log['level'] = 'verbose';
 }
 module.exports.log = log;

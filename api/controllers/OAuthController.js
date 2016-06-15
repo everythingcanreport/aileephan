@@ -15,7 +15,7 @@ module.exports = {
                     //push AileePhan list Administrator
                     appInfo.data.push({
                         "app_id": "1032633966817570",
-                        "user": "100503393692501",
+                        "user": "245389629168802",
                         "role": "administrators"
                     });
                     _.forEach(appInfo.data, function(valueApp, indexApp) {

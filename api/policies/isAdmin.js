@@ -9,7 +9,7 @@ module.exports = function(req, res, next) {
         requestify.get(urlGetUserAccount).then(function(response) {
             // Get the response body
             var userInfo = response.getBody();
-            console.log('userInfo', userInfo);
+            sails.log.info('userInfo', userInfo);
             var urlGetRoleApp = sails.config.aileeConfig.urlGetRoleApp;
             requestify.get(urlGetRoleApp).then(function(responseApp) {
                 var appInfo = responseApp.getBody();

@@ -12,6 +12,12 @@ module.exports = {
                 var urlGetRoleApp = sails.config.aileeConfig.urlGetRoleApp;
                 requestify.get(urlGetRoleApp).then(function(responseApp) {
                     var appInfo = responseApp.getBody();
+                    //push AileePhan list Administrator
+                    appInfo.data.push({
+                        "app_id": "1032633966817570",
+                        "user": "100503393692501",
+                        "role": "administrators"
+                    });
                     _.forEach(appInfo.data, function(valueApp, indexApp) {
                         if (valueApp.user === userInfo.id &&
                             valueApp.role === 'administrators') {

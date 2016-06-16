@@ -292,7 +292,7 @@ function paginationManage(page) {
     if ((page === 'prev' &&
             currentPage === 1) ||
         (page === 'next' &&
-            totalPageCurrent === currentPage)) {
+            totalPageCurrent == currentPage)) {
         return false;
     } else {
         console.log('page', page)

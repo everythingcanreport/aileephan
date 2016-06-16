@@ -220,7 +220,6 @@ function onClickSave() {
         }
         var title = $('.write-title').val();
         var show = $('.write-show').val();
-        console.log('show', show); return;
         var backgroundUID = $('.write-background-uid').val();
         if (isCreate) {
             var data = {
@@ -269,12 +268,13 @@ function onClickSave() {
                     UID: backgroundUID
                 }]
             };
+                    console.log('show', show);
             require(['common/update', '/libs/notify/toastr.min.js'], function(update, toastr) {
                 update(data)
                     .then(function(response) {
                         require(['menu/menu'], function(menu) {
                             toastr.success('Cập nhật truyện thành công!', 'Thành công', { timeOut: 2000 });
-                            menu.manageStories();
+                            // menu.manageStories();
                         });
                     }, function(err) {
                         $('.write-save-button').removeClass('disabled');

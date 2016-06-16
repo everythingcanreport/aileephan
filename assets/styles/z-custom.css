@@ -455,3 +455,6 @@ a:hover {
 .width-button {
     width: 80px;
 }
+.ui.form input[type=text] {
+    line-height: 0.32em;
+}

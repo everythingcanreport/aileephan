@@ -452,3 +452,6 @@ a:hover {
         margin-top: 20px !important;
     }
 }
+.width-button {
+    width: 80px;
+}

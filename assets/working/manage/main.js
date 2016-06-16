@@ -295,6 +295,8 @@ function paginationManage(page) {
             totalPageCurrent === currentPage)) {
         return false;
     } else {
+        console.log('page', page)
+        console.log('currentPage', currentPage)
         if (page === 'prev') {
             currentPage -= 1;
             var offset = (currentPage - 1) * 5;

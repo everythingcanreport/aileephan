@@ -406,6 +406,7 @@ function onClickChangeStatusNo() {
 //confirm change status yes
 function onClickChangeStatusYes() {
     $('.button-yes').addClass('disabled');
+    $('.button-no').addClass('disabled');
     $('.button-yes').addClass('loading');
     var uid = $('.confirm-change-status').val();
     if (uid &&
@@ -428,6 +429,7 @@ function onClickChangeStatusYes() {
                 .then(function(response) {
                     $('.small.modal.change-status').modal('hide');
                     $('.button-yes').removeClass('disabled');
+                     $('.button-no').removeClass('disabled');
                     $('.button-yes').removeClass('loading');
                     toastr.success('Cập nhật trạng thái truyện thành công!!', 'Thành công', { timeOut: 2000 });
                 }, function(err) {
@@ -439,6 +441,7 @@ function onClickChangeStatusYes() {
                     }
                     $('.small.modal.change-status').modal('hide');
                     $('.button-yes').removeClass('disabled');
+                    $('.button-no').removeClass('disabled');
                     $('.button-yes').removeClass('loading');
                     toastr.error('Cập nhật trạng thái truyện thất bại!', 'Thất bại', { timeOut: 2000 });
                 });

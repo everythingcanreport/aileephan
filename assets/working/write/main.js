@@ -219,7 +219,8 @@ function onClickSave() {
             textContent = trimmedString + ' ...';
         }
         var title = $('.write-title').val();
-        var show = $('.write-show:checked').val();
+        var show = $('.write-show:checked').val() ? $('.write-show:checked').val() : 'N' ;
+
         var backgroundUID = $('.write-background-uid').val();
         if (isCreate) {
             var data = {

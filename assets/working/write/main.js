@@ -268,13 +268,12 @@ function onClickSave() {
                     UID: backgroundUID
                 }]
             };
-                    console.log('show', show);
             require(['common/update', '/libs/notify/toastr.min.js'], function(update, toastr) {
                 update(data)
                     .then(function(response) {
                         require(['menu/menu'], function(menu) {
                             toastr.success('Cập nhật truyện thành công!', 'Thành công', { timeOut: 2000 });
-                            // menu.manageStories();
+                            menu.manageStories();
                         });
                     }, function(err) {
                         $('.write-save-button').removeClass('disabled');

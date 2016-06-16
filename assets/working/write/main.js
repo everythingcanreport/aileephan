@@ -220,6 +220,7 @@ function onClickSave() {
         }
         var title = $('.write-title').val();
         var show = $('.write-show').val();
+        console.log('show', show)
         var backgroundUID = $('.write-background-uid').val();
         if (isCreate) {
             var data = {

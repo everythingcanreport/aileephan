@@ -340,12 +340,12 @@ function onClickView(uid) {
                     $('.review-description').append(htmlContent);
                     $('.review-title').text(title);
                     var backgroundUID = (stories && stories.FileUploads && stories.FileUploads[0] ? stories.FileUploads[0].UID : null);
-                    if (backgroundUID !== null) {
+                    if (backgroundUID) {
                         $('.review-background').removeClass('hide');
+                        $('.review-background').attr('src', '/download-background/' + backgroundUID);
                     } else {
                         $('.review-background').addClass('hide');
                     }
-                    $('.review-background').attr('src', '/download-background/' + backgroundUID);
                     var dateWriteReview = new Date();
                     if (stories.CreatedDate) {
                         dateWriteReview = new Date(stories.CreatedDate);

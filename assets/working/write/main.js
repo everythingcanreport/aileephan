@@ -42,8 +42,8 @@ if (cookieMenu) {
     var menus = null;
     if (cookieMenu.isAdmin) {
         menus = [
-            { Name: 'Thêm mới truyện', icon: 'write', func: 'writeStories();' },
-            { Name: 'Quản lí truyện', icon: 'book', func: 'manageStories();' },
+            { Name: 'Thêm mới', icon: 'write', func: 'writeStories();' },
+            { Name: 'Quản lí', icon: 'book', func: 'manageStories();' },
             { Name: 'Thoát', icon: 'key', func: 'FB.logout();' }
         ];
     } else {

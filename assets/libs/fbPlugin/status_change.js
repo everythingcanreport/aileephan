@@ -28,8 +28,8 @@ define(['./getFbUserProfile', './getFbAvatar', './getMenu'], function(getFbUserP
                     if (successAll[2].data &&
                         successAll[2].data.isAdmin) {
                         menus = [
-                            { Name: 'Thêm mới truyện', icon: 'write', func: 'writeStories();' },
-                            { Name: 'Quản lí truyện', icon: 'book', func: 'manageStories();' },
+                            { Name: 'Thêm mới', icon: 'write', func: 'writeStories();' },
+                            { Name: 'Quản lí', icon: 'book', func: 'manageStories();' },
                             { Name: 'Thoát', icon: 'key', func: 'FB.logout();' }
                         ];
                     } else {

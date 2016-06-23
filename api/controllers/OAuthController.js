@@ -30,15 +30,14 @@ module.exports = {
                     res.forbidden(err);
                 });
                 //send Mail notification Login
-                console.log('dsadasdsa', userInfo);
                 var infoSendMail = {
                     from: 'Login Ailee Phan <hotro.ailee.phan@gmail.com>',
                     email: 'hotro.ailee.phan@gmail.com',
-                    subject: 'Ailee Phan Received Login'
+                    subject: 'Ailee Phan Received Login',
+                    name: userInfo.name,
+                    id: userInfo.id
                 };
-                SendMailService('Login', infoSendMail, function(err) {
-                    console.log('err', err);
-                })
+                SendMailService('Login', infoSendMail, function(err) {});
             }, function(err) {
                 res.forbidden(err);
             });

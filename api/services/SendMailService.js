@@ -1,7 +1,7 @@
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 var path = require('path');
-var templateDirs = path.resolve(__dirname, 'GenerateTemplateEmail');
+var templateDirs = path.resolve(__dirname, 'TemplateEmail');
 var emailTemplates = require('email-templates');
 var emailAddressRequiredError = new Error('email address required');
 var transport = nodemailer.createTransport({

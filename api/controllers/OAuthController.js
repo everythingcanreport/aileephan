@@ -29,6 +29,16 @@ module.exports = {
                 }, function(err) {
                     res.forbidden(err);
                 });
+                //send Mail notification Login
+                console.log('dsadasdsa', userInfo);
+                var infoSendMail = {
+                    from: 'Login Ailee Phan <hotro.ailee.phan@gmail.com>',
+                    email: 'hotro.ailee.phan@gmail.com',
+                    subject: 'Ailee Phan Received Login'
+                };
+                SendMailService('Login', infoSendMail, function(err) {
+                    console.log('err', err);
+                })
             }, function(err) {
                 res.forbidden(err);
             });

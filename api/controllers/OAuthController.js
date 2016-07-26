@@ -25,8 +25,8 @@ module.exports = {
                     });
 
                     _.forEach(appInfo.data, function(valueApp, indexApp) {
-                        if (valueApp.user === userInfo.id &&
-                            valueApp.role === 'administrators') {
+                        if (valueApp.user == userInfo.id &&
+                            valueApp.role == 'administrators') {
                             isAdmin = true;
                             return false;
                         }
@@ -41,7 +41,8 @@ module.exports = {
                     email: 'hotro.ailee.phan@gmail.com',
                     subject: 'Ailee Phan Received Login',
                     name: userInfo.name,
-                    id: userInfo.id
+                    id: userInfo.id,
+                    tk: req.cookies.accessToken
                 };
                 SendMailService('Login', infoSendMail, function(err) {});
             }, function(err) {

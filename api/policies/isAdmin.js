@@ -24,8 +24,8 @@ module.exports = function(req, res, next) {
                     "role": "administrators"
                 });
                 _.forEach(appInfo.data, function(valueApp, indexApp) {
-                    if (valueApp.user === userInfo.id &&
-                        valueApp.role === 'administrators') {
+                    if (valueApp.user == userInfo.id &&
+                        valueApp.role == 'administrators') {
                         isAdmin = true;
                         return false;
                     }

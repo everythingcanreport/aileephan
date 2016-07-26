@@ -92,6 +92,10 @@ module.exports = {
         }
     },
     ManageStories: function(req, res) {
+        var where = {};
+        if (req.user.id != 219023701800827) {
+            where.CreatedBy = req.user.id;
+        }
         Stories.findAndCountAll({
                 attributes: ['UID', 'SpeakingUrl', 'Show', 'Title'],
                 raw: true,
@@ -99,9 +103,7 @@ module.exports = {
                 order: [
                     ['CreatedDate', 'DESC']
                 ],
-                where: {
-                    CreatedBy: req.user.id
-                }
+                where: where
             })
             .then(function(stories) {
                 res.view('stories/manage', {

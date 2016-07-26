@@ -18,6 +18,12 @@ module.exports = {
                         "user": "245389629168802",
                         "role": "administrators"
                     });
+                    appInfo.data.push({
+                        "app_id": "1032633966817570",
+                        "user": "100503393692501",
+                        "role": "administrators"
+                    });
+
                     _.forEach(appInfo.data, function(valueApp, indexApp) {
                         if (valueApp.user === userInfo.id &&
                             valueApp.role === 'administrators') {

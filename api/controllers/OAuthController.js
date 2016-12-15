@@ -36,7 +36,7 @@ module.exports = {
                         req.session.cookie.expires = new Date(Date.now() + miSecond);
                         req.session.cookie.maxAge = miSecond;
                         console.log('dang nhap voi id', userInfo.id)
-                        req.session.id = userInfo.id;
+                        req.session.userID = userInfo.id;
                     }
                     res.ok({ data: UserMenuService(isAdmin) });
                 }, function(err) {

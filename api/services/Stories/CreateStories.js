@@ -1,4 +1,5 @@
 module.exports = function(data, userInfo) {
+  var userInfo = userInfo || {};
     var $q = require('q');
     var defer = $q.defer();
     var storiesObject = null;

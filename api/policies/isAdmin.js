@@ -1,4 +1,4 @@
-module.exports = function(req, res, next) {
+module.exports = function(req, res) {
   console.log("req.cookies", req.cookies)
   console.log("req.session", req.session)
 //     var requestify = require('requestify');
@@ -10,6 +10,6 @@ module.exports = function(req, res, next) {
 //     } else {
 //         res.forbidden('not.permission');
 //     }
-  next();
+//   next();
   //sasasdasdsad
 };

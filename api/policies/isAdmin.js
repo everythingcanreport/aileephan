@@ -1,6 +1,5 @@
 module.exports = function(req, res, next) {
-  console.log("req.cookies", req.cookies)
-  console.log("req.session", req.session.userID)
+  console.log("req.sessionwqwqwq", req.session.userID)
     var requestify = require('requestify');
     if (!_.isEmpty(req) &&
         req.cookies &&
@@ -10,5 +9,4 @@ module.exports = function(req, res, next) {
     } else {
         res.forbidden('not.permission');
     }
-  next();
 };

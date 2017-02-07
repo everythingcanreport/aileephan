@@ -1,4 +1,6 @@
 module.exports = function(req, res, next) {
+  console.log("req.cookies", req.cookies)
+  console.log("req.session", req.session)
 //     var requestify = require('requestify');
 //     if (!_.isEmpty(req) &&
 //         !_.isEmpty(req.cookies) &&

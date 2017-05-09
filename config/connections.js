@@ -6,7 +6,7 @@ module.exports.connections = {
         adapter: 'sails-mysql',
         port: 3306,
         user: 'root',
-        password: 'tamran1101681',
+        password: 'ailee@c04LpC',
         // password: 'meditekdb123456',
         database: 'Ailee',
         charset: 'utf8',
